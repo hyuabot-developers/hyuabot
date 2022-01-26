@@ -1,7 +1,6 @@
 # HYUabot
 HYUabot is a campus information service for Hanyang University at Ansan.
 
---------------------
 ## Provided Data
 * Shuttle
     - Dormitory → Campus → Station → Campus
@@ -23,7 +22,6 @@ HYUabot is a campus information service for Hanyang University at Ansan.
 * Phone Book for office in school or store around school
 * Campus calendar
 
---------------------
 ## Server-side components
 If you want to run a HYUabot service as your own, you need to install and configure the following server-side components. 
 
@@ -41,7 +39,6 @@ A server which serves web platform
 A server which serves Kakao-i platform
 * https://github.com/hyuabot-developers/hyuabot-kakao-i-server
 
---------------------
 ## Client-side components
 For details about client build and configuration, please refer README.md in each repository.
 
