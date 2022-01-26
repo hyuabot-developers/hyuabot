@@ -1,9 +1,8 @@
-If you want a English version, please refer [README_en.md](https://github.com/hyuabot-developers/hyuabot/blob/main/README.md).
+If you want a English version, please refer [README_en.md](https://github.com/hyuabot-developers/hyuabot/blob/main/docs/README_en.md).
 
 # 휴아봇
 휴아봇은 한양대학교 ERICA 캠퍼스 내 정보 제공을 위한 서비스입니다.
 
---------------------
 ## 제공되는 데이터
 * 셔틀버스
     - 기숙사 → 셔틀콕 → 한대앞역 → 셔틀콕
@@ -24,7 +23,6 @@ If you want a English version, please refer [README_en.md](https://github.com/hy
 * 교내외 전화번호부
 * 학사력
 
---------------------
 ## 서버 구성
 
 ### API server
@@ -39,7 +37,6 @@ If you want a English version, please refer [README_en.md](https://github.com/hy
 카카오i / 카카오톡 채널과 통신을 위한 서버입니다.
 * https://github.com/hyuabot-developers/hyuabot-kakao-i-server
 
---------------------
 ## 클라이언트 구성
 
 ### WebUI
