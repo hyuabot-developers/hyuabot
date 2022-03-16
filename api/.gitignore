@@ -1,0 +1,10 @@
+
+.idea/
+
+src/hyuabot_api.egg-info/
+
+*.pyc
+
+.eggs/
+
+.python-version
