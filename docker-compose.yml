@@ -12,6 +12,8 @@ services:
       build: ./api
       environment:
         - REDIS_HOST=hyuabot-redis
+        - BUS_API_KEY=${BUS_API_KEY}
+        - METRO_API_KEY=${METRO_API_KEY}
       ports:
         - 8080:8080
       depends_on:
