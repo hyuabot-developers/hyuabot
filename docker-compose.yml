@@ -1,0 +1,18 @@
+version: '3'
+services:
+  hyuabot-redis:
+    image: redis
+    command: redis-server --port 6379
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - 6379:6379
+  hyuabot-api:
+      build: ./api
+      environment:
+        - REDIS_HOST=hyuabot-redis
+      ports:
+        - 8080:8080
+      depends_on:
+        - hyuabot-redis
