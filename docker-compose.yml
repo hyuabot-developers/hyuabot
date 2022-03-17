@@ -6,8 +6,8 @@ services:
     labels:
       - "name=redis"
       - "mode=standalone"
-    ports:
-      - 6379:6379
+    expose:
+      - "6379"
   hyuabot-api:
       build: ./api
       environment:
@@ -15,7 +15,7 @@ services:
         - BUS_API_KEY=${BUS_API_KEY}
         - METRO_API_KEY=${METRO_API_KEY}
       ports:
-        - 8080:8080
+        - 38080:8080
       depends_on:
         - hyuabot-redis
   hyuabot-kakao:
@@ -23,6 +23,6 @@ services:
       environment:
         - API_HOST=hyuabot-api
       ports:
-        - 8080:8080
+        - 38081:8081
       depends_on:
         - hyuabot-redis
