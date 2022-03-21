@@ -6,9 +6,21 @@ from fastapi import APIRouter
 from app.hyuabot.kakao.core.config import AppSettings, korea_standard_time
 from app.hyuabot.kakao.core.create_response import create_carousel_response
 from app.hyuabot.kakao.scheme.request import KakaoRequest
-from app.hyuabot.kakao.scheme.response import ServerResponse, TextCard
+from app.hyuabot.kakao.scheme.response import ServerResponse, TextCard, QuickReply
 
 food_campus_router = APIRouter(prefix="/campus", tags=["Restaurant menu by campus"])
+quick_replies = [
+    QuickReply(action="block", label="학생식당", messageText="학생식당",
+               blockId="5cc3f00d384c5508fceec588"),
+    QuickReply(action="block", label="교직원식당", messageText="교직원식당",
+               blockId="5cc3f00d384c5508fceec588"),
+    QuickReply(action="block", label="창의인재원식당", messageText="창의인재원식당",
+               blockId="5cc3f00d384c5508fceec588"),
+    QuickReply(action="block", label="푸드코트", messageText="푸드코트",
+               blockId="5cc3f00d384c5508fceec588"),
+    QuickReply(action="block", label="창업보육센터", messageText="창업보육센터",
+               blockId="5cc3f00d384c5508fceec588"),
+]
 
 
 async def fetch_menu_list_by_campus() -> list:
@@ -50,7 +62,7 @@ async def campus(_: KakaoRequest) -> ServerResponse:
             description = "제공되는 메뉴 없음"
 
         card_list.append(TextCard(
-            title=title, description=description.strip(), buttons=[],
+            title=title, description=description.strip(), buttons=quick_replies
         ))
 
     return create_carousel_response(card_list, [])
