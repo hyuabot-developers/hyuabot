@@ -62,7 +62,7 @@ async def campus(_: KakaoRequest) -> ServerResponse:
             description = "제공되는 메뉴 없음"
 
         card_list.append(TextCard(
-            title=title, description=description.strip(), buttons=quick_replies
+            title=title, description=description.strip(), buttons=[]
         ))
 
-    return create_carousel_response(card_list, [])
+    return create_carousel_response(card_list, quick_replies)
