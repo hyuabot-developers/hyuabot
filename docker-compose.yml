@@ -6,6 +6,8 @@ services:
     labels:
       - "name=redis"
       - "mode=standalone"
+    volumes:
+      - ./data:/data
     expose:
       - "6379"
   hyuabot-api:
