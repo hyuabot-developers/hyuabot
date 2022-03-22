@@ -30,9 +30,9 @@ async def campus(user_input: KakaoRequest) -> ServerResponse:
     card_list: list[TextCard] = []
 
     if menu_dict is not None:
-        description = ""
         for restaurant_key, menu_list in menu_dict.items():
             title = f"{restaurant_name}({restaurant_key})"
+            description = ""
             for menu_item in menu_list:
                 description += f"{menu_item['menu']}\n"
                 description += f"가격 - {menu_item['price']}\n"
