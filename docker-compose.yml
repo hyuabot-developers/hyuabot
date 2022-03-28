@@ -16,15 +16,21 @@ services:
         - REDIS_HOST=hyuabot-redis
         - BUS_API_KEY=${BUS_API_KEY}
         - METRO_API_KEY=${METRO_API_KEY}
+        - TZ=Asia/Seoul
       ports:
         - 38080:8080
       depends_on:
         - hyuabot-redis
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
   hyuabot-kakao:
       build: ./kakao
       environment:
         - API_HOST=hyuabot-api
+        - TZ=Asia/Seoul
       ports:
         - 38081:8081
       depends_on:
         - hyuabot-redis
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
