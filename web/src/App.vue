@@ -1,41 +1,52 @@
 <template>
-  <div id="app">
-    <ShuttleHome />
-    <GrowBottomNavigation :options="options"/>
-  </div>
+  <v-card>
+    <v-layout>
+      <v-app-bar color="#0E4A84" prominent>
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title>휴아봇</v-toolbar-title>
+      </v-app-bar>
+
+      <v-navigation-drawer v-model="drawer" bottom >
+        <v-list :items="items" />
+      </v-navigation-drawer>
+      <v-main>
+        <ShuttleHome />
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
-import { GrowBottomNavigation } from "bottom-navigation-vue"
-import ShuttleHome from './components/Home.vue'
-
+import ShuttleHome from "@/components/Home";
 export default {
   name: 'App',
   components: {
-    ShuttleHome, GrowBottomNavigation,
+    ShuttleHome
   },
   data: () => ({
-    selected: 1,
-    options: [
-      { id: 1, icon: "fas fa-home", title: "Home", badge: 1 },
-      { id: 2, icon: "fas fa-layer-group", title: "Category" },
-      { id: 3, icon: "fas fa-cog", title: "Setting" },
-      { id: 4, icon: "fas fa-user", title: "Account", badge: 15 },
-      { id: 5, icon: "fas fa-bell", title: "Notification" },
+    drawer: false,
+    items: [
+      {
+        title: '셔틀',
+        value: 'shuttle',
+      },
+      {
+        title: '버스',
+        value: 'bus',
+      },
+      {
+        title: '전철',
+        value: 'subway',
+      },
+      {
+        title: '학식',
+        value: 'cafeteria',
+      },
     ],
   }),
 }
 </script>
 
 <style>
-#app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-  white-space: nowrap;
-}
+
 </style>
