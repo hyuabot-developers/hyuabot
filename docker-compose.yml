@@ -34,3 +34,11 @@ services:
         - hyuabot-redis
       volumes:
         - /etc/localtime:/etc/localtime:ro
+  hyuabot-web:
+      build: ./web
+      environment:
+        - API_HOST=hyuabot-api
+      ports:
+        - 38082:80
+      depends_on:
+        - hyuabot-redis
