@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <v-app>
-      <v-main>
-        <router-view></router-view>
+      <!-- Bottom nav height : 56px-->
+      <v-main style="padding-bottom: 36px">
+        <v-slide-x-transition mode="out-in">
+          <router-view></router-view>
+        </v-slide-x-transition>
       </v-main>
       <v-bottom-navigation :value="sSelect" color="primary" fixed>
         <v-btn to="/">

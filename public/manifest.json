@@ -2,6 +2,7 @@
   "name": "휴아봇",
   "short_name": "휴아봇",
   "theme_color": "#0e4a84",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -77,6 +78,5 @@
     }
   ],
   "start_url": "/",
-  "display": "standalone",
-  "background_color": "none"
+  "display": "standalone"
 }
