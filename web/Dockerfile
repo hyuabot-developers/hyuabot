@@ -1,14 +1,25 @@
 # build stage
 FROM node:lts-alpine as build-stage
-WORKDIR /app
-COPY package*.json ./
-RUN npm install -g npm
-RUN npm install
+WORKDIR /home/node/app
 COPY . .
+RUN npm install -g npm@8.6.0
+RUN npm install
 RUN npm run build
 
 # production stage
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:lts-alpine
+ENV NODE_ENV=production
+WORKDIR /home/node/app
+
+# Install deps for production only
+COPY ./package* ./
+RUN npm install && \
+    npm cache clean --force
+# Copy builded source from the upper builder stage
+COPY --from=builder /home/node/app/build ./build
+
+# Expose ports (for orchestrators and dynamic reverse proxies)
+EXPOSE 3000
+
+# Start the app
+CMD npm start
