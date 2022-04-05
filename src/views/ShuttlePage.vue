@@ -18,7 +18,6 @@ ShuttleCard {
 <script>
 import ShuttleCard from "@/components/ShuttleCard";
 import axios from "axios";
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 export default {
   name: "ShuttlePage",
   components: { ShuttleCard },
@@ -29,7 +28,7 @@ export default {
   },
   methods: {
     async getShuttleList() {
-      const url = "/api/v1/shuttle/arrival";
+      const url = "https://api.hyuabot.app/api/v1/shuttle/arrival";
       const res = await axios.get(url);
       if (res.status === 200) {
         this.shuttleList = res.data["arrivalList"];
