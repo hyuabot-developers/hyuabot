@@ -32,3 +32,5 @@ if (process.env.NODE_ENV === "production") {
     },
   });
 }
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", () => self.clients.claim());
