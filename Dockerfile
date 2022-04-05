@@ -16,7 +16,7 @@ COPY ./package* ./
 RUN npm install && \
     npm cache clean --force
 # Copy builded source from the upper builder stage
-COPY --from=builder /home/node/app/build ./build
+COPY --from=build-stage /home/node/app/build ./build
 
 # Expose ports (for orchestrators and dynamic reverse proxies)
 EXPOSE 3000
