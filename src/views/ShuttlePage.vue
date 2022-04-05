@@ -1,18 +1,45 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-container>
+    <v-flex>
+      <ShuttleCard
+        v-for="(shuttleArrivalItem, index) in shuttleList"
+        :key="index"
+        :item="shuttleArrivalItem"
+        style="margin-bottom: 20px"
+      />
+    </v-flex>
+  </v-container>
 </template>
-
+<style scoped>
+ShuttleCard {
+  overflow-y: scroll;
+}
+</style>
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import ShuttleCard from "@/components/ShuttleCard";
+import axios from "axios";
 export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
+  name: "ShuttlePage",
+  components: { ShuttleCard },
+  data() {
+    return {
+      shuttleList: null,
+    };
+  },
+  methods: {
+    async getShuttleList() {
+      const url = "/api/v1/shuttle/arrival";
+      const res = await axios.get(url);
+      if (res.status === 200) {
+        this.shuttleList = res.data["arrivalList"];
+      } else {
+        this.shuttleList = [];
+      }
+      console.log(this.shuttleList);
+    },
+  },
+  created() {
+    this.getShuttleList();
   },
 };
 </script>
