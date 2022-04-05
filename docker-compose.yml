@@ -32,6 +32,7 @@ services:
         - 38081:8081
       depends_on:
         - hyuabot-redis
+        - hyuabot-api
       volumes:
         - /etc/localtime:/etc/localtime:ro
   hyuabot-web:
@@ -39,6 +40,7 @@ services:
       environment:
         - API_HOST=hyuabot-api
       ports:
-        - 38082:80
+        - 38082:3000
       depends_on:
         - hyuabot-redis
+        - hyuabot-api
