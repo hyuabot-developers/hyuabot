@@ -28,8 +28,10 @@ export default {
   },
   methods: {
     async getShuttleList() {
-      const url = "https://api.hyuabot.app/api/v1/shuttle/arrival";
-      const res = await axios.get(url);
+      const url = "/api/v1/shuttle/arrival";
+      const res = await axios.get(url, {
+        baseURL: "https://api.hyuabot.app",
+      });
       if (res.status === 200) {
         this.shuttleList = res.data["arrivalList"];
       } else {
