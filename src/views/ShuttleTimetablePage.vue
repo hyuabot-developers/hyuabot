@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-flex>
-      <ShuttleCard
-        v-for="(shuttleArrivalItem, index) in shuttleList"
-        :key="index"
-        :item="shuttleArrivalItem"
-        style="margin-bottom: 20px"
-      />
+      <!--      <ShuttleCard-->
+      <!--        v-for="(shuttleArrivalItem, index) in getShuttleTimetableList"-->
+      <!--        :key="index"-->
+      <!--        :item="shuttleArrivalItem"-->
+      <!--        style="margin-bottom: 20px"-->
+      <!--      />-->
     </v-flex>
   </v-container>
 </template>
@@ -16,28 +16,43 @@ ShuttleCard {
 }
 </style>
 <script>
-import ShuttleCard from "@/components/ShuttleCard";
 import axios from "axios";
 export default {
-  name: "ShuttlePage",
-  components: { ShuttleCard },
-  data() {
-    return {
-      shuttleList: null,
-    };
+  name: "ShuttleTimetablePage",
+  components: {},
+  computed: {
+    getShuttleTimetableList() {
+      return this.$store.state.shuttleTimetableData[
+        this.$route.params.stopCode
+      ][this.$route.params.heading];
+    },
   },
   methods: {
     async getShuttleList() {
-      const url = "/api/v1/shuttle/arrival";
-      const res = await axios.get(url, {
-        baseURL: "https://api.hyuabot.app",
-      });
-      if (res.status === 200) {
-        this.shuttleList = res.data["arrivalList"];
-      } else {
-        this.shuttleList = [];
+      if (
+        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] ===
+          {} ||
+        !this.$store.state.shuttleTimetableData[this.$route.params.stopCode]
+      ) {
+        const url = `/api/v1/shuttle/arrival/${this.$route.params.stopCode}/timetable/all`;
+        const res = await axios.get(url, {
+          baseURL: "https://api.hyuabot.app",
+        });
+        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] =
+          {};
+        if (res.status === 200) {
+          console.log(res.data);
+          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
+            "weekdays"
+          ] = res.data["weekdays"];
+          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
+            "weekends"
+          ] = res.data["weekends"];
+        } else {
+          this.$router.go(-1);
+        }
       }
-      console.log(this.shuttleList);
+      // console.log(this.getShuttleTimetableList());
     },
   },
   created() {
