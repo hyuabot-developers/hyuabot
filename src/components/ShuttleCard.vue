@@ -9,7 +9,21 @@
         {{ item["stopName"] }}
       </v-row>
       <v-divider />
-      <v-row no-gutters style="height: 75px" align="center" justify="center">
+      <v-row
+        no-gutters
+        style="height: 75px"
+        align="center"
+        justify="center"
+        v-on:click="
+          moveToTimetable(
+            $event,
+            item['stopCode'],
+            shuttleHeadingList[item['stopCode']].length > 1
+              ? 'busForStation'
+              : 'busForTerminal'
+          )
+        "
+      >
         <v-col cols="5" style="font-size: 1em">
           {{ shuttleHeadingList[item["stopCode"]][0] }}행
         </v-col>
@@ -80,6 +94,7 @@
         style="height: 75px"
         align="center"
         justify="center"
+        v-on:click="moveToTimetable($event, item['stopCode'], 'busForTerminal')"
       >
         <v-col cols="5">
           {{ shuttleHeadingList[item["stopCode"]][1] }}행
@@ -136,6 +151,15 @@ export default {
   methods: {
     cardHeight: function (item) {
       return this.shuttleHeadingList[item["stopCode"]].length > 1 ? 200 : 125;
+    },
+    moveToTimetable: function (event, stopCode, heading) {
+      this.$router.push({
+        name: "Shuttle Timetable Page",
+        params: {
+          stopCode: stopCode,
+          heading: heading,
+        },
+      });
     },
   },
   data() {
