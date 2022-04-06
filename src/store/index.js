@@ -11,10 +11,8 @@ export const store = new Vuex.Store({
     getShuttleRealtimeData: (state) => {
       return state.shuttleRealtimeData;
     },
-  },
-  mutations: {
-    getShuttleTimetableDataByHeading: (state, stopCode, heading) => {
-      return state.shuttleTimetableData[stopCode][heading];
+    getShuttleTimetableData: (state) => {
+      return state.shuttleTimetableData;
     },
   },
 });

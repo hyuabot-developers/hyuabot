@@ -1,18 +1,72 @@
 <template>
   <v-container>
-    <v-flex>
-      <!--      <ShuttleCard-->
-      <!--        v-for="(shuttleArrivalItem, index) in getShuttleTimetableList"-->
-      <!--        :key="index"-->
-      <!--        :item="shuttleArrivalItem"-->
-      <!--        style="margin-bottom: 20px"-->
-      <!--      />-->
-    </v-flex>
+    <div>
+      <ul class="tabs">
+        <li
+          v-for="(tab, index) in tabs"
+          :key="index"
+          v-bind:class="{ active: index === selectedTabIndex }"
+          v-on:click="changeButtonClicked(index)"
+        >
+          {{ tab }}
+        </li>
+      </ul>
+      <ul class="timetableList">
+        <li
+          v-for="(timetable, timetableIndex) in getShuttleTimetableList[
+            this.$route.params.stopCode
+          ][selectedTabIndex === 0 ? 'weekdays' : 'weekends'][
+            this.$route.params.heading
+          ]"
+          :key="timetableIndex"
+        >
+          {{ timetable.time }}
+        </li>
+      </ul>
+    </div>
   </v-container>
 </template>
 <style scoped>
-ShuttleCard {
-  overflow-y: scroll;
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.tabs {
+  position: fixed;
+  display: flex;
+  width: 90vw;
+}
+.tabs li {
+  display: inline-block;
+  padding: 15px;
+  width: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ccc;
+  background-color: #eee;
+  color: #999;
+}
+.tabs li.active {
+  background-color: #0e4a84;
+  color: #fff;
+}
+div {
+  flex-flow: column wrap;
+}
+.timetableList {
+  margin-bottom: 15px;
+  overflow-y: hidden;
+}
+.timetableList li {
+  box-sizing: border-box;
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+.timetableList li:last-child {
+  border-bottom: none;
 }
 </style>
 <script>
@@ -22,10 +76,14 @@ export default {
   components: {},
   computed: {
     getShuttleTimetableList() {
-      return this.$store.state.shuttleTimetableData[
-        this.$route.params.stopCode
-      ][this.$route.params.heading];
+      return this.$store.state.shuttleTimetableData;
     },
+  },
+  data() {
+    return {
+      tabs: ["평일", "주말"],
+      selectedTabIndex: 0,
+    };
   },
   methods: {
     async getShuttleList() {
@@ -54,9 +112,13 @@ export default {
       }
       // console.log(this.getShuttleTimetableList());
     },
+    changeButtonClicked(index) {
+      this.selectedTabIndex = index;
+    },
   },
   created() {
     this.getShuttleList();
+    console.log(this.$store.state.shuttleTimetableData);
   },
 };
 </script>
