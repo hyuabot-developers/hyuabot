@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import ShuttlePage from "../views/ShuttlePage.vue";
+import ShuttleTimetablePage from "@/views/ShuttleTimetablePage";
 
 Vue.use(VueRouter);
 
@@ -9,6 +10,11 @@ const routes = [
     path: "/",
     name: "Shuttle Page",
     component: ShuttlePage,
+  },
+  {
+    path: "/shuttle/timetable",
+    name: "Shuttle Timetable Page",
+    component: ShuttleTimetablePage,
   },
   {
     path: "/subway",

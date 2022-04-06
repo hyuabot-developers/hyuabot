@@ -2,7 +2,7 @@
   <v-container>
     <v-flex>
       <ShuttleCard
-        v-for="(shuttleArrivalItem, index) in getShuttleArrivalList"
+        v-for="(shuttleArrivalItem, index) in shuttleList"
         :key="index"
         :item="shuttleArrivalItem"
         style="margin-bottom: 20px"
@@ -21,11 +21,6 @@ import axios from "axios";
 export default {
   name: "ShuttlePage",
   components: { ShuttleCard },
-  computed: {
-    getShuttleArrivalList() {
-      return this.$store.state.shuttleRealtimeData;
-    },
-  },
   data() {
     return {
       shuttleList: null,
@@ -38,10 +33,11 @@ export default {
         baseURL: "https://api.hyuabot.app",
       });
       if (res.status === 200) {
-        this.$store.state.shuttleRealtimeData = res.data["arrivalList"];
+        this.shuttleList = res.data["arrivalList"];
       } else {
-        this.$store.state.shuttleRealtimeData = [];
+        this.shuttleList = [];
       }
+      console.log(this.shuttleList);
     },
   },
   created() {
