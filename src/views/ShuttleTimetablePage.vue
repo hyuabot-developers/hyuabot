@@ -102,10 +102,10 @@ export default {
           console.log(res.data);
           this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
             "weekdays"
-          ] = res.data["weekdays"];
+          ] = res.data[0]["weekdays"];
           this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
             "weekends"
-          ] = res.data["weekends"];
+          ] = res.data[0]["weekends"];
         } else {
           this.$router.go(-1);
         }
