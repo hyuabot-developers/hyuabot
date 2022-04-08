@@ -13,11 +13,9 @@
       </ul>
       <ul class="timetableList">
         <li
-          v-for="(timetable, timetableIndex) in getShuttleTimetableList[
-            this.$route.params.stopCode
-          ][selectedTabIndex === 0 ? 'weekdays' : 'weekends'][
-            this.$route.params.heading
-          ]"
+          v-for="(timetable, timetableIndex) in this.shuttleTimetable[
+            selectedTabIndex === 0 ? 'weekdays' : 'weekends'
+          ][this.$route.params.heading]"
           :key="timetableIndex"
         >
           {{ timetable.time }}
@@ -74,43 +72,33 @@ import axios from "axios";
 export default {
   name: "ShuttleTimetablePage",
   components: {},
-  computed: {
-    getShuttleTimetableList() {
-      return this.$store.state.shuttleTimetableData;
-    },
-  },
+  computed: {},
   data() {
     return {
       tabs: ["평일", "주말"],
       selectedTabIndex: 0,
+      shuttleTimetable: {},
     };
   },
   methods: {
     async getShuttleList() {
-      if (
-        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] ===
-          {} ||
-        !this.$store.state.shuttleTimetableData[this.$route.params.stopCode]
-      ) {
-        const url = `/api/v1/shuttle/arrival/${this.$route.params.stopCode}/timetable/all`;
+      console.log(this.$store.state.shuttleTimetableData.length);
+      if (this.$store.state.shuttleTimetableData.length === 0) {
+        const url = "/api/v1/shuttle/timetable";
         const res = await axios.get(url, {
           baseURL: "https://api.hyuabot.app",
         });
-        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] =
-          {};
+        console.log(res.status);
         if (res.status === 200) {
-          console.log(res.data);
-          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
-            "weekdays"
-          ] = res.data[0]["weekdays"];
-          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
-            "weekends"
-          ] = res.data[0]["weekends"];
+          this.$store.commit("setShuttleTimetable", res.data["timetableList"]);
+          console.log(this.$store.state.shuttleTimetableData);
         } else {
           this.$router.go(-1);
         }
       }
-      // console.log(this.getShuttleTimetableList());
+      this.shuttleTimetable = this.$store.getters.getShuttleTimetable(
+        this.$route.params.stopCode
+      );
     },
     changeButtonClicked(index) {
       this.selectedTabIndex = index;
@@ -118,7 +106,7 @@ export default {
   },
   created() {
     this.getShuttleList();
-    console.log(this.$store.state.shuttleTimetableData);
+    console.log(this.shuttleTimetable);
   },
 };
 </script>
