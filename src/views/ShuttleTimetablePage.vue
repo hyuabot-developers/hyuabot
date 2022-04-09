@@ -1,78 +1,87 @@
 <template>
-  <v-container>
-    <div>
-      <ul class="tabs">
-        <li
+  <v-layout column align-center>
+    <v-flex class="tabs">
+      <v-tabs fixed-tabs>
+        <v-tab
           v-for="(tab, index) in tabs"
           :key="index"
           v-bind:class="{ active: index === selectedTabIndex }"
           v-on:click="changeButtonClicked(index)"
         >
           {{ tab }}
-        </li>
-      </ul>
-      <ul class="timetableList">
-        <li
+        </v-tab>
+      </v-tabs>
+    </v-flex>
+    <v-flex class="timetable">
+      <v-list>
+        <template
           v-for="(timetable, timetableIndex) in this.shuttleTimetable[
             selectedTabIndex === 0 ? 'weekdays' : 'weekends'
           ][this.$route.params.heading]"
-          :key="timetableIndex"
         >
-          {{ timetable.time }}
-        </li>
-      </ul>
-    </div>
-  </v-container>
+          <v-divider
+            v-if="timetableIndex !== 0"
+            :key="timetableIndex"
+            style="width: 100%"
+          ></v-divider>
+
+          <v-list-item :key="timetable.time">
+            <v-list-item-content class="d-flex justify-center">
+              <v-row no-gutters align="center" justify="center">
+                <v-col cols="2">
+                  <span
+                    v-bind:style="{
+                      color: timetable.type === 'C' ? '#0E4A84' : '#FF0000',
+                    }"
+                  >
+                    {{ timetable.type === "C" ? "순환" : "직행" }}
+                  </span>
+                </v-col>
+                <v-col cols="5">
+                  <span
+                    v-bind:style="{
+                      color: isTimePassed(timetable.time)
+                        ? '#000000'
+                        : '#7F7F7F',
+                    }"
+                  >
+                    {{ timetable.time.replace(":", "시 ") }}분<br />
+                  </span>
+                </v-col>
+              </v-row>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-flex>
+  </v-layout>
 </template>
 <style scoped>
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-ul.tabs {
+.tabs {
   position: fixed;
-  display: flex;
-  width: 90vw;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
 }
-.tabs li {
-  display: inline-block;
-  padding: 15px;
-  width: 50%;
-  text-align: center;
-  box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
-  background-color: #eee;
-  color: #999;
-}
-.tabs li.active {
-  background-color: #0e4a84;
-  color: #fff;
-}
-div {
-  flex-flow: column wrap;
-}
-.timetableList {
-  margin-bottom: 15px;
-  overflow-y: hidden;
-}
-.timetableList li {
-  box-sizing: border-box;
-  display: block;
-  padding: 15px;
-  border-bottom: 1px solid #ccc;
-  position: relative;
-}
-.timetableList li:last-child {
-  border-bottom: none;
+.timetable {
+  margin-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
 }
 </style>
 <script>
 import axios from "axios";
+
 export default {
   name: "ShuttleTimetablePage",
   components: {},
-  computed: {},
+  computed: {
+    getShuttleArrivalList() {
+      return this.$store.state.shuttleRealtimeData;
+    },
+  },
   data() {
     return {
       tabs: ["평일", "주말"],
@@ -102,6 +111,15 @@ export default {
     },
     changeButtonClicked(index) {
       this.selectedTabIndex = index;
+    },
+    isTimePassed(shuttleTime) {
+      let currentTime = new Date();
+      let timeArr = shuttleTime.split(":");
+      return (
+        currentTime.getHours() < parseInt(timeArr[0]) ||
+        (currentTime.getHours() === parseInt(timeArr[0]) &&
+          currentTime.getMinutes() < parseInt(timeArr[1]))
+      );
     },
   },
   created() {
