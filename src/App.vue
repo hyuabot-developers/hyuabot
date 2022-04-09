@@ -2,38 +2,42 @@
   <div id="app">
     <v-app>
       <!-- Bottom nav height : 56px-->
-      <v-main style="padding-bottom: 36px">
-        <v-slide-x-transition mode="out-in">
-          <router-view></router-view>
-        </v-slide-x-transition>
-      </v-main>
-      <v-bottom-navigation :value="sSelect" color="primary" fixed>
-        <v-btn to="/">
-          <span>셔틀</span>
-          <v-icon>mdi-bus</v-icon>
-        </v-btn>
-        <v-btn to="/subway">
-          <span>전철</span>
-          <v-icon>mdi-train</v-icon>
-        </v-btn>
-        <v-btn to="/bus">
-          <span>버스</span>
-          <v-icon>mdi-bus-multiple</v-icon>
-        </v-btn>
-        <v-btn to="/cafeteria">
-          <span>학식</span>
-          <v-icon>mdi-silverware</v-icon>
-        </v-btn>
-        <v-btn to="/more">
-          <span>더보기</span>
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-bottom-navigation>
+      <v-content style="padding-bottom: 36px">
+        <v-container fluid fill-height>
+          <v-slide-x-transition mode="out-in">
+            <router-view></router-view>
+          </v-slide-x-transition>
+        </v-container>
+      </v-content>
+      <v-footer>
+        <v-bottom-navigation :value="sSelect" color="primary" fixed>
+          <v-btn to="/">
+            <span>셔틀</span>
+            <v-icon>mdi-bus</v-icon>
+          </v-btn>
+          <v-btn to="/subway">
+            <span>전철</span>
+            <v-icon>mdi-train</v-icon>
+          </v-btn>
+          <v-btn to="/bus">
+            <span>버스</span>
+            <v-icon>mdi-bus-multiple</v-icon>
+          </v-btn>
+          <v-btn to="/cafeteria">
+            <span>학식</span>
+            <v-icon>mdi-silverware</v-icon>
+          </v-btn>
+          <v-btn to="/more">
+            <span>더보기</span>
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </v-bottom-navigation>
+      </v-footer>
     </v-app>
   </div>
 </template>
 
-<style>
+<style scoped>
 #app {
   font-family: Godo, serif;
   -webkit-font-smoothing: antialiased;
@@ -41,10 +45,6 @@
   text-align: center;
   color: #2c3e50;
   width: 100vw;
-  height: 100vh;
-}
-
-v-main {
   height: 100vh;
 }
 
