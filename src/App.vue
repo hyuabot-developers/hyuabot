@@ -1,14 +1,11 @@
 <template>
   <div id="app">
     <v-app>
-      <!-- Bottom nav height : 56px-->
-      <v-content style="padding-bottom: 36px">
-        <v-container fluid fill-height>
-          <v-slide-x-transition mode="out-in">
-            <router-view></router-view>
-          </v-slide-x-transition>
-        </v-container>
-      </v-content>
+      <v-main style="margin-bottom: 56px">
+        <v-slide-x-transition mode="out-in">
+          <router-view></router-view>
+        </v-slide-x-transition>
+      </v-main>
       <v-footer>
         <v-bottom-navigation :value="sSelect" color="primary" fixed>
           <v-btn to="/">
@@ -46,15 +43,6 @@
   color: #2c3e50;
   width: 100vw;
   height: 100vh;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
 }
 
 @font-face {
