@@ -1,7 +1,7 @@
 <template>
   <v-layout column align-center>
     <v-flex class="tabs">
-      <v-tabs fixed-tabs>
+      <v-tabs fixed-tabs v-model="current_key">
         <v-tab
           v-for="(tab, index) in tabs"
           :key="index"
@@ -82,11 +82,16 @@ export default {
       return this.$store.state.shuttleRealtimeData;
     },
   },
+  created() {
+    this.getShuttleList();
+    console.log(this.shuttleTimetable);
+  },
   data() {
     return {
       tabs: ["평일", "주말"],
       selectedTabIndex: 0,
       shuttleTimetable: {},
+      current_key: 0,
     };
   },
   methods: {
@@ -122,9 +127,10 @@ export default {
       );
     },
   },
-  created() {
-    this.getShuttleList();
-    console.log(this.shuttleTimetable);
+  mounted() {
+    let currentTime = new Date();
+    this.current_key =
+      currentTime.getDay() === 0 || currentTime.getDay() === 6 ? 1 : 0;
   },
 };
 </script>
