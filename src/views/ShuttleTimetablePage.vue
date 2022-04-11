@@ -13,7 +13,15 @@
       </v-tabs>
     </v-flex>
     <v-flex class="timetable">
-      <v-list>
+      <v-list
+        v-if="
+          Object.keys(
+            this.shuttleTimetable[
+              selectedTabIndex === 0 ? 'weekdays' : 'weekends'
+            ]
+          ).includes(this.$route.params.heading)
+        "
+      >
         <template
           v-for="(timetable, timetableIndex) in this.shuttleTimetable[
             selectedTabIndex === 0 ? 'weekdays' : 'weekends'
@@ -24,33 +32,11 @@
             :key="timetableIndex"
             style="width: 100%"
           ></v-divider>
-
-          <v-list-item :key="timetable.time">
-            <v-list-item-content class="d-flex justify-center">
-              <v-row no-gutters align="center" justify="center">
-                <v-col cols="2">
-                  <span
-                    v-bind:style="{
-                      color: timetable.type === 'C' ? '#0E4A84' : '#FF0000',
-                    }"
-                  >
-                    {{ timetable.type === "C" ? "순환" : "직행" }}
-                  </span>
-                </v-col>
-                <v-col cols="5">
-                  <span
-                    v-bind:style="{
-                      color: isTimePassed(timetable.time)
-                        ? '#000000'
-                        : '#7F7F7F',
-                    }"
-                  >
-                    {{ timetable.time.replace(":", "시 ") }}분<br />
-                  </span>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-list-item>
+          <ShuttleListItem
+            v-bind:timetable="timetable"
+            v-bind:selected-tab-index="selectedTabIndex"
+            v-bind:key="'shuttle-list-item-' + timetableIndex"
+          />
         </template>
       </v-list>
     </v-flex>
@@ -73,10 +59,11 @@
 </style>
 <script>
 import axios from "axios";
+import ShuttleListItem from "@/components/ShuttleListItem";
 
 export default {
   name: "ShuttleTimetablePage",
-  components: {},
+  components: { ShuttleListItem },
   computed: {
     getShuttleArrivalList() {
       return this.$store.state.shuttleRealtimeData;
@@ -84,7 +71,6 @@ export default {
   },
   created() {
     this.getShuttleList();
-    console.log(this.shuttleTimetable);
   },
   data() {
     return {
@@ -96,7 +82,6 @@ export default {
   },
   methods: {
     async getShuttleList() {
-      console.log(this.$store.state.shuttleTimetableData.length);
       if (this.$store.state.shuttleTimetableData.length === 0) {
         const url = "/api/v1/shuttle/timetable";
         const res = await axios.get(url, {
@@ -116,15 +101,6 @@ export default {
     },
     changeButtonClicked(index) {
       this.selectedTabIndex = index;
-    },
-    isTimePassed(shuttleTime) {
-      let currentTime = new Date();
-      let timeArr = shuttleTime.split(":");
-      return (
-        currentTime.getHours() < parseInt(timeArr[0]) ||
-        (currentTime.getHours() === parseInt(timeArr[0]) &&
-          currentTime.getMinutes() < parseInt(timeArr[1]))
-      );
     },
   },
   mounted() {
