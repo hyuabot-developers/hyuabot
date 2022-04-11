@@ -4,7 +4,6 @@
       <v-tabs fixed-tabs>
         <v-tab
           v-for="(tab, index) in tabs"
-          :key="index"
           v-bind:class="{ active: index === selectedTabIndex }"
           v-on:click="changeButtonClicked(index)"
         >
@@ -21,7 +20,6 @@
         >
           <v-divider
             v-if="timetableIndex !== 0"
-            :key="timetableIndex"
             style="width: 100%"
           ></v-divider>
 

@@ -30,7 +30,7 @@
         <v-col cols="2">
           <li
             v-show="item['busForTerminal'].length > 0"
-            v-for="(timeItem, index) in item[
+            v-for="timeItem in item[
               shuttleHeadingList[item['stopCode']].length > 1
                 ? 'busForStation'
                 : 'busForTerminal'
@@ -45,7 +45,6 @@
                 ].length
               )
             )"
-            :key="index"
             style="margin-bottom: 20px"
             v-bind:style="{
               color: timeItem['type'] === 'C' ? '#0E4A84' : '#FF0000',
@@ -64,7 +63,7 @@
                   : 'busForTerminal'
               ].length > 0
             "
-            v-for="(timeItem, index) in item[
+            v-for="timeItem in item[
               shuttleHeadingList[item['stopCode']].length > 1
                 ? 'busForStation'
                 : 'busForTerminal'
@@ -79,7 +78,6 @@
                 ].length
               )
             )"
-            :key="index"
             style="margin-bottom: 20px"
           >
             {{ timeItem["time"].replace(":", "시 ") }}분
@@ -113,11 +111,10 @@
         <v-col cols="2">
           <li
             v-show="item['busForTerminal'].length > 0"
-            v-for="(timeItem, index) in item['busForTerminal'].slice(
+            v-for="timeItem in item['busForTerminal'].slice(
               0,
               Math.min(2, item['busForTerminal'].length)
             )"
-            :key="index"
             style="margin-bottom: 20px"
             v-bind:style="{
               color: timeItem['type'] === 'C' ? '#0E4A84' : '#FF0000',
@@ -130,11 +127,10 @@
         <v-col cols="5">
           <li
             v-show="item['busForTerminal'].length > 0"
-            v-for="(timeItem, index) in item['busForTerminal'].slice(
+            v-for="timeItem in item['busForTerminal'].slice(
               0,
               Math.min(2, item['busForTerminal'].length)
             )"
-            :key="index"
             style="margin-bottom: 20px"
           >
             {{ timeItem["time"].replace(":", "시 ") }}분
