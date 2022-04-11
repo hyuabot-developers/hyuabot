@@ -104,7 +104,6 @@ export default {
       }
     },
   },
-  data() {},
   props: {
     item: {
       type: Object,
