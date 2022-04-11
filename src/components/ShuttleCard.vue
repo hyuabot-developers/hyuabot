@@ -85,6 +85,17 @@
             {{ timeItem["time"].replace(":", "시 ") }}분
             <br />
           </li>
+          <span
+            v-show="
+              item[
+                shuttleHeadingList[item['stopCode']].length > 1
+                  ? 'busForStation'
+                  : 'busForTerminal'
+              ].length === 0
+            "
+          >
+            운행 종료
+          </span>
         </v-col>
       </v-row>
       <v-divider v-if="shuttleHeadingList[item['stopCode']].length > 1" />
@@ -129,6 +140,17 @@
             {{ timeItem["time"].replace(":", "시 ") }}분
             <br />
           </li>
+          <span
+            v-show="
+              item[
+                shuttleHeadingList[item['stopCode']].length > 1
+                  ? 'busForStation'
+                  : 'busForTerminal'
+              ].length === 0
+            "
+          >
+            운행 종료
+          </span>
         </v-col>
       </v-row>
     </v-container>
