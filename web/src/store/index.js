@@ -6,13 +6,18 @@ export const store = new Vuex.Store({
   state: {
     shuttleRealtimeData: [],
     shuttleTimetableData: [],
+    subwayData: [],
   },
   getters: {
-    getShuttleRealtimeData: (state) => {
-      return state.shuttleRealtimeData;
+    getShuttleTimetable: (state) => (stopCode) => {
+      return state.shuttleTimetableData.find(
+        (item) => item.stopCode === stopCode
+      );
     },
-    getShuttleTimetableData: (state) => {
-      return state.shuttleTimetableData;
+  },
+  mutations: {
+    setShuttleTimetable(state, timetable) {
+      state.shuttleTimetableData = timetable;
     },
   },
 });

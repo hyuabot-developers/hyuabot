@@ -1,124 +1,110 @@
 <template>
-  <v-container>
-    <div>
-      <ul class="tabs">
-        <li
+  <v-layout column align-center>
+    <v-flex class="tabs">
+      <v-tabs fixed-tabs v-model="current_key">
+        <v-tab
           v-for="(tab, index) in tabs"
-          :key="index"
           v-bind:class="{ active: index === selectedTabIndex }"
           v-on:click="changeButtonClicked(index)"
         >
           {{ tab }}
-        </li>
-      </ul>
-      <ul class="timetableList">
-        <li
-          v-for="(timetable, timetableIndex) in getShuttleTimetableList[
-            this.$route.params.stopCode
-          ][selectedTabIndex === 0 ? 'weekdays' : 'weekends'][
-            this.$route.params.heading
-          ]"
-          :key="timetableIndex"
+        </v-tab>
+      </v-tabs>
+    </v-flex>
+    <v-flex class="timetable">
+      <v-list
+        v-if="
+          Object.keys(
+            this.shuttleTimetable[
+              selectedTabIndex === 0 ? 'weekdays' : 'weekends'
+            ]
+          ).includes(this.$route.params.heading)
+        "
+      >
+        <template
+          v-for="(timetable, timetableIndex) in this.shuttleTimetable[
+            selectedTabIndex === 0 ? 'weekdays' : 'weekends'
+          ][this.$route.params.heading]"
         >
-          {{ timetable.time }}
-        </li>
-      </ul>
-    </div>
-  </v-container>
+          <v-divider
+            v-if="timetableIndex !== 0"
+            style="width: 100%"
+          ></v-divider>
+          <ShuttleListItem
+            v-bind:timetable="timetable"
+            v-bind:selected-tab-index="selectedTabIndex"
+            v-bind:key="'shuttle-list-item-' + timetableIndex"
+          />
+        </template>
+      </v-list>
+    </v-flex>
+  </v-layout>
 </template>
 <style scoped>
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-ul.tabs {
+.tabs {
   position: fixed;
-  display: flex;
-  width: 90vw;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
 }
-.tabs li {
-  display: inline-block;
-  padding: 15px;
-  width: 50%;
-  text-align: center;
-  box-sizing: border-box;
-  border-bottom: 1px solid #ccc;
-  background-color: #eee;
-  color: #999;
-}
-.tabs li.active {
-  background-color: #0e4a84;
-  color: #fff;
-}
-div {
-  flex-flow: column wrap;
-}
-.timetableList {
-  margin-bottom: 15px;
-  overflow-y: hidden;
-}
-.timetableList li {
-  box-sizing: border-box;
-  display: block;
-  padding: 15px;
-  border-bottom: 1px solid #ccc;
-  position: relative;
-}
-.timetableList li:last-child {
-  border-bottom: none;
+.timetable {
+  margin-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
 }
 </style>
 <script>
 import axios from "axios";
+import ShuttleListItem from "@/components/ShuttleListItem";
+
 export default {
   name: "ShuttleTimetablePage",
-  components: {},
+  components: { ShuttleListItem },
   computed: {
-    getShuttleTimetableList() {
-      return this.$store.state.shuttleTimetableData;
+    getShuttleArrivalList() {
+      return this.$store.state.shuttleRealtimeData;
     },
+  },
+  created() {
+    this.getShuttleList();
   },
   data() {
     return {
       tabs: ["평일", "주말"],
       selectedTabIndex: 0,
+      shuttleTimetable: {},
+      current_key: 0,
     };
   },
   methods: {
     async getShuttleList() {
-      if (
-        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] ===
-          {} ||
-        !this.$store.state.shuttleTimetableData[this.$route.params.stopCode]
-      ) {
-        const url = `/api/v1/shuttle/arrival/${this.$route.params.stopCode}/timetable/all`;
+      if (this.$store.state.shuttleTimetableData.length === 0) {
+        const url = "/api/v1/shuttle/timetable";
         const res = await axios.get(url, {
           baseURL: "https://api.hyuabot.app",
         });
-        this.$store.state.shuttleTimetableData[this.$route.params.stopCode] =
-          {};
+        console.log(res.status);
         if (res.status === 200) {
-          console.log(res.data);
-          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
-            "weekdays"
-          ] = res.data["weekdays"];
-          this.$store.state.shuttleTimetableData[this.$route.params.stopCode][
-            "weekends"
-          ] = res.data["weekends"];
+          this.$store.commit("setShuttleTimetable", res.data["timetableList"]);
+          console.log(this.$store.state.shuttleTimetableData);
         } else {
           this.$router.go(-1);
         }
       }
-      // console.log(this.getShuttleTimetableList());
+      this.shuttleTimetable = this.$store.getters.getShuttleTimetable(
+        this.$route.params.stopCode
+      );
     },
     changeButtonClicked(index) {
       this.selectedTabIndex = index;
     },
   },
-  created() {
-    this.getShuttleList();
-    console.log(this.$store.state.shuttleTimetableData);
+  mounted() {
+    let currentTime = new Date();
+    this.current_key =
+      currentTime.getDay() === 0 || currentTime.getDay() === 6 ? 1 : 0;
   },
 };
 </script>

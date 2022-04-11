@@ -1,18 +1,17 @@
 <template>
-  <v-container>
+  <v-layout column align-center>
     <v-flex>
       <ShuttleCard
-        v-for="(shuttleArrivalItem, index) in getShuttleArrivalList"
-        :key="index"
+        v-for="shuttleArrivalItem in getShuttleArrivalList"
         :item="shuttleArrivalItem"
-        style="margin-bottom: 20px"
+        style="margin-top: 10px"
       />
     </v-flex>
-  </v-container>
+  </v-layout>
 </template>
 <style scoped>
 ShuttleCard {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 </style>
 <script>
