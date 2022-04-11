@@ -1,5 +1,50 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-layout column align-center>
+    <v-flex>
+      <SubwayCard
+        v-for="(subwayArrivalItem, index) in this.$store.state.subwayData"
+        :key="index"
+        :item="subwayArrivalItem"
+        style="margin-top: 10px"
+      />
+    </v-flex>
+  </v-layout>
 </template>
+<script>
+import axios from "axios";
+import SubwayCard from "@/components/SubwayCard";
+
+export default {
+  name: "SubwayPage",
+  components: { SubwayCard },
+  data() {
+    return {
+      message: "Hello from the about page!",
+      timer: "",
+    };
+  },
+  methods: {
+    async getSubwayList() {
+      const url = "/api/v1/subway/arrival/erica";
+      const res = await axios.get(url, {
+        baseURL: "https://api.hyuabot.app",
+      });
+      if (res.status === 200) {
+        this.$store.state.subwayData = res.data["departureList"];
+      } else {
+        this.$store.state.subwayData = [];
+      }
+    },
+    cancelAutoRefresh() {
+      clearInterval(this.timer);
+    },
+  },
+  created() {
+    this.getSubwayList();
+    this.timer = setInterval(this.getSubwayList, 60000);
+  },
+  destroyed() {
+    this.cancelAutoRefresh();
+  },
+};
+</script>
