@@ -1,0 +1,46 @@
+version: '3'
+services:
+  hyuabot-redis:
+    image: redis
+    command: redis-server --port 6379
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    volumes:
+      - ./data:/data
+    expose:
+      - "6379"
+  hyuabot-api:
+      build: ./api
+      environment:
+        - REDIS_HOST=hyuabot-redis
+        - BUS_API_KEY=${BUS_API_KEY}
+        - METRO_API_KEY=${METRO_API_KEY}
+        - TZ=Asia/Seoul
+      ports:
+        - 38080:8080
+      depends_on:
+        - hyuabot-redis
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+  hyuabot-kakao:
+      build: ./kakao
+      environment:
+        - API_HOST=hyuabot-api
+        - TZ=Asia/Seoul
+      ports:
+        - 38081:8081
+      depends_on:
+        - hyuabot-redis
+        - hyuabot-api
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+  hyuabot-web:
+      build: ./web
+      environment:
+        - API_HOST=hyuabot-api
+      ports:
+        - 38082:80
+      depends_on:
+        - hyuabot-redis
+        - hyuabot-api
