@@ -2,8 +2,7 @@
   <v-layout column align-center>
     <v-flex>
       <ShuttleCard
-        v-for="(shuttleArrivalItem, index) in getShuttleArrivalList"
-        :key="index"
+        v-for="shuttleArrivalItem in getShuttleArrivalList"
         :item="shuttleArrivalItem"
         style="margin-top: 10px"
       />
