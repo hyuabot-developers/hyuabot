@@ -32,8 +32,15 @@
           ></v-divider>
           <ShuttleListItem
             v-bind:timetable="timetable"
+            v-bind:shuttleStop="stopCode"
+            v-bind:shuttleType="heading"
             v-bind:selected-tab-index="selectedTabIndex"
-            v-bind:key="'shuttle-list-item-' + timetableIndex"
+            v-bind:key="
+              'shuttle-list-item-' +
+              (selectedTabIndex === 0 ? 'weekdays' : 'weekends') +
+              '-' +
+              timetableIndex
+            "
           />
         </template>
       </v-list>
@@ -76,6 +83,8 @@ export default {
       selectedTabIndex: 0,
       shuttleTimetable: {},
       current_key: 0,
+      stopCode: this.$route.params.stopCode.toString(),
+      heading: this.$route.params.heading.toString(),
     };
   },
   methods: {
