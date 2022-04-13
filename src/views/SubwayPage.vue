@@ -42,6 +42,7 @@ export default {
   created() {
     this.getSubwayList();
     this.timer = setInterval(this.getSubwayList, 60000);
+    this.$store.commit("setAppTitle", "전철");
   },
   destroyed() {
     this.cancelAutoRefresh();
