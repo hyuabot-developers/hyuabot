@@ -37,6 +37,8 @@ export default {
             now.getDay() === 0 || now.getDay() === 6 ? "weekends" : "weekdays";
           let busDataByLine = {
             lineName: item["name"],
+            startStop: item["startStop"],
+            terminalStop: item["terminalStop"],
             busStopName: item["busStop"],
             arrivalList: [],
           };
