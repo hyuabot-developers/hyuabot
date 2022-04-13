@@ -4,6 +4,7 @@ import Vue from "vue";
 Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
+    appTitle: "셔틀버스",
     shuttleRealtimeData: [],
     shuttleTimetableData: [],
     subwayData: [],

@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <v-app>
+      <v-app-bar app color="#0E4A84" dark fixed>
+        <v-app-bar-title>{{ this.$store.state.appTitle }}</v-app-bar-title>
+      </v-app-bar>
       <v-main style="margin-bottom: 56px">
         <v-slide-x-transition mode="out-in">
           <router-view></router-view>
