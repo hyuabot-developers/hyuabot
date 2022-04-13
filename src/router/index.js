@@ -12,7 +12,7 @@ const routes = [
     component: ShuttlePage,
   },
   {
-    path: "/shuttle/timetable",
+    path: "/shuttle/timetable/:stopCode/:heading",
     name: "Shuttle Timetable Page",
     component: ShuttleTimetablePage,
   },
