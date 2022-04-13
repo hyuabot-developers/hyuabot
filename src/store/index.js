@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
     shuttleRealtimeData: [],
     shuttleTimetableData: [],
     subwayData: [],
+    busData: [],
   },
   getters: {
     getShuttleTimetable: (state) => (stopCode) => {
