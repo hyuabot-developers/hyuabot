@@ -30,7 +30,81 @@ export default {
         baseURL: "https://api.hyuabot.app",
       });
       if (res.status === 200) {
-        this.$store.state.subwayData = res.data["departureList"];
+        let subwayData = [];
+        res.data["departureList"].map((item) => {
+          let updateTime = new Date(item["updateTime"]);
+          let now = new Date();
+          let updateBefore =
+            (now.getTime() - updateTime.getTime()) / (1000 * 60);
+          let subwayDataByLine = {
+            lineName: item["lineName"],
+            up: [],
+            down: [],
+          };
+          item["realtime"]["up"].map((realtimeItem) => {
+            if (realtimeItem["remainedTime"] - updateBefore > 0) {
+              subwayDataByLine.up.push({
+                terminalStation: realtimeItem["terminalStation"],
+                currentStation: realtimeItem["currentStation"],
+                remainedTime: realtimeItem["remainedTime"] - updateBefore,
+              });
+            }
+          });
+          let previousItemTime = -1;
+          if (subwayDataByLine.up.length > 0) {
+            previousItemTime =
+              subwayDataByLine.up[subwayDataByLine.up.length - 1].remainedTime;
+          }
+          item["timetable"]["up"].map((timetableItem) => {
+            let time = new Date(
+              `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${
+                timetableItem["departureTime"]
+              }`
+            );
+            let remainedTime =
+              (time.getTime() - new Date().getTime()) / (1000 * 60);
+            if (remainedTime > previousItemTime + 3) {
+              subwayDataByLine.up.push({
+                terminalStation: timetableItem["terminalStation"],
+                currentStation: "시간표",
+                remainedTime: remainedTime,
+              });
+            }
+          });
+          item["realtime"]["down"].map((realtimeItem) => {
+            if (realtimeItem["remainedTime"] - updateBefore > 0) {
+              subwayDataByLine.down.push({
+                terminalStation: realtimeItem["terminalStation"],
+                currentStation: realtimeItem["currentStation"],
+                remainedTime: realtimeItem["remainedTime"] - updateBefore,
+              });
+            }
+          });
+          previousItemTime = -1;
+          if (subwayDataByLine.down.length > 0) {
+            previousItemTime =
+              subwayDataByLine.down[subwayDataByLine.down.length - 1]
+                .remainedTime;
+          }
+          item["timetable"]["down"].map((timetableItem) => {
+            let time = new Date(
+              `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${
+                timetableItem["departureTime"]
+              }`
+            );
+            let remainedTime =
+              (time.getTime() - new Date().getTime()) / (1000 * 60);
+            if (remainedTime > previousItemTime + 3) {
+              subwayDataByLine.down.push({
+                terminalStation: timetableItem["terminalStation"],
+                currentStation: "시간표",
+                remainedTime: remainedTime,
+              });
+            }
+          });
+          subwayData.push(subwayDataByLine);
+        });
+        this.$store.state.subwayData = subwayData;
       } else {
         this.$store.state.subwayData = [];
       }
