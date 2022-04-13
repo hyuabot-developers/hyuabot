@@ -12,12 +12,12 @@
       <v-divider />
       <v-row no-gutters style="height: 75px" align="center" justify="center">
         <v-col cols="2" style="font-size: 1em">상행</v-col>
-        <v-col cols="5">
+        <v-col cols="4">
           <li
-            v-show="item['realtime']['up'].length > 0"
-            v-for="(realtimeItem, index) in item['realtime']['up'].slice(
+            v-show="item['up'].length > 0"
+            v-for="(realtimeItem, index) in item['up'].slice(
               0,
-              Math.min(2, item['realtime']['up'].length)
+              Math.min(2, item['up'].length)
             )"
             :key="index"
             style="margin-bottom: 20px"
@@ -26,52 +26,79 @@
             <br />
           </li>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="2">
           <li
-            v-for="(realtimeItem, index) in item['realtime']['up'].slice(
+            v-for="(realtimeItem, index) in item['up'].slice(
               0,
-              Math.min(2, item['realtime']['up'].length)
+              Math.min(2, item['up'].length)
+            )"
+            :key="index"
+            style="margin-bottom: 20px"
+            v-bind:style="{
+              color: getCurrentStationColor(realtimeItem['currentStation']),
+            }"
+          >
+            {{ parseInt(realtimeItem["remainedTime"]) }}분<br />
+          </li>
+        </v-col>
+        <v-col cols="4">
+          <li
+            v-for="(realtimeItem, index) in item['up'].slice(
+              0,
+              Math.min(2, item['up'].length)
             )"
             :key="index"
             style="margin-bottom: 20px"
           >
-            {{ parseInt(realtimeItem["remainedTime"]) }}분 ({{
-              realtimeItem["currentStation"]
-            }})
-            <br />
+            {{ realtimeItem["currentStation"].replace("시간표", "") }}<br />
           </li>
         </v-col>
       </v-row>
       <v-divider />
       <v-row no-gutters style="height: 75px" align="center" justify="center">
         <v-col cols="2" style="font-size: 1em">하행</v-col>
-        <v-col cols="5">
+        <v-col cols="4">
           <li
-            v-show="item['realtime']['down'].length > 0"
-            v-for="(realtimeItem, index) in item['realtime']['down'].slice(
+            v-show="item['down'].length > 0"
+            v-for="(realtimeItem, index) in item['down'].slice(
               0,
-              Math.min(2, item['realtime']['down'].length)
+              Math.min(2, item['down'].length)
             )"
             :key="index"
             style="margin-bottom: 20px"
           >
-            {{ realtimeItem["terminalStation"] }}행
+            {{ realtimeItem["terminalStation"].replace("신인천", "인천") }}행
             <br />
           </li>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="2">
           <li
-            v-for="(realtimeItem, index) in item['realtime']['down'].slice(
+            v-for="(realtimeItem, index) in item['down'].slice(
               0,
-              Math.min(2, item['realtime']['down'].length)
+              Math.min(2, item['up'].length)
             )"
             :key="index"
             style="margin-bottom: 20px"
+            v-bind:style="{
+              color: getCurrentStationColor(realtimeItem['currentStation']),
+            }"
           >
-            {{ parseInt(realtimeItem["remainedTime"]) }}분 ({{
-              realtimeItem["currentStation"]
-            }})
-            <br />
+            {{ parseInt(realtimeItem["remainedTime"]) }}분<br />
+          </li>
+        </v-col>
+        <v-col cols="4">
+          <li
+            v-for="(realtimeItem, index) in item['down'].slice(
+              0,
+              Math.min(2, item['down'].length)
+            )"
+            :key="index"
+            style="margin-bottom: 20px"
+            v-bind:style="{
+              color: getCurrentStationColor(realtimeItem['currentStation']),
+            }"
+          >
+            {{ realtimeItem["currentStation"].replace("시간표", "") }}<br />
           </li>
         </v-col>
       </v-row>
@@ -102,6 +129,9 @@ export default {
         case "수인분당선":
           return "#FABE00";
       }
+    },
+    getCurrentStationColor: function (currentStation) {
+      return currentStation === "시간표" ? "#7f7f7f" : "#000000";
     },
   },
   props: {
