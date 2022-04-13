@@ -7,7 +7,11 @@
         style="margin-top: 10px"
       />
     </v-flex>
-    <v-snackbar v-model="snackbar" style="padding-bottom: 56px" :timeout="1500">
+    <v-snackbar
+      v-model="getSnackBarVisibility"
+      style="padding-bottom: 56px"
+      :timeout="1500"
+    >
       시간표를 확인하시려면 시간표 카드를 클릭해주세요.
     </v-snackbar>
   </v-layout>
@@ -31,10 +35,12 @@ export default {
     getShuttleArrivalList() {
       return this.$store.state.shuttleRealtimeData;
     },
+    getSnackBarVisibility() {
+      return this.$store.state.shuttleSnackBar;
+    },
   },
   data() {
     return {
-      snackbar: true,
       shuttleList: null,
     };
   },
