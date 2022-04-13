@@ -2,7 +2,9 @@
   <div id="app">
     <v-app>
       <v-app-bar app color="#0E4A84" dark fixed dense>
-        <v-app-bar-title>{{ setTitle }}</v-app-bar-title>
+        <v-spacer />
+        <v-app-bar-title alg>{{ setTitle }}</v-app-bar-title>
+        <v-spacer />
       </v-app-bar>
       <v-main style="margin-bottom: 56px">
         <v-slide-x-transition mode="out-in">
