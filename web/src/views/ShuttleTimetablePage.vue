@@ -45,13 +45,16 @@
         </template>
       </v-list>
     </v-flex>
+    <v-snackbar v-model="snackbar" style="padding-bottom: 56px" :timeout="1500">
+      시간을 클릭하시면 정차 정류소를 볼 수 있습니다.
+    </v-snackbar>
   </v-layout>
 </template>
 <style scoped>
 .tabs {
   position: fixed;
   left: 0;
-  top: 0;
+  top: 48px;
   width: 100vw;
   z-index: 1;
 }
@@ -76,6 +79,7 @@ export default {
   },
   created() {
     this.getShuttleList();
+    this.setTitle();
   },
   data() {
     return {
@@ -85,6 +89,7 @@ export default {
       current_key: 0,
       stopCode: this.$route.params.stopCode.toString(),
       heading: this.$route.params.heading.toString(),
+      snackbar: true,
     };
   },
   methods: {
@@ -108,6 +113,43 @@ export default {
     },
     changeButtonClicked(index) {
       this.selectedTabIndex = index;
+    },
+    setTitle() {
+      const shuttleNameDict = {
+        Dormitory: {
+          name: "기숙사",
+          busForStation: "한대앞/셔틀콕",
+          busForTerminal: "예술인/셔틀콕",
+        },
+        Shuttlecock_O: {
+          name: "셔틀콕",
+          busForStation: "한대앞",
+          busForTerminal: "예술인",
+        },
+        Station: {
+          name: "한대앞",
+          busForStation: "기숙사/셔틀콕",
+          busForTerminal: "예술인",
+        },
+        Terminal: {
+          name: "예술인",
+          busForStation: "기숙사/셔틀콕",
+          busForTerminal: "기숙사/셔틀콕",
+        },
+        Shuttlecock_I: {
+          name: "셔틀콕 건너편",
+          busForStation: "기숙사",
+          busForTerminal: "기숙사",
+        },
+      };
+      this.$store.commit(
+        "setAppTitle",
+        `${shuttleNameDict[this.$route.params.stopCode].name} ➔ ${
+          shuttleNameDict[this.$route.params.stopCode][
+            this.$route.params.heading
+          ]
+        }`
+      );
     },
   },
   mounted() {

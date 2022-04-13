@@ -171,6 +171,7 @@ export default {
       return this.shuttleHeadingList[item["stopCode"]].length > 1 ? 200 : 125;
     },
     moveToTimetable: function (event, stopCode, heading) {
+      this.$store.commit("setShuttleSnackBarVisible", false);
       this.$router.push({
         name: "Shuttle Timetable Page",
         params: {

@@ -4,6 +4,8 @@ import Vue from "vue";
 Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
+    appTitle: "셔틀버스",
+    shuttleSnackBar: true,
     shuttleRealtimeData: [],
     shuttleTimetableData: [],
     subwayData: [],
@@ -18,6 +20,12 @@ export const store = new Vuex.Store({
   mutations: {
     setShuttleTimetable(state, timetable) {
       state.shuttleTimetableData = timetable;
+    },
+    setAppTitle(state, title) {
+      state.appTitle = title;
+    },
+    setShuttleSnackBarVisible(state, visible) {
+      state.shuttleSnackBar = visible;
     },
   },
 });
