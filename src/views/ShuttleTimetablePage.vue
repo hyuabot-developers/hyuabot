@@ -54,7 +54,7 @@
 .tabs {
   position: fixed;
   left: 0;
-  top: 55px;
+  top: 48px;
   width: 100vw;
   z-index: 1;
 }
