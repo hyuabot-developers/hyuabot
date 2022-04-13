@@ -53,6 +53,7 @@ export default {
   },
   created() {
     this.getShuttleList();
+    this.$store.commit("setAppTitle", "셔틀버스");
   },
 };
 </script>

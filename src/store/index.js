@@ -20,5 +20,8 @@ export const store = new Vuex.Store({
     setShuttleTimetable(state, timetable) {
       state.shuttleTimetableData = timetable;
     },
+    setAppTitle(state, title) {
+      state.appTitle = title;
+    },
   },
 });
