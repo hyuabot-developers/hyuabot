@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <v-app>
-      <v-app-bar app color="#0E4A84" dark fixed>
-        <v-app-bar-title>{{ this.$store.state.appTitle }}</v-app-bar-title>
+      <v-app-bar app color="#0E4A84" dark fixed dense>
+        <v-app-bar-title>{{ setTitle }}</v-app-bar-title>
       </v-app-bar>
       <v-main style="margin-bottom: 56px">
         <v-slide-x-transition mode="out-in">
@@ -65,6 +65,11 @@ export default {
     return {
       sSelect: "자전거",
     };
+  },
+  computed: {
+    setTitle() {
+      return this.$store.state.appTitle;
+    },
   },
 };
 </script>
