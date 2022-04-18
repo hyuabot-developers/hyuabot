@@ -1,4 +1,4 @@
-# 휴아봇 (hyuabot-client-web)
+# 휴아봇
 
 A campus information platform in Hanyang Univ ERICA Campus
 
