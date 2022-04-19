@@ -15,12 +15,12 @@ export const useBusArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchArrivalList: (state: BusState) => {
+    fetchArrivalList(){
       api.get('/bus/arrival').then(
-        (response: AxiosResponse<{[key: string]: BusItem[]}>) => {
-          state.arrivalList = response.data['departureList']
+        (response: AxiosResponse<{[key: string]: BusItem[] | string}>) => {
+          this.arrivalList = response.data['departureList'] as BusItem[];
         }
-      );
+      )
     },
   },
 });

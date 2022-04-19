@@ -15,10 +15,10 @@ export const useShuttleArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchShuttleArrivalList: (state: ShuttleState) => {
+    fetchShuttleArrivalList()  {
       api.get('/shuttle/arrival').then(
         (response: AxiosResponse<{[key: string]: ShuttleStopItem[] | string}>) => {
-          state.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
+          this.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
         }
       );
     },

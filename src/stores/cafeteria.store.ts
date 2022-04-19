@@ -15,10 +15,10 @@ export const useCafeteriaStore = defineStore({
     },
   },
   actions: {
-    fetchMenuList: (state: CafeteriaState) => {
+    fetchMenuList() {
       api.get('/food/campus/erica').then(
         (response: AxiosResponse<{[key: string]: CafeteriaItem[] | string}>) => {
-          state.restaurantList = response.data['restaurantList'] as CafeteriaItem[];
+          this.restaurantList = response.data['restaurantList'] as CafeteriaItem[];
         }
       );
     },

@@ -15,10 +15,10 @@ export const useShuttleTimetableStore = defineStore({
     },
   },
   actions: {
-    fetchShuttleTimetableList: (state: ShuttleTimetableState) => {
+    fetchShuttleTimetableList() {
       api.get('/shuttle/timetable').then(
         (response: AxiosResponse<{[key: string]: ShuttleTimetableItem[] | string}>) => {
-          state.arrivalList = response.data['timetableList'] as ShuttleTimetableItem[];
+          this.arrivalList = response.data['timetableList'] as ShuttleTimetableItem[];
         }
       );
     },

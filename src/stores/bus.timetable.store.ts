@@ -18,10 +18,10 @@ export const useBusTimetableStore = defineStore({
     },
   },
   actions: {
-    fetchTimetable: (state: BusTimetableState, lineName: string) => {
+    fetchTimetable(lineName: string) {
       api.get(`/bus/arrival/${lineName}`).then(
         (response: AxiosResponse<BusTimetableItem>) => {
-          state.timetable[lineName] = response.data
+          this.timetable[lineName] = response.data
         }
       );
     },

@@ -15,10 +15,10 @@ export const useSubwayArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchSubwayArrivalList: (state: SubwayState, campus: string) => {
+    fetchSubwayArrivalList(campus: string) {
       api.get(`/subway/arrival/${campus}`).then(
         (response: AxiosResponse<{[key: string]: SubwayItem[] | string}>) => {
-          state.arrivalList = response.data['departureList'] as SubwayItem[];
+          this.arrivalList = response.data['departureList'] as SubwayItem[];
         }
       );
     },
