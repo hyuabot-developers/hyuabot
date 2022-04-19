@@ -1,5 +1,7 @@
 import {defineStore} from 'pinia';
 import {ShuttleStopItem} from 'src/models/shuttle.item';
+import {api} from 'boot/axios';
+import {AxiosResponse} from 'axios';
 
 export type ShuttleState = {
   arrivalList: ShuttleStopItem[];
@@ -11,5 +13,14 @@ export const useShuttleArrivalStore = defineStore({
     getArrivalList: (state: ShuttleState) => {
       return (stopCode: string) => state.arrivalList.filter(item => item.stopCode === stopCode)
     },
-  }
+  },
+  actions: {
+    fetchShuttleArrivalList: (state: ShuttleState) => {
+      api.get('/shuttle/arrival').then(
+        (response: AxiosResponse<{[key: string]: ShuttleStopItem[] | string}>) => {
+          state.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
+        }
+      );
+    },
+  },
 });
