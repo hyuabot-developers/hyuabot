@@ -7,6 +7,7 @@ export default boot(({ app }) => {
   const i18n = createI18n({
     locale: 'ko-KR',
     fallbackLocale: 'ko-KR',
+    globalInjection: true,
     messages,
   });
 

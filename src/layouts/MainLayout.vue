@@ -3,7 +3,7 @@
     <q-header elevated class="bg-primary">
       <q-toolbar>
         <q-toolbar-title class="absolute-center">
-          {{ title }}
+          {{ this.$t(title) }}
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
