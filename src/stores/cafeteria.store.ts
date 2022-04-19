@@ -5,7 +5,7 @@ export type CafeteriaState = {
   restaurantList: CafeteriaItem[];
 }
 export const useCafeteriaStore = defineStore({
-  id: 'shuttleArrivalStore',
+  id: 'cafeteriaStore',
   state: () => ({restaurantList: []} as CafeteriaState),
   getters: {
     getMenuList: (state: CafeteriaState) => {
