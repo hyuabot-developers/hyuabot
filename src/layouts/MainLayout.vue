@@ -8,6 +8,16 @@
       </q-toolbar>
     </q-header>
 
+    <q-footer>
+      <q-tabs dense>
+        <q-route-tab icon="mdi-bus" to="/shuttle" :label="$t('menu.shuttle')" replace/>
+        <q-route-tab icon="mdi-train" to="/subway" :label="$t('menu.subway')" replace/>
+        <q-route-tab icon="mdi-bus-multiple" to="/bus" :label="$t('menu.bus')" replace/>
+        <q-route-tab icon="mdi-silverware" to="/cafeteria" :label="$t('menu.cafeteria')" replace/>
+        <q-route-tab icon="mdi-menu" to="/menu" :label="$t('menu.menu')" replace/>
+      </q-tabs>
+    </q-footer>
+
     <q-page-container>
       <router-view />
     </q-page-container>
