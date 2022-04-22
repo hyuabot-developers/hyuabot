@@ -19,6 +19,7 @@ export const useShuttleArrivalStore = defineStore({
       api.get('/shuttle/arrival').then(
         (response: AxiosResponse<{[key: string]: ShuttleStopItem[] | string}>) => {
           this.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
+          console.log(this.arrivalList);
         }
       );
     },

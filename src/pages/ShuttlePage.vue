@@ -1,15 +1,22 @@
 <template>
-  <q-page class="row items-center justify-evenly"></q-page>
+  <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px">
+    <ShuttleCard v-for="shuttleItem in shuttleArrivalList" :shuttle="shuttleItem"/>
+  </q-page>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
 import {useShuttleArrivalStore} from 'stores/shuttle.store';
 import {useGlobalStore} from 'stores/global.store';
+import ShuttleCard from 'components/ShuttleCard.vue';
+import {ShuttleStopItem} from 'src/models/shuttle.item';
 
 export default defineComponent({
   name: 'ShuttlePage',
+  components: {ShuttleCard},
   setup () {
+    const shuttleArrivalList = ref([] as ShuttleStopItem[])
+
     const globalStore = useGlobalStore();
     globalStore.title = 'menu.shuttle';
 
@@ -18,6 +25,10 @@ export default defineComponent({
     setInterval(() => {
       shuttleStore.fetchShuttleArrivalList();
     }, 60000);
+    shuttleStore.$subscribe((mutation, state) => {
+      shuttleArrivalList.value = state.arrivalList;
+    });
+    return {shuttleArrivalList};
   }
 });
 </script>
