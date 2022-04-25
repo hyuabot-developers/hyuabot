@@ -9,7 +9,7 @@ declare module '@vue/runtime-core' {
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: "http://127.0.0.1:38080/api/v1/",
   timeout: 5000,
 });
 
