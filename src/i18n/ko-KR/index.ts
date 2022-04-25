@@ -22,6 +22,7 @@ export default {
       Terminal: '예술인',
       Campus: '셔틀콕/기숙사',
       Shuttlecock_Dormitory: '기숙사',
-    }
+    },
+    more: '전체 시간표 보기',
   }
 };
