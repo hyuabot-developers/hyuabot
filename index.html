@@ -13,5 +13,16 @@
   </head>
   <body>
     <!-- quasar:entry-point -->
+  <script>
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      const button = document.querySelector("button");
+      button.removeAttribute('hidden');
+      button.addEventListener('click', () => {
+        event.prompt();
+        button.setAttribute('disabled', "true");
+      });
+    });
+  </script>
   </body>
 </html>
