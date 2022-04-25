@@ -3,9 +3,9 @@
     <q-card-section class="bg-primary text-white">
       <div class="text-h6">{{ this.$t(`shuttle.${shuttle.stopCode}`) }}</div>
     </q-card-section>
-    <q-card-section>
+    <q-card-section style="padding-top: 0; padding-bottom: 0">
       <div class="row">
-        <div class="text-h6 col-5 items-center">
+        <div class="text-subtitle1 col-5 items-center">
           {{ this.$t(`shuttle.heading.${shuttleHeadingList[shuttle.stopCode][0]}`) }}
         </div>
         <div class="col-7">
@@ -23,7 +23,7 @@
       </div>
       <q-separator v-if="hasDualDestination" />
       <div class="row" v-if="hasDualDestination">
-        <div class="text-h6 col-5 items-center">{{ this.$t(`shuttle.heading.${shuttleHeadingList[shuttle.stopCode][1]}`) }}</div>
+        <div class="text-subtitle1 col-5 items-center">{{ this.$t(`shuttle.heading.${shuttleHeadingList[shuttle.stopCode][1]}`) }}</div>
         <div class="col-7">
           <q-list dense>
             <q-item v-for="shuttleDepartureItem in shuttle.busForTerminal.slice(0, Math.min(2, shuttle.busForTerminal.length))">
@@ -69,10 +69,6 @@ export default {
 </script>
 
 <style scoped>
-q-card-section {
-  padding-top: -16px;
-}
-
 div .items-center {
   display: flex;
   justify-content: center;
