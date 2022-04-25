@@ -15,5 +15,13 @@ export default {
     Station: '한대앞',
     Terminal: '예술인',
     Shuttlecock_I: '셔틀콕 건너편',
+    heading: {
+      Dormitory_Station: '셔틀콕/한대앞',
+      Dormitory_Terminal: '셔틀콕/예술인',
+      Station: '한대앞',
+      Terminal: '예술인',
+      Campus: '셔틀콕/기숙사',
+      Shuttlecock_Dormitory: '기숙사',
+    }
   }
 };

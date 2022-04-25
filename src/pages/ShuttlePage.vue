@@ -1,6 +1,6 @@
 <template>
-  <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px">
-    <ShuttleCard v-for="shuttleItem in shuttleArrivalList" :shuttle="shuttleItem"/>
+  <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+    <ShuttleCard v-for="shuttleItem in shuttleArrivalList" :shuttle="shuttleItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
 
