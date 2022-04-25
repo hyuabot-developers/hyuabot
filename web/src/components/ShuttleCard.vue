@@ -24,6 +24,7 @@
         </div>
       </div>
     </q-card-section>
+    <q-separator />
     <q-btn
       flat
       class="full-width"
@@ -51,6 +52,7 @@
         </div>
       </div>
     </q-card-section>
+    <q-separator v-if="hasDualDestination" />
     <q-btn
       flat
       class="full-width"
