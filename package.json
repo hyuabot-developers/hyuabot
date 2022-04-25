@@ -17,7 +17,7 @@
     "pinia": "^2.0.13",
     "quasar": "^2.6.6",
     "vue": "^3.2.33",
-    "vue-i18n": "^9.1.9",
+    "vue-i18n": "^9.2.0-beta.35",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
@@ -31,7 +31,14 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.7.1",
     "prettier": "^2.6.2",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "workbox-build": "^6.5.0",
+    "workbox-cacheable-response": "^6.5.0",
+    "workbox-core": "^6.5.0",
+    "workbox-expiration": "^6.5.0",
+    "workbox-precaching": "^6.5.0",
+    "workbox-routing": "^6.5.0",
+    "workbox-strategies": "^6.5.0"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",

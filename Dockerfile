@@ -7,9 +7,9 @@ COPY . .
 
 FROM develop-step as build-step
 RUN yarn
-RUN quasar build
+RUN quasar build --mode pwa
 
 FROM nginx:stable-alpine as production-step
-COPY --from=build-step /app/dist/spa /usr/share/nginx/html
+COPY --from=build-step /app/dist/pwa /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
