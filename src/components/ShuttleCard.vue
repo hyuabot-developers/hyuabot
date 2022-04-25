@@ -24,7 +24,12 @@
         </div>
       </div>
     </q-card-section>
-    <q-btn flat class="full-width">{{ this.$t(`shuttle.more`) }}</q-btn>
+    <q-btn
+      flat
+      class="full-width"
+      :to="{ path: `/shuttle/timetable/${shuttle.stopCode}/${hasDualDestination ? 'busForStation' : 'busForTerminal'}` }" >
+      {{ this.$t(`shuttle.more`) }}
+    </q-btn>
     <q-separator v-if="hasDualDestination" />
     <q-card-section
       v-if="hasDualDestination"
@@ -46,7 +51,13 @@
         </div>
       </div>
     </q-card-section>
-    <q-btn flat class="full-width" v-if="hasDualDestination">{{ this.$t(`shuttle.more`) }}</q-btn>
+    <q-btn
+      flat
+      class="full-width"
+      v-if="hasDualDestination"
+      :to="{ path: `/shuttle/timetable/${shuttle.stopCode}/busForTerminal` }" >
+      {{ this.$t(`shuttle.more`) }}
+    </q-btn>
   </q-card>
 </template>
 
@@ -78,7 +89,7 @@ export default {
       hasDualDestination,
       shuttleHeadingList,
       isExpandedFirst,
-      isExpandedSecond
+      isExpandedSecond,
     }
   }
 }
