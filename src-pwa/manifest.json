@@ -3,7 +3,7 @@
   "short_name": "휴아봇",
   "theme_color": "#0e4a84",
   "background_color": "#ffffff",
-  "start_url": "../",
+  "start_url": "/",
   "scope": "/",
   "display": "fullscreen",
   "orientation": "portrait",
