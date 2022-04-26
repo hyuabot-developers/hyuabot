@@ -18,14 +18,7 @@ module.exports = configure(function (/* ctx */) {
     ],
 
     extras: [
-      // 'ionicons-v4',
-      // 'fontawesome-v6',
-      // 'eva-icons',
-      // 'themify',
-      // 'line-awesome',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
       'mdi-v5',
-      'material-icons', // optional, you are not bound to it
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build

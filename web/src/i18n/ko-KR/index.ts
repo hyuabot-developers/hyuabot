@@ -24,5 +24,17 @@ export default {
       Shuttlecock_Dormitory: '기숙사',
     },
     more: '전체 시간표 보기',
+  },
+  bus: {
+    waitingStartStop: '회차점 대기',
+    '10-1': {
+      'terminalStop': '상록수역',
+    },
+    '707-1': {
+      'terminalStop': '수원역',
+    },
+    '3102': {
+      'terminalStop': '강남역',
+    }
   }
 };

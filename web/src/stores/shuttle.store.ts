@@ -16,15 +16,12 @@ export const useShuttleArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchShuttleArrivalList()  {
+    async fetchShuttleArrivalList() {
       const globalState = useGlobalStore();
       globalState.isLoading = true;
-      api.get('/shuttle/arrival').then(
-        (response: AxiosResponse<{[key: string]: ShuttleStopItem[] | string}>) => {
-          this.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
-          globalState.isLoading = false;
-        }
-      );
-    },
+      const response: AxiosResponse<{ [key: string]: ShuttleStopItem[] | string }> = await api.get('/shuttle/arrival');
+      this.arrivalList = response.data['arrivalList'] as ShuttleStopItem[];
+      globalState.isLoading = false;
+    }
   },
 });

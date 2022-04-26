@@ -2,6 +2,7 @@ import {defineStore} from 'pinia';
 import {SubwayItem} from 'src/models/subway.item';
 import {api} from 'boot/axios';
 import {AxiosResponse} from 'axios';
+import {useGlobalStore} from 'stores/global.store';
 
 export type SubwayState = {
   arrivalList: SubwayItem[];
@@ -15,12 +16,12 @@ export const useSubwayArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchSubwayArrivalList(campus: string) {
-      api.get(`/subway/arrival/${campus}`).then(
-        (response: AxiosResponse<{[key: string]: SubwayItem[] | string}>) => {
-          this.arrivalList = response.data['departureList'] as SubwayItem[];
-        }
-      );
+    async fetchSubwayArrivalList(campus: string) {
+      const globalState = useGlobalStore();
+      globalState.isLoading = true;
+      const response: AxiosResponse<{[key: string]: SubwayItem[] | string}> = await api.get(`/subway/arrival/${campus}`);
+      this.arrivalList = response.data['departureList'] as SubwayItem[];
+      globalState.isLoading = false;
     },
   },
 });
