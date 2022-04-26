@@ -2,7 +2,7 @@ export interface BusItem {
   name: string;
   startStop: string;
   terminalStop: string;
-  timeFromStateStop: number;
+  timeFromStartStop: string;
   busStop: string;
   realtime: BusRealtimeItem[];
   timetable: BusTimetableItem;
@@ -17,5 +17,6 @@ export interface BusRealtimeItem {
 
 export interface BusTimetableItem {
   weekdays: string[];
-  weekends: string[];
+  saturday: string[];
+  sunday: string[];
 }

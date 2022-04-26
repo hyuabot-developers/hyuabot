@@ -2,6 +2,7 @@ import {defineStore} from 'pinia';
 import {BusItem} from 'src/models/bus.item';
 import {api} from 'boot/axios';
 import {AxiosResponse} from 'axios';
+import {useGlobalStore} from 'stores/global.store';
 
 export type BusState = {
   arrivalList: BusItem[];
@@ -15,12 +16,13 @@ export const useBusArrivalStore = defineStore({
     },
   },
   actions: {
-    fetchArrivalList(){
-      api.get('/bus/arrival').then(
-        (response: AxiosResponse<{[key: string]: BusItem[] | string}>) => {
-          this.arrivalList = response.data['departureList'] as BusItem[];
-        }
-      )
+    async fetchArrivalList(){
+      const globalState = useGlobalStore();
+      globalState.isLoading = true;
+      const response: AxiosResponse<{[key: string]: BusItem[] | string}> = await api.get('/bus/arrival');
+      this.arrivalList = response.data['departureInfoList'] as BusItem[];
+      console.log(this.arrivalList);
+      globalState.isLoading = false;
     },
   },
 });
