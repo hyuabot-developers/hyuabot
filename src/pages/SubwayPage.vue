@@ -1,15 +1,32 @@
 <template>
-  <q-page class="row items-center justify-evenly"></q-page>
+  <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+    <div v-if="globalStore.isLoading" class="loading-container">
+      <q-spinner
+        class="loading"
+        color="secondary"
+        size="3em"
+      />
+    </div>
+    <SubwayCard v-for="subwayItem in subWayArrivalList" :subway="subwayItem" style="margin-bottom: 10px"/>
+  </q-page>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
 import {useSubwayArrivalStore} from 'stores/subway.store';
+import SubwayCard from 'components/SubwayCard.vue';
+
+import {SubwayItem} from 'src/models/subway.item';
 
 export default defineComponent({
   name: 'SubwayPage',
+  components: {
+    SubwayCard,
+  },
   setup () {
+    const subWayArrivalList = ref([] as SubwayItem[]);
+
     const globalStore = useGlobalStore();
     globalStore.title = 'menu.subway';
 
@@ -18,6 +35,14 @@ export default defineComponent({
     setInterval(() => {
       subwayStore.fetchSubwayArrivalList('erica');
     }, 60000);
+    subwayStore.$subscribe((mutation, state) => {
+      subWayArrivalList.value = state.arrivalList;
+    });
+
+    return {
+      globalStore,
+      subWayArrivalList,
+    };
   }
 });
 </script>
