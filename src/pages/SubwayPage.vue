@@ -25,7 +25,7 @@ export default defineComponent({
 
     const subwayStore = useSubwayArrivalStore();
     subwayStore.fetchSubwayArrivalList('erica');
-    setInterval(() => {
+    const timer = setInterval(() => {
       subwayStore.fetchSubwayArrivalList('erica');
     }, 60000);
     subwayStore.$subscribe((mutation, state) => {
@@ -35,7 +35,11 @@ export default defineComponent({
     return {
       globalStore,
       subWayArrivalList,
+      timer
     };
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>

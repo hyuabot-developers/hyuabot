@@ -22,13 +22,16 @@ export default defineComponent({
 
     const busStore = useBusArrivalStore();
     busStore.fetchArrivalList();
-    setInterval(() => {
+    const timer = setInterval(() => {
       busStore.fetchArrivalList();
     }, 60000);
     busStore.$subscribe((mutation, state) => {
       busArrivalList.value = state.arrivalList;
     })
-    return {globalStore, busArrivalList};
+    return {globalStore, busArrivalList, timer};
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>

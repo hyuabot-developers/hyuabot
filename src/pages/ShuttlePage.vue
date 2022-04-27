@@ -30,13 +30,16 @@ export default defineComponent({
 
     const shuttleStore = useShuttleArrivalStore();
     shuttleStore.fetchShuttleArrivalList();
-    setInterval(() => {
+    const timer = setInterval(() => {
       shuttleStore.fetchShuttleArrivalList();
     }, 60000);
     shuttleStore.$subscribe((mutation, state) => {
       shuttleArrivalList.value = state.arrivalList;
     });
-    return {globalStore, shuttleArrivalList};
+    return {globalStore, shuttleArrivalList, timer};
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>
