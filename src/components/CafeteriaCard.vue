@@ -1,0 +1,67 @@
+<template>
+  <q-card class="full-width" v-on:click="isExpanded = !isExpanded">
+    <q-card-section class="bg-primary text-white">
+      <div class="text-h6">{{ cafeteriaItem.name }}</div>
+    </q-card-section>
+    <q-card-section
+      v-for="(menuItems, menuKey) in cafeteriaItem.menuList" :key="menuKey" v-show="isExpanded || menuKey.includes(defaultKey)"
+      style="padding-top: 5px; padding-bottom: 0">
+      <div class="text-h6" style="margin-bottom: 10px">{{ menuKey }}</div>
+      <q-list dense>
+        <template  v-for="(menu, menuIndex) in menuItems">
+          <q-item>
+            <div class="column col-12">
+              <div style="margin-bottom: 10px">{{ menu.menu }}</div>
+              <div>₩ {{ menu.price }}</div>
+            </div>
+          </q-item>
+          <q-separator style="margin-top: 5px; margin-bottom: 5px" v-if="menuIndex !== menuItems.length - 1" />
+        </template>
+      </q-list>
+      <q-separator v-if="menuKey !== Object.keys(cafeteriaItem.menuList).at(Object.keys(cafeteriaItem.menuList).length - 1) && isExpanded" />
+    </q-card-section>
+  </q-card>
+</template>
+
+<script>
+
+import {ref} from 'vue';
+
+export default {
+  name: 'CafeteriaCard',
+  props: {
+    cafeteriaItem: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
+    const isExpanded = ref(false)
+    let defaultKey = '중식'
+    const now = new Date()
+    if(now.getHours() < 10){
+      for(let key in props.cafeteriaItem.menuList){
+        if(key.includes('조식')){
+          defaultKey = '조식'
+          break
+        }
+      }
+    } else if(now.getHours() >= 15) {
+      for(let key in props.cafeteriaItem.menuList){
+        if(key.includes('석식')){
+          defaultKey = '석식'
+          break
+        }
+      }
+    }
+    return { defaultKey, isExpanded }
+  }
+}
+</script>
+
+<style scoped>
+div .items-center {
+  display: flex;
+  justify-content: center;
+}
+</style>
