@@ -11,11 +11,13 @@ body {
 .body--light {
   --q-primary   : #0E4A84;
   --q-secondary : #7DB928;
+  --q-text-color : #000000;
 }
 
 .body--dark {
   --q-primary   : #0E4A84;
   --q-secondary : #7DB928;
+  --q-text-color : #FFFFFF;
 }
 
 @font-face {
