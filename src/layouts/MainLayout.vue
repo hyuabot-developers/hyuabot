@@ -27,6 +27,17 @@
         />
       </div>
       <router-view />
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-fab
+          v-model="fabOpened"
+          vertical-actions-align="right"
+          color="secondary"
+          icon="mdi-chevron-up"
+          active-icon="mdi-chevron-down"
+          direction="up" >
+          <q-fab-action label-position="right" color="secondary" @click="switchDarkMode" icon="mdi-brightness-6" label="Dark Mode" />
+        </q-fab>
+      </q-page-sticky>
     </q-page-container>
   </q-layout>
 </template>
@@ -45,15 +56,30 @@ q-spinner {
 <script lang="ts">
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
+  import {useQuasar} from 'quasar';
   export default {
     setup() {
+      const $q = useQuasar()
+
       let title = ref('')
+      let fabOpened = ref(false)
 
       const globalStore = useGlobalStore();
       globalStore.$subscribe(() => {
         title.value = globalStore.title;
       });
-      return {globalStore, title};
+
+      if(!localStorage.hasOwnProperty('isDarkMode')){
+        $q.dark.set('auto')
+      } else {
+        $q.dark.set(localStorage.getItem('isDarkMode') === 'true')
+      }
+
+      function switchDarkMode(){
+        $q.dark.toggle()
+        localStorage.setItem('isDarkMode', $q.dark.isActive.toString())
+      }
+      return {globalStore, fabOpened, title, switchDarkMode};
     }
   }
 </script>
