@@ -15,12 +15,9 @@ export const useReadingRoomStore = defineStore({
     },
   },
   actions: {
-    fetchReadingRoomList(campus: string) {
-      api.get(`/library/${campus}`).then(
-        (response: AxiosResponse<ReadingRoomItem[]>) => {
-          this.readingRoomList = response.data;
-        }
-      );
+    async fetchReadingRoomList(campus: string) {
+      const response: AxiosResponse<ReadingRoomItem[]> = await api.get(`/library/${campus}`)
+      this.readingRoomList = response.data;
     },
   },
 });

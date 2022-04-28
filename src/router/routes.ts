@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
       { path: '/bus', component: () => import('pages/BusPage.vue') },
       { path: '/cafeteria', component: () => import('pages/CafeteriaPage.vue') },
       { path: '/menu', component: () => import('pages/MenuPage.vue') },
+      { path: '/library', component: () => import('pages/ReadingRoomPage.vue') },
     ],
   },
   {
