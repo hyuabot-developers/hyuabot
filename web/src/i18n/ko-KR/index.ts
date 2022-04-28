@@ -7,6 +7,7 @@ export default {
     subway: '전철',
     bus: '버스',
     cafeteria: '학식',
+    library: '열람실 좌석 조회',
     menu: '더보기',
   },
   shuttle: {
