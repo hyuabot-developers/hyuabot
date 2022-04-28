@@ -19,6 +19,13 @@
     </q-footer>
 
     <q-page-container>
+      <div v-if="globalStore.isLoading" class="loading-container">
+        <q-spinner
+          class="loading"
+          color="secondary"
+          size="3em"
+        />
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -26,6 +33,13 @@
 <style scoped lang="scss">
 .bg-primary {
   background: #f7f7f7;
+}
+
+q-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
 }
 </style>
 <script lang="ts">
@@ -39,7 +53,7 @@
       globalStore.$subscribe(() => {
         title.value = globalStore.title;
       });
-      return {title};
+      return {globalStore, title};
     }
   }
 </script>

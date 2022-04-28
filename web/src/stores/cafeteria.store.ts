@@ -2,6 +2,7 @@ import {defineStore} from 'pinia';
 import {CafeteriaItem} from 'src/models/cafeteria.item';
 import {api} from 'boot/axios';
 import {AxiosResponse} from 'axios';
+import {useGlobalStore} from 'stores/global.store';
 
 export type CafeteriaState = {
   restaurantList: CafeteriaItem[];
@@ -15,12 +16,12 @@ export const useCafeteriaStore = defineStore({
     },
   },
   actions: {
-    fetchMenuList() {
-      api.get('/food/campus/erica').then(
-        (response: AxiosResponse<{[key: string]: CafeteriaItem[] | string}>) => {
-          this.restaurantList = response.data['restaurantList'] as CafeteriaItem[];
-        }
-      );
+    async fetchMenuList() {
+      const globalState = useGlobalStore();
+      globalState.isLoading = true;
+      const response: AxiosResponse<{[key: string]: CafeteriaItem[] | string}> = await api.get('/food/campus/erica');
+      this.restaurantList = response.data['restaurantList'] as CafeteriaItem[];
+      globalState.isLoading = false;
     },
   },
 });

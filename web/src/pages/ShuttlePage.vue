@@ -1,12 +1,5 @@
 <template>
   <q-page class="column items-center justify-start" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
-    <div v-if="globalStore.isLoading" class="loading-container">
-      <q-spinner
-        class="loading"
-        color="secondary"
-        size="3em"
-      />
-    </div>
     <ShuttleCard v-for="shuttleItem in shuttleArrivalList" :shuttle="shuttleItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
@@ -37,13 +30,16 @@ export default defineComponent({
 
     const shuttleStore = useShuttleArrivalStore();
     shuttleStore.fetchShuttleArrivalList();
-    setInterval(() => {
+    const timer = setInterval(() => {
       shuttleStore.fetchShuttleArrivalList();
     }, 60000);
     shuttleStore.$subscribe((mutation, state) => {
       shuttleArrivalList.value = state.arrivalList;
     });
-    return {globalStore, shuttleArrivalList};
+    return {globalStore, shuttleArrivalList, timer};
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>

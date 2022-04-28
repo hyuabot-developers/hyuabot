@@ -1,12 +1,5 @@
 <template>
   <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
-    <div v-if="globalStore.isLoading" class="loading-container">
-      <q-spinner
-        class="loading"
-        color="secondary"
-        size="3em"
-      />
-    </div>
     <SubwayCard v-for="subwayItem in subWayArrivalList" :subway="subwayItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
@@ -32,7 +25,7 @@ export default defineComponent({
 
     const subwayStore = useSubwayArrivalStore();
     subwayStore.fetchSubwayArrivalList('erica');
-    setInterval(() => {
+    const timer = setInterval(() => {
       subwayStore.fetchSubwayArrivalList('erica');
     }, 60000);
     subwayStore.$subscribe((mutation, state) => {
@@ -42,7 +35,11 @@ export default defineComponent({
     return {
       globalStore,
       subWayArrivalList,
+      timer
     };
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>
