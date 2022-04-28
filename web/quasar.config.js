@@ -42,7 +42,9 @@ module.exports = configure(function (/* ctx */) {
     },
 
     framework: {
-      config: {},
+      config: {
+        dark: 'auto'
+      },
       plugins: []
     },
 
