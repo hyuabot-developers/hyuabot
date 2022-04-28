@@ -1,6 +1,6 @@
 <template>
   <q-page class="row justify-start">
-    <q-list bordered separator style="width: 100%; height: 240px; margin: 10px">
+    <q-list bordered separator style="width: 100%; height: 192px; margin: 10px">
       <q-item clickable>
         <q-item-section avatar v-ripple>
           <q-icon style="color: var(--q-primary)" name="mdi-library" />
@@ -12,12 +12,6 @@
           <q-icon style="color: var(--q-primary)" name="mdi-calendar" />
         </q-item-section>
         <q-item-section>학사력</q-item-section>
-      </q-item>
-      <q-item clickable>
-        <q-item-section avatar v-ripple>
-          <q-icon style="color: var(--q-primary)" name="mdi-map" />
-        </q-item-section>
-        <q-item-section>캠퍼스 지도</q-item-section>
       </q-item>
       <q-item clickable>
         <q-item-section avatar v-ripple>
