@@ -8,6 +8,16 @@ body {
   height: 100vh;
 }
 
+.body--light {
+  --q-primary   : #0E4A84;
+  --q-secondary : #7DB928;
+}
+
+.body--dark {
+  --q-primary   : #0E4A84;
+  --q-secondary : #7DB928;
+}
+
 @font-face {
   font-family: Godo;
   font-style: normal;
