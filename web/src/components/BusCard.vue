@@ -11,7 +11,7 @@
         <div class="col-9">
           <q-list dense>
             <q-item v-for="busDepartureItem in arrivalData.slice(0, Math.min(3, arrivalData.length))">
-              <div class="col-6 items-center" style="color: #0E4A84" v-if="parseInt(busDepartureItem.location) >= 0">
+              <div class="col-6 items-center" style="color: var(--q-secondary)" v-if="parseInt(busDepartureItem.location) >= 0">
                 {{ busDepartureItem.location }} 전
               </div>
               <div class="col-6 items-center" style="color: #FF0000" v-else>

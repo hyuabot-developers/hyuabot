@@ -13,7 +13,7 @@
         <div class="col-7">
           <q-list dense>
             <q-item v-for="(shuttleDepartureItem, shuttleIndex) in (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).slice(0, Math.min(5, (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).length))" v-show="shuttleIndex < 2 || isExpandedFirst">
-              <div class="col-4 items-center" v-bind:style="{color: shuttleDepartureItem.type === 'C' ? '#0E4A84' : '#FF0000'}">
+              <div class="col-4 items-center" v-bind:style="{color: shuttleDepartureItem.type === 'C' ? 'var(--q-secondary)' : '#FF0000'}">
                 {{ shuttleDepartureItem.type === "C" ? "순환" : "직행" }}
               </div>
               <div class="col-8 items-center">
@@ -41,7 +41,7 @@
         <div class="col-7">
           <q-list dense>
             <q-item v-for="(shuttleDepartureItem, shuttleIndex) in shuttle.busForTerminal.slice(0, Math.min(5, shuttle.busForTerminal.length))" v-show="shuttleIndex < 2 || isExpandedSecond">
-              <div class="col-4 items-center" v-bind:style="{color: shuttleDepartureItem.type === 'C' ? '#0E4A84' : '#FF0000'}">
+              <div class="col-4 items-center" v-bind:style="{color: shuttleDepartureItem.type === 'C' ? 'var(--q-secondary)' : '#FF0000'}">
                 {{ shuttleDepartureItem.type === "C" ? "순환" : "직행" }}
               </div>
               <div class="col-8 items-center">
