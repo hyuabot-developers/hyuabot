@@ -22,11 +22,10 @@
             v-bind:style="{color: timeDelta >= 0 ? 'var(--q-text-color)' : '#7F7F7F'}"
           >
             <q-item-section>
-              <div class="text-h6">{{ shuttleStopList[index] }}</div>
+              <div>{{ shuttleStopList[index] }}</div>
             </q-item-section>
             <q-item-section>
-              <div
-                class="text-h6">
+              <div>
                 {{ calculateTime(item.time, timeDelta) }}
               </div>
             </q-item-section>
