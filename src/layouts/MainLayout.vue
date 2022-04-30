@@ -19,13 +19,6 @@
     </q-footer>
 
     <q-page-container>
-      <div v-if="globalStore.isLoading" class="loading-container">
-        <q-spinner
-          class="loading"
-          color="secondary"
-          size="3em"
-        />
-      </div>
       <router-view />
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-fab
