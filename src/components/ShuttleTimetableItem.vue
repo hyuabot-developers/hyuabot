@@ -19,7 +19,7 @@
         <q-list separator>
           <q-item
             v-for="(timeDelta, index) in timeDeltaArray" :key="index"
-            v-bind:style="{color: timeDelta >= 0 ? '#000000' : '#7F7F7F'}"
+            v-bind:style="{color: timeDelta >= 0 ? 'var(--q-text-color)' : '#7F7F7F'}"
           >
             <q-item-section>
               <div class="text-h6">{{ shuttleStopList[index] }}</div>
