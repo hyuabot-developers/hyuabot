@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import { useRoute } from 'vue-router'
 import {useGlobalStore} from 'stores/global.store';
 import {useShuttleTimetableStore} from 'stores/shuttle.timetable.store';
 
@@ -11,7 +12,8 @@ export default defineComponent({
   name: 'ShuttleTimetablePage',
   setup () {
     const globalStore = useGlobalStore();
-    globalStore.title = 'menu.shuttleTimetable';
+    const route = useRoute();
+    globalStore.title = `shuttle.timetable.${route.params.stopCode}.${route.params.heading}`;
 
     const shuttleTimetableStore = useShuttleTimetableStore();
     shuttleTimetableStore.fetchShuttleTimetableList();
