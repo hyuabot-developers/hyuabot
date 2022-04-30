@@ -24,6 +24,31 @@ export default {
       Campus: '셔틀콕/기숙사',
       Shuttlecock_Dormitory: '기숙사',
     },
+    timetable: {
+      Dormitory: {
+        busForStation: '기숙사 → 셔틀콕/한대앞',
+        busForTerminal: '기숙사 → 셔틀콕/예술인',
+      },
+      Shuttlecock_O: {
+        busForStation: '셔틀콕 → 한대앞',
+        busForTerminal: '셔틀콕 → 예술인',
+      },
+      Station: {
+        busForStation: '한대앞 → 셔틀콕/기숙사',
+        busForTerminal: '한대앞 → 예술인',
+      },
+      Terminal: {
+        busForStation: '예술인 → 셔틀콕/기숙사',
+        busForTerminal: '예술인 → 셔틀콕/기숙사',
+      },
+      Shuttlecock_I: {
+        busForStation: '셔틀콕 → 기숙사',
+        busForTerminal: '셔틀콕 → 기숙사',
+      },
+      weekdays: '평일',
+      weekends: '주말',
+      departureTime: '각 정류소 출발 시간',
+    },
     more: '전체 시간표 보기',
   },
   bus: {

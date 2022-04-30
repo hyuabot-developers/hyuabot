@@ -11,16 +11,14 @@ export const useShuttleTimetableStore = defineStore({
   state: () => ({arrivalList: []} as ShuttleTimetableState),
   getters: {
     getArrivalList: (state: ShuttleTimetableState) => {
-      return (stopCode: string) => state.arrivalList.filter(item => item.stopCode === stopCode)
+      console.log(state.arrivalList);
+      return (stopCode: string) => state.arrivalList.filter(item => item.stopCode === stopCode)[0]
     },
   },
   actions: {
-    fetchShuttleTimetableList() {
-      api.get('/shuttle/timetable').then(
-        (response: AxiosResponse<{[key: string]: ShuttleTimetableItem[] | string}>) => {
-          this.arrivalList = response.data['timetableList'] as ShuttleTimetableItem[];
-        }
-      );
+    async fetchShuttleTimetableList() {
+      const response: AxiosResponse<{[key: string]: ShuttleTimetableItem[] | string}> = await api.get('/shuttle/timetable')
+      this.arrivalList = response.data['timetableList'] as ShuttleTimetableItem[];
     },
   },
 });
