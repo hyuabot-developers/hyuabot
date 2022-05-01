@@ -87,7 +87,6 @@ export default defineComponent({
     } else {
       busTimetable.value = busTimetableStore.getTimetable(route.params.lineCode.toString());
     }
-    console.log(busTimetable.value);
     return {
       isTimePassed,
       tabIndex,

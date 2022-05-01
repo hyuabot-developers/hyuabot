@@ -119,7 +119,6 @@ export default {
         }
       });
     }
-    console.log(arrivalData.value);
     return {getSeatCount, lineColor, arrivalData};
   }
 }
