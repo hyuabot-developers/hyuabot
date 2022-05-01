@@ -13,7 +13,10 @@
         <div class="col-8">
           <q-list dense>
             <q-item
-              v-for="(shuttleDepartureItem, shuttleIndex) in (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).slice(0, Math.min(5, (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).length))" v-show="shuttleIndex < 2 || isExpandedFirst"
+              v-for="(shuttleDepartureItem, shuttleIndex) in (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal)
+              .filter(item => isTimePassed(item.time))
+              .slice(0, Math.min(5, (hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).length))"
+              v-show="shuttleIndex < 2 || isExpandedFirst"
               style="padding: 0"
             >
               <div class="col-6 items-center" v-bind:style="{color: shuttleDepartureItem.type === 'C' ? 'var(--q-secondary)' : '#FF0000'}">
@@ -21,6 +24,12 @@
               </div>
               <div class="col-6 items-center">
                 {{ shuttleDepartureItem.time.replace(":", "시 ") }}분
+              </div>
+            </q-item>
+            <q-item
+              v-if="(hasDualDestination ? shuttle.busForStation : shuttle.busForTerminal).filter(item => isTimePassed(item.time)).length === 0">
+              <div class="col-12 items-center">
+                {{ this.$t('shuttle.out_of_service') }}
               </div>
             </q-item>
           </q-list>
@@ -44,7 +53,9 @@
         <div class="col-8">
           <q-list dense>
             <q-item
-              v-for="(shuttleDepartureItem, shuttleIndex) in shuttle.busForTerminal.slice(0, Math.min(5, shuttle.busForTerminal.length))"
+              v-for="(shuttleDepartureItem, shuttleIndex) in shuttle.busForTerminal
+              .filter(item => isTimePassed(item.time))
+              .slice(0, Math.min(5, shuttle.busForTerminal.length))"
               v-show="shuttleIndex < 2 || isExpandedSecond"
               style="padding: 0"
             >
@@ -53,6 +64,11 @@
               </div>
               <div class="col-6 items-center">
                 {{ shuttleDepartureItem.time.replace(":", "시 ") }}분
+              </div>
+            </q-item>
+            <q-item v-if="shuttle.busForTerminal.filter(item => isTimePassed(item.time)).length === 0">
+              <div class="col-12 items-center">
+                {{ this.$t('shuttle.out_of_service') }}
               </div>
             </q-item>
           </q-list>
@@ -83,6 +99,18 @@ export default {
     }
   },
   setup(props) {
+    function isTimePassed(time) {
+      const now = new Date();
+      const target = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        parseInt(time.split(':')[0]),
+        parseInt(time.split(':')[1])
+      );
+      return now < target;
+    }
+
     const shuttleHeadingList = {
         Dormitory: ['Dormitory_Station', 'Dormitory_Terminal'],
         Shuttlecock_O: ['Station', 'Terminal'],
@@ -95,6 +123,7 @@ export default {
     const isExpandedSecond = ref(false)
 
     return {
+      isTimePassed,
       hasDualDestination,
       shuttleHeadingList,
       isExpandedFirst,
