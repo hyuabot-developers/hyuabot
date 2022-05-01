@@ -48,7 +48,7 @@
           <q-list separator>
             <q-item
               clickable
-              @click="$q.dark.set(item.value === 'auto' ? 'auto' : item.value === 'true')"
+              @click="setDarkMode(item.value)"
               v-for="item in darkModeOptions">
                 <q-item-section>
                   <div class="items-center">{{ item.label }}</div>
@@ -68,7 +68,7 @@
           <q-list separator>
             <q-item
               clickable
-              @click="locale = item.value"
+              @click="setLocale(item.value)"
               v-for="item in localeOptions">
               <q-item-section>
                 <div class="items-center">{{ item.label }}</div>
@@ -117,6 +117,10 @@ export default defineComponent({
         value: 'false',
       },
     ];
+    function setDarkMode(value: string) {
+      $q.dark.set(value === 'auto' ? 'auto' : value === 'true');
+      localStorage.setItem('isDarkMode', $q.dark.isActive.toString())
+    }
 
     const localeDialogOpened = ref(false);
     const { locale } = useI18n({useScope: 'global'});
@@ -124,13 +128,18 @@ export default defineComponent({
       { value: 'ko-KR', label: '한국어' },
       { value: 'en-US', label: 'English' },
     ]
+    function setLocale(value: string) {
+      locale.value = value;
+      localStorage.setItem('locale', value);
+    }
     return {
       darkModeOptions,
       darkMode,
       darkModeDialogOpened,
+      setDarkMode,
       localeOptions,
-      locale,
       localeDialogOpened,
+      setLocale,
     }
   }
 });

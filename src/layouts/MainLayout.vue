@@ -56,6 +56,7 @@ q-spinner {
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
   import {useQuasar} from 'quasar';
+  import {useI18n} from "vue-i18n";
   export default {
     setup() {
       const $q = useQuasar()
@@ -72,6 +73,13 @@ q-spinner {
         $q.dark.set('auto')
       } else {
         $q.dark.set(localStorage.getItem('isDarkMode') === 'true')
+      }
+
+      const { locale } = useI18n({useScope: 'global'});
+      if(!localStorage.hasOwnProperty('locale')){
+        locale.value = 'ko-KR'
+      } else {
+        locale.value = localStorage.getItem('locale')
       }
 
       function switchDarkMode(){
