@@ -62,5 +62,8 @@ export default {
     '3102': {
       'terminalStop': '강남역',
     }
+  },
+  cafeteria: {
+    'out_of_order': '학식 정보 미제공',
   }
 };
