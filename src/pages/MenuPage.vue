@@ -19,7 +19,7 @@
         </q-item-section>
         <q-item-section>{{ this.$t('menu.contact') }}</q-item-section>
       </q-item>
-      <q-item clickable>
+      <q-item clickable @click="localeDialogOpened = true">
         <q-item-section avatar v-ripple>
           <q-icon style="color: var(--q-primary)" name="mdi-web" />
         </q-item-section>
@@ -53,6 +53,26 @@
                 <q-item-section>
                   <div class="items-center">{{ item.label }}</div>
                 </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="localeDialogOpened">
+      <q-card style="width: 500px">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">{{ this.$t('menu.language') }}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pa-md" style="padding: 16px">
+          <q-list separator>
+            <q-item
+              clickable
+              @click="locale = item.value"
+              v-for="item in localeOptions">
+              <q-item-section>
+                <div class="items-center">{{ item.label }}</div>
+              </q-item-section>
             </q-item>
           </q-list>
         </q-card-section>
@@ -97,10 +117,20 @@ export default defineComponent({
         value: 'false',
       },
     ];
+
+    const localeDialogOpened = ref(false);
+    const { locale } = useI18n({useScope: 'global'});
+    const localeOptions = [
+      { value: 'ko-KR', label: '한국어' },
+      { value: 'en-US', label: 'English' },
+    ]
     return {
       darkModeOptions,
       darkMode,
-      darkModeDialogOpened
+      darkModeDialogOpened,
+      localeOptions,
+      locale,
+      localeDialogOpened,
     }
   }
 });
