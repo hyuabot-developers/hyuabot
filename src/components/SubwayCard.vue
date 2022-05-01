@@ -21,9 +21,11 @@
     <q-separator />
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <q-list>
-        <q-item v-for="subwayDepartureItem in arrivalDownData.slice(0, Math.min(2, arrivalDownData.length))">
+        <q-item v-for="subwayDepartureItem in arrivalDownData
+          .filter(item => item.terminalStation !== '오이도' || item.remainedTime > 0)
+          .slice(0, Math.min(2, arrivalDownData.length))">
           <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
-            {{ subwayDepartureItem.terminalStation }} 행
+            {{ subwayDepartureItem.terminalStation.replace("신인천", "인천") }} 행
           </div>
           <div class="col-4 items-center">
             {{ subwayDepartureItem.currentStation }}
@@ -37,8 +39,9 @@
     <q-separator />
     <q-btn
       flat
+      :to="{ path: `/subway/timetable/${lineCode}` }"
       class="full-width" >
-      {{ this.$t(`shuttle.more`) }}
+      {{ this.$t(`subway.more`) }}
     </q-btn>
   </q-card>
 </template>
@@ -59,6 +62,15 @@ export default {
     const lineColor = props.subway.lineName === '4호선' ? '#00A4E3' : '#FABE00';
     const arrivalUpData = ref([]);
     const arrivalDownData = ref([]);
+    let lineCode = -1;
+    switch (props.subway.lineName){
+      case '4호선':
+        lineCode = 1004;
+        break;
+      case '수인분당선':
+        lineCode = 1075;
+        break;
+    }
 
     props.subway.realtime.up.forEach(item => {
       arrivalUpData.value.push({
@@ -117,7 +129,7 @@ export default {
       }
     });
 
-    return {lineColor, arrivalUpData, arrivalDownData};
+    return {lineCode, lineColor, arrivalUpData, arrivalDownData};
   }
 }
 </script>
