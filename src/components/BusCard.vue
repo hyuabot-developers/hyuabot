@@ -19,7 +19,7 @@
                 {{ this.$t('bus.waitingStartStop') }}
               </div>
               <div class="col-6 items-center">
-                {{ busDepartureItem.remainedTime }}분
+                {{ busDepartureItem.remainedTime }}분 {{ getSeatCount(busDepartureItem)}}
               </div>
             </q-item>
           </q-list>
@@ -58,6 +58,13 @@ export default {
       });
     });
 
+    function getSeatCount(item) {
+      if (item.remainedSeat >= 0) {
+        return `(${item.remainedSeat}석)`;
+      } else {
+        return '';
+      }
+    }
     const now = new Date();
     if(now.getDay() === 0) {
       props.bus.timetable.sunday.forEach(item => {
@@ -112,7 +119,7 @@ export default {
       });
     }
     console.log(arrivalData.value);
-    return {lineColor, arrivalData};
+    return {getSeatCount, lineColor, arrivalData};
   }
 }
 </script>
