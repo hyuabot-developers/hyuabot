@@ -18,12 +18,9 @@ export const useBusTimetableStore = defineStore({
     },
   },
   actions: {
-    fetchTimetable(lineName: string) {
-      api.get(`/bus/arrival/${lineName}`).then(
-        (response: AxiosResponse<BusTimetableItem>) => {
-          this.timetable[lineName] = response.data
-        }
-      );
+    async fetchTimetable(lineName: string) {
+      const response: AxiosResponse<BusTimetableItem> = await api.get(`/bus/timetable/${lineName}`);
+      this.timetable[lineName] = response.data;
     },
   },
 });

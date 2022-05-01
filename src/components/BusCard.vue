@@ -29,6 +29,7 @@
     <q-separator />
     <q-btn
       flat
+      :to="{ path: `/bus/timetable/${bus.name}` }"
       class="full-width" >
       {{ this.$t(`shuttle.more`) }}
     </q-btn>
