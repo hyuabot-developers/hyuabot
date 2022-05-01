@@ -5,12 +5,13 @@
     </q-card-section>
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <div class="row">
-        <div class="text-subtitle1 col-3 items-center">
+        <div class="text-subtitle1 col-4 items-center">
           {{ this.$t(`bus.${bus.name}.terminalStop`) }}
         </div>
-        <div class="col-9">
+        <div class="col-8">
           <q-list dense>
-            <q-item v-for="busDepartureItem in arrivalData.slice(0, Math.min(3, arrivalData.length))">
+            <q-item v-for="busDepartureItem in arrivalData.slice(0, Math.min(3, arrivalData.length))"
+              class="no-padding">
               <div class="col-6 items-center" style="color: var(--q-secondary)" v-if="parseInt(busDepartureItem.location) >= 0">
                 {{ busDepartureItem.location }} 전
               </div>
@@ -18,7 +19,7 @@
                 {{ this.$t('bus.waitingStartStop') }}
               </div>
               <div class="col-6 items-center">
-                {{ busDepartureItem.remainedTime }}분
+                {{ busDepartureItem.remainedTime }}분 {{ getSeatCount(busDepartureItem)}}
               </div>
             </q-item>
           </q-list>
@@ -28,6 +29,7 @@
     <q-separator />
     <q-btn
       flat
+      :to="{ path: `/bus/timetable/${bus.name}` }"
       class="full-width" >
       {{ this.$t(`shuttle.more`) }}
     </q-btn>
@@ -57,6 +59,13 @@ export default {
       });
     });
 
+    function getSeatCount(item) {
+      if (item.remainedSeat >= 0) {
+        return `(${item.remainedSeat}석)`;
+      } else {
+        return '';
+      }
+    }
     const now = new Date();
     if(now.getDay() === 0) {
       props.bus.timetable.sunday.forEach(item => {
@@ -110,8 +119,7 @@ export default {
         }
       });
     }
-    console.log(arrivalData.value);
-    return {lineColor, arrivalData};
+    return {getSeatCount, lineColor, arrivalData};
   }
 }
 </script>

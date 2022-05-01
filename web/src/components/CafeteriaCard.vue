@@ -20,6 +20,10 @@
       </q-list>
       <q-separator v-if="menuKey !== Object.keys(cafeteriaItem.menuList).at(Object.keys(cafeteriaItem.menuList).length - 1) && isExpanded" />
     </q-card-section>
+    <q-card-section
+      v-if="Object.keys(cafeteriaItem.menuList).length === 0">
+      {{ this.$t('cafeteria.out_of_order') }}
+    </q-card-section>
   </q-card>
 </template>
 

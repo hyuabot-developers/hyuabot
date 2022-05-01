@@ -21,7 +21,6 @@ export const useBusArrivalStore = defineStore({
       globalState.isLoading = true;
       const response: AxiosResponse<{[key: string]: BusItem[] | string}> = await api.get('/bus/arrival');
       this.arrivalList = response.data['departureInfoList'] as BusItem[];
-      console.log(this.arrivalList);
       globalState.isLoading = false;
     },
   },

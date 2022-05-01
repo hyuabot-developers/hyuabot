@@ -28,7 +28,13 @@
           icon="mdi-chevron-up"
           active-icon="mdi-chevron-down"
           direction="up" >
-          <q-fab-action label-position="right" color="secondary" @click="switchDarkMode" icon="mdi-brightness-6" label="Dark Mode" />
+          <q-fab-action
+            label-position="right"
+            color="secondary"
+            @click="switchDarkMode"
+            icon="mdi-brightness-6"
+            v-bind:label="$t('menu.dark_mode')"
+          />
         </q-fab>
       </q-page-sticky>
     </q-page-container>
@@ -50,6 +56,7 @@ q-spinner {
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
   import {useQuasar} from 'quasar';
+  import {useI18n} from "vue-i18n";
   export default {
     setup() {
       const $q = useQuasar()
@@ -66,6 +73,13 @@ q-spinner {
         $q.dark.set('auto')
       } else {
         $q.dark.set(localStorage.getItem('isDarkMode') === 'true')
+      }
+
+      const { locale } = useI18n({useScope: 'global'});
+      if(!localStorage.hasOwnProperty('locale')){
+        locale.value = 'ko-KR'
+      } else {
+        locale.value = localStorage.getItem('locale')
       }
 
       function switchDarkMode(){
