@@ -49,6 +49,7 @@ export default {
       weekends: '주말',
       departureTime: '각 정류소 출발 시간',
     },
+    out_of_service: '운행 종료',
     more: '전체 시간표 보기',
   },
   bus: {
