@@ -8,7 +8,17 @@ export default {
     bus: '버스',
     cafeteria: '학식',
     library: '열람실 좌석 조회',
+    calendar: '학사력',
+    contact: '전화부',
+    language: '언어 설정',
+    about: '소개',
+    dark_mode: '다크 모드',
     menu: '더보기',
+    dark: {
+      light: '끄기(주간 모드)',
+      dark: '켜기(야간 모드)',
+      auto: '자동(시스템)',
+    }
   },
   shuttle: {
     Dormitory: '기숙사',
