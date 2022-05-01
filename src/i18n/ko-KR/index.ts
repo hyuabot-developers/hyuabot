@@ -51,6 +51,15 @@ export default {
     },
     more: '전체 시간표 보기',
   },
+  subway: {
+    timetable: {
+      1004: '4호선',
+      1075: '수인분당선',
+      up: '상행',
+      down: '하행',
+    },
+    more: '전체 시간표 보기',
+  },
   bus: {
     waitingStartStop: '회차점 대기',
     '10-1': {
