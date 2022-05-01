@@ -1,44 +1,107 @@
 <template>
   <q-page class="row justify-start">
-    <q-list bordered separator style="width: 100%; height: 192px; margin: 10px">
+    <q-list bordered separator style="width: 100%; height: 288px; margin: 10px">
       <q-item clickable to="/library">
         <q-item-section avatar v-ripple>
           <q-icon style="color: var(--q-primary)" name="mdi-library" />
         </q-item-section>
-        <q-item-section>열람실 좌석 정보</q-item-section>
+        <q-item-section>{{ this.$t('menu.library') }}</q-item-section>
       </q-item>
       <q-item clickable to="/calendar">
         <q-item-section avatar v-ripple>
           <q-icon style="color: var(--q-primary)" name="mdi-calendar" />
         </q-item-section>
-        <q-item-section>학사력</q-item-section>
+        <q-item-section>{{ this.$t('menu.calendar') }}</q-item-section>
       </q-item>
       <q-item clickable to="/contact">
         <q-item-section avatar v-ripple>
           <q-icon style="color: var(--q-primary)" name="mdi-account-box" />
         </q-item-section>
-        <q-item-section>전화부</q-item-section>
+        <q-item-section>{{ this.$t('menu.contact') }}</q-item-section>
       </q-item>
-      <q-item clickable to="/setting">
+      <q-item clickable>
         <q-item-section avatar v-ripple>
-          <q-icon style="color: var(--q-primary)" name="mdi-cog" />
+          <q-icon style="color: var(--q-primary)" name="mdi-web" />
         </q-item-section>
-        <q-item-section>설정</q-item-section>
+        <q-item-section>{{ this.$t('menu.language') }}</q-item-section>
+      </q-item>
+      <q-item clickable @click="darkModeDialogOpened = true">
+        <q-item-section avatar v-ripple>
+          <q-icon style="color: var(--q-primary)" name="mdi-brightness-6" />
+        </q-item-section>
+        <q-item-section>{{ this.$t('menu.dark_mode') }}</q-item-section>
+      </q-item>
+      <q-item clickable>
+        <q-item-section avatar v-ripple>
+          <q-icon style="color: var(--q-primary)" name="mdi-information" />
+        </q-item-section>
+        <q-item-section>{{ this.$t('menu.about') }}</q-item-section>
       </q-item>
     </q-list>
+    <q-dialog v-model="darkModeDialogOpened">
+      <q-card style="width: 500px">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">{{ this.$t('menu.dark_mode') }}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pa-md" style="padding: 16px">
+          <q-list separator>
+            <q-item
+              clickable
+              @click="$q.dark.set(item.value === 'auto' ? 'auto' : item.value === 'true')"
+              v-for="item in darkModeOptions">
+                <q-item-section>
+                  <div class="items-center">{{ item.label }}</div>
+                </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
+<style>
+q-radio {
+  align-items: start;
+}
+</style>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
+import {useQuasar} from 'quasar';
+import {useI18n} from 'vue-i18n';
 
 export default defineComponent({
   name: 'MenuPage',
   setup () {
     const globalStore = useGlobalStore();
     globalStore.title = 'menu.menu';
-
     globalStore.isLoading = false;
+
+    const $q = useQuasar();
+    const darkModeDialogOpened = ref(false);
+    const darkMode = ref($q.dark.mode);
+
+    const $t = useI18n().t
+    const darkModeOptions = [
+      {
+        label: $t('menu.dark.auto'),
+        value: 'auto',
+      },
+      {
+        label: $t('menu.dark.dark'),
+        value: 'true',
+      },
+      {
+        label: $t('menu.dark.light'),
+        value: 'false',
+      },
+    ];
+    return {
+      darkModeOptions,
+      darkMode,
+      darkModeDialogOpened
+    }
   }
 });
 </script>

@@ -28,7 +28,13 @@
           icon="mdi-chevron-up"
           active-icon="mdi-chevron-down"
           direction="up" >
-          <q-fab-action label-position="right" color="secondary" @click="switchDarkMode" icon="mdi-brightness-6" label="Dark Mode" />
+          <q-fab-action
+            label-position="right"
+            color="secondary"
+            @click="switchDarkMode"
+            icon="mdi-brightness-6"
+            v-bind:label="$t('menu.dark_mode')"
+          />
         </q-fab>
       </q-page-sticky>
     </q-page-container>
