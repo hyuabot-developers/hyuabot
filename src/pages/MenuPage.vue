@@ -45,11 +45,11 @@
         </q-card-section>
 
         <q-card-section class="q-pa-md" style="padding: 16px">
-          <q-list>
+          <q-list separator>
             <q-item
               clickable
               @click="$q.dark.set(item.value === 'auto' ? 'auto' : item.value === 'true')"
-              v-for="item in options">
+              v-for="item in darkModeOptions">
                 <q-item-section>
                   <div class="items-center">{{ item.label }}</div>
                 </q-item-section>
@@ -83,7 +83,7 @@ export default defineComponent({
     const darkMode = ref($q.dark.mode);
 
     const $t = useI18n().t
-    const options = [
+    const darkModeOptions = [
       {
         label: $t('menu.dark.auto'),
         value: 'auto',
@@ -98,7 +98,7 @@ export default defineComponent({
       },
     ];
     return {
-      options,
+      darkModeOptions,
       darkMode,
       darkModeDialogOpened
     }
