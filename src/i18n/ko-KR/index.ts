@@ -70,6 +70,11 @@ export default {
     },
     '3102': {
       'terminalStop': '강남역',
+    },
+    timetable: {
+      'weekdays': '평일',
+      'saturday': '토요일',
+      'sunday': '일요일',
     }
   },
   cafeteria: {
