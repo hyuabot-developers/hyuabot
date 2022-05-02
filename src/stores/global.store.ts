@@ -5,7 +5,12 @@ export const useGlobalStore = defineStore({
   state: () => ({
     isLoading: true,
     title: '',
+<<<<<<< HEAD
     subwayTabVisibility: false,
     subwayTabIndex: '',
+=======
+    busTabVisibility: false,
+    busTabIndex: 'weekdays',
+>>>>>>> bus-page
   }),
 });
