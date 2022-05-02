@@ -5,8 +5,9 @@
         <q-toolbar-title class="absolute-center">
           {{ this.$t(title) }}
         </q-toolbar-title>
+      </q-toolbar>
+      <q-toolbar v-if="globalStore.subwayTabVisibility">
         <q-tabs
-          v-if="globalStore.subwayTabVisibility"
           v-model="globalStore.subwayTabIndex"
           class="bg-primary text-white full-width"
           align="justify">
