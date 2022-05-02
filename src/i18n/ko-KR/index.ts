@@ -14,6 +14,10 @@ export default {
     about: '소개',
     dark_mode: '다크 모드',
     menu: '더보기',
+    developer: '개발자',
+    developer_belong: '소속: 소프트웨어학부 17',
+    version: '버전',
+    contact_email: '이메일',
     dark: {
       light: '끄기(주간 모드)',
       dark: '켜기(야간 모드)',
