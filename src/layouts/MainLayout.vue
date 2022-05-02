@@ -78,7 +78,7 @@ q-spinner {
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
   import {useQuasar} from 'quasar';
-  import {useI18n} from "vue-i18n";
+  import {useI18n} from 'vue-i18n';
   export default {
     setup() {
       const $q = useQuasar()

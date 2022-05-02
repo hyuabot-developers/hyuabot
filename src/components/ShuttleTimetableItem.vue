@@ -40,7 +40,7 @@
 import {ref} from 'vue';
 
 export default {
-  name: 'ShuttleTimetableItem',
+  name: 'ShuttleTimetableListItem',
   props: {
     shuttleStop: {
       type: String,
