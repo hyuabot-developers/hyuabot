@@ -43,7 +43,7 @@ export default defineComponent({
     readingRoomStore.$subscribe((mutation, state) => {
       readingRoomList.value = state.readingRoomList;
     })
-    return {readingRoomList, timer};
+    return {globalStore, readingRoomList, timer};
   },
   unmounted() {
     clearInterval(this.timer);
