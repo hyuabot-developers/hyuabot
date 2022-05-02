@@ -1,11 +1,6 @@
 <template>
   <q-page class="justify-center">
-    <q-tabs v-model="tabIndex" class="bg-primary text-white full-width" align="justify">
-      <q-tab name="weekdays" v-bind:label="$t('bus.timetable.weekdays')" />
-      <q-tab name="saturday" v-bind:label="$t('bus.timetable.saturday')" />
-      <q-tab name="sunday" v-bind:label="$t('bus.timetable.sunday')" />
-    </q-tabs>
-    <q-tab-panels v-model="tabIndex" animated>
+    <q-tab-panels v-model="globalStore.busTabIndex" animated swipeable>
       <q-tab-panel name="weekdays">
         <q-list separator>
           <q-item class="full-width"
@@ -68,12 +63,12 @@ export default defineComponent({
     const globalStore = useGlobalStore();
     const route = useRoute();
     globalStore.title = route.params.lineCode.toString();
+    globalStore.busTabVisibility = true;
     const now = new Date();
-    const tabIndex = ref('weekdays');
     if(now.getDay() === 0) {
-      tabIndex.value = 'sunday';
+      globalStore.busTabIndex = 'sunday';
     } else if(now.getDay() === 6) {
-      tabIndex.value = 'saturday';
+      globalStore.busTabIndex = 'saturday';
     }
 
     const busTimetable = ref(<BusTimetableItem>{});
@@ -88,11 +83,15 @@ export default defineComponent({
       busTimetable.value = busTimetableStore.getTimetable(route.params.lineCode.toString());
     }
     return {
+      globalStore,
       isTimePassed,
-      tabIndex,
       route,
       busTimetable
     };
+  },
+  unmounted() {
+    const globalStore = useGlobalStore();
+    globalStore.busTabVisibility = false;
   }
 });
 </script>
