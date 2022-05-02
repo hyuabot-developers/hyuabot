@@ -1,10 +1,6 @@
 <template>
   <q-page class="justify-center">
-    <q-tabs v-model="tabIndex" class="bg-primary text-white full-width" align="justify">
-      <q-tab name="weekdays" v-bind:label="$t('shuttle.timetable.weekdays')" />
-      <q-tab name="weekends" v-bind:label="$t('shuttle.timetable.weekends')" />
-    </q-tabs>
-    <q-tab-panels v-model="tabIndex" animated>
+    <q-tab-panels v-model="globalStore.shuttleTabIndex" animated swipeable>
       <q-tab-panel name="weekdays">
         <q-list separator tabindex="weekdaysIndex">
           <ShuttleTimetableItem v-for="(item, index) in weekdaysTimetable" :key="index" :item="item" :shuttle-stop="route.params.stopCode.toString()" />
@@ -47,14 +43,13 @@ export default defineComponent({
     const globalStore = useGlobalStore();
     const route = useRoute();
     globalStore.title = `shuttle.timetable.${route.params.stopCode}.${route.params.heading}`;
+    globalStore.shuttleTabVisibility = true;
     const now = new Date();
-    const tabIndex = ref(now.getDay() === 0 || now.getDay() === 6 ? 'weekends' : 'weekdays');
+    globalStore.shuttleTabIndex = now.getDay() === 0 || now.getDay() === 6 ? 'weekends' : 'weekdays';
 
     const shuttleTimetableStore = useShuttleTimetableStore();
     const weekdaysTimetable = ref()
     const weekendsTimetable = ref()
-    const weekdaysIndex = ref(0);
-    const weekendsIndex = ref(0);
     shuttleTimetableStore.fetchShuttleTimetableList().then(() => {
       weekdaysTimetable.value = route.params.heading === 'busForStation' ?
         shuttleTimetableStore.getArrivalList(route.params.stopCode.toString()).weekdays.busForStation :
@@ -62,30 +57,19 @@ export default defineComponent({
       weekendsTimetable.value = route.params.heading === 'busForStation' ?
         shuttleTimetableStore.getArrivalList(route.params.stopCode.toString()).weekends.busForStation :
         shuttleTimetableStore.getArrivalList(route.params.stopCode.toString()).weekends.busForTerminal
-      for(let i = 0; i < weekdaysTimetable.value.length; i++) {
-        if(isTimePassed(weekdaysTimetable.value[i].time)) {
-          weekdaysIndex.value = i;
-          break;
-        }
-      }
-      for(let i = 0; i < weekendsTimetable.value.length; i++) {
-        if(isTimePassed(weekendsTimetable.value[i].time)) {
-          weekendsIndex.value = i;
-          break;
-        }
-      }
-
     });
 
     return {
+      globalStore,
       shuttleTimetableStore,
-      tabIndex,
       route,
-      weekdaysIndex,
-      weekendsIndex,
       weekdaysTimetable,
       weekendsTimetable
     };
+  },
+  unmounted () {
+    const globalStore = useGlobalStore();
+    globalStore.shuttleTabVisibility = false;
   }
 });
 </script>

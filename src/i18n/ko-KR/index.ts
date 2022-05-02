@@ -59,6 +59,16 @@ export default {
       weekends: '주말',
       departureTime: '각 정류소 출발 시간',
     },
+    out_of_service: '운행 종료',
+    more: '전체 시간표 보기',
+  },
+  subway: {
+    timetable: {
+      1004: '4호선',
+      1075: '수인분당선',
+      up: '상행',
+      down: '하행',
+    },
     more: '전체 시간표 보기',
   },
   bus: {
@@ -71,6 +81,14 @@ export default {
     },
     '3102': {
       'terminalStop': '강남역',
+    },
+    timetable: {
+      'weekdays': '평일',
+      'saturday': '토요일',
+      'sunday': '일요일',
     }
+  },
+  cafeteria: {
+    'out_of_order': '학식 정보 미제공',
   }
 };
