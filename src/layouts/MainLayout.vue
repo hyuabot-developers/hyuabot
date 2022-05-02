@@ -6,6 +6,12 @@
           {{ this.$t(title) }}
         </q-toolbar-title>
       </q-toolbar>
+      <q-toolbar v-if="globalStore.shuttleTabVisibility">
+        <q-tabs v-model="globalStore.shuttleTabIndex" class="bg-primary text-white full-width" align="justify">
+          <q-tab name="weekdays" v-bind:label="$t('shuttle.timetable.weekdays')" />
+          <q-tab name="weekends" v-bind:label="$t('shuttle.timetable.weekends')" />
+        </q-tabs>
+      </q-toolbar>
       <q-toolbar v-if="globalStore.busTabVisibility">
         <q-tabs v-model="globalStore.busTabIndex" class="bg-primary text-white full-width" align="justify">
           <q-tab name="weekdays" v-bind:label="$t('bus.timetable.weekdays')" />
