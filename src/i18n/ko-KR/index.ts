@@ -8,7 +8,17 @@ export default {
     bus: '버스',
     cafeteria: '학식',
     library: '열람실 좌석 조회',
+    calendar: '학사력',
+    contact: '전화부',
+    language: '언어 설정',
+    about: '소개',
+    dark_mode: '다크 모드',
     menu: '더보기',
+    dark: {
+      light: '끄기(주간 모드)',
+      dark: '켜기(야간 모드)',
+      auto: '자동(시스템)',
+    }
   },
   shuttle: {
     Dormitory: '기숙사',
@@ -49,6 +59,7 @@ export default {
       weekends: '주말',
       departureTime: '각 정류소 출발 시간',
     },
+    out_of_service: '운행 종료',
     more: '전체 시간표 보기',
   },
   subway: {
@@ -70,6 +81,14 @@ export default {
     },
     '3102': {
       'terminalStop': '강남역',
+    },
+    timetable: {
+      'weekdays': '평일',
+      'saturday': '토요일',
+      'sunday': '일요일',
     }
+  },
+  cafeteria: {
+    'out_of_order': '학식 정보 미제공',
   }
 };
