@@ -1,10 +1,6 @@
 <template>
   <q-page class="justify-center">
-    <q-tabs v-model="tabIndex" class="bg-primary text-white full-width" align="justify">
-      <q-tab name="up" v-bind:label="$t('subway.timetable.up')" />
-      <q-tab name="down" v-bind:label="$t('subway.timetable.down')" />
-    </q-tabs>
-    <q-tab-panels v-model="tabIndex" animated>
+    <q-tab-panels v-model="globalStore.subwayTabIndex" animated swipeable>
       <q-tab-panel name="up">
         <q-list separator tabindex="upIndex">
           <q-item clickable class="full-width" v-for="item in subwayArrivalData.timetable.up">
@@ -61,24 +57,24 @@ export default defineComponent({
     const globalStore = useGlobalStore();
     const route = useRoute();
     globalStore.title = `subway.timetable.${route.params.lineCode}`;
-    const now = new Date();
-    const tabIndex = ref(now.getDay() === 0 || now.getDay() === 6 ? 'down' : 'up');
+    globalStore.subwayTabVisibility = true;
+    globalStore.subwayTabIndex = 'up';
     const lineColor = route.params.lineCode === '1004' ? '#00A4E3' : '#FABE00';
 
     const subwayStore = useSubwayArrivalStore();
-    const upIndex = ref(0);
-    const downIndex = ref(0);
     const lineCodeDict: { [key: string]: string } = {'1004': '4호선', '1075': '수인분당선'};
     const subwayArrivalData = subwayStore.getArrivalList(lineCodeDict[route.params.lineCode.toString()])[0];
     return {
+      globalStore,
       isTimePassed,
       lineColor,
-      tabIndex,
       route,
-      upIndex,
-      downIndex,
       subwayArrivalData
     };
+  },
+  unmounted() {
+    const globalStore = useGlobalStore();
+    globalStore.subwayTabVisibility = false;
   }
 });
 </script>
