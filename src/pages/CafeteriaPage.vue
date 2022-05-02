@@ -1,9 +1,24 @@
 <template>
   <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
+    <div v-show="globalStore.isLoading" class="loading-container">
+      <q-spinner
+        class="loading"
+        color="secondary"
+        size="3em"
+      />
+    </div>
     <CafeteriaCard v-for="cafeteriaItem in cafeteriaList" :cafeteriaItem="cafeteriaItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
-
+<style scoped>
+.loading-container {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import CafeteriaCard from 'components/CafeteriaCard.vue';

@@ -6,6 +6,28 @@
           {{ this.$t(title) }}
         </q-toolbar-title>
       </q-toolbar>
+      <q-toolbar v-if="globalStore.shuttleTabVisibility">
+        <q-tabs v-model="globalStore.shuttleTabIndex" class="bg-primary text-white full-width" align="justify">
+          <q-tab name="weekdays" v-bind:label="$t('shuttle.timetable.weekdays')" />
+          <q-tab name="weekends" v-bind:label="$t('shuttle.timetable.weekends')" />
+        </q-tabs>
+      </q-toolbar>
+      <q-toolbar v-if="globalStore.busTabVisibility">
+        <q-tabs v-model="globalStore.busTabIndex" class="bg-primary text-white full-width" align="justify">
+          <q-tab name="weekdays" v-bind:label="$t('bus.timetable.weekdays')" />
+          <q-tab name="saturday" v-bind:label="$t('bus.timetable.saturday')" />
+          <q-tab name="sunday" v-bind:label="$t('bus.timetable.sunday')" />
+        </q-tabs>
+      </q-toolbar>
+      <q-toolbar v-if="globalStore.subwayTabVisibility">
+        <q-tabs
+          v-model="globalStore.subwayTabIndex"
+          class="bg-primary text-white full-width"
+          align="justify">
+          <q-tab name="up" v-bind:label="$t('subway.timetable.up')" />
+          <q-tab name="down" v-bind:label="$t('subway.timetable.down')" />
+        </q-tabs>
+      </q-toolbar>
     </q-header>
 
     <q-footer elevated>
@@ -28,7 +50,13 @@
           icon="mdi-chevron-up"
           active-icon="mdi-chevron-down"
           direction="up" >
-          <q-fab-action label-position="right" color="secondary" @click="switchDarkMode" icon="mdi-brightness-6" label="Dark Mode" />
+          <q-fab-action
+            label-position="right"
+            color="secondary"
+            @click="switchDarkMode"
+            icon="mdi-brightness-6"
+            v-bind:label="$t('menu.dark_mode')"
+          />
         </q-fab>
       </q-page-sticky>
     </q-page-container>
@@ -50,6 +78,7 @@ q-spinner {
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
   import {useQuasar} from 'quasar';
+  import {useI18n} from "vue-i18n";
   export default {
     setup() {
       const $q = useQuasar()
@@ -66,6 +95,13 @@ q-spinner {
         $q.dark.set('auto')
       } else {
         $q.dark.set(localStorage.getItem('isDarkMode') === 'true')
+      }
+
+      const { locale } = useI18n({useScope: 'global'});
+      if(!localStorage.hasOwnProperty('locale')){
+        locale.value = 'ko-KR'
+      } else {
+        locale.value = localStorage.getItem('locale')
       }
 
       function switchDarkMode(){
