@@ -6,6 +6,15 @@
           {{ this.$t(title) }}
         </q-toolbar-title>
       </q-toolbar>
+      <q-toolbar v-if="globalStore.subwayTabVisibility">
+        <q-tabs
+          v-model="globalStore.subwayTabIndex"
+          class="bg-primary text-white full-width"
+          align="justify">
+          <q-tab name="up" v-bind:label="$t('subway.timetable.up')" />
+          <q-tab name="down" v-bind:label="$t('subway.timetable.down')" />
+        </q-tabs>
+      </q-toolbar>
     </q-header>
 
     <q-footer elevated>

@@ -5,5 +5,7 @@ export const useGlobalStore = defineStore({
   state: () => ({
     isLoading: true,
     title: '',
+    subwayTabVisibility: false,
+    subwayTabIndex: '',
   }),
 });
