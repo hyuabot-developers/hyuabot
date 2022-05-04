@@ -38,7 +38,7 @@ module.exports = configure(function (/* ctx */) {
     },
 
     devServer: {
-      open: true,
+      open: false,
     },
 
     framework: {
