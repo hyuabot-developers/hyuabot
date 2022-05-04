@@ -78,25 +78,31 @@ export default {
         break;
     }
 
+    const now = new Date();
     props.subway.realtime.up.forEach(item => {
-      arrivalUpData.value.push({
-        terminalStation: item.terminalStation,
-        currentStation: item.currentStation,
-        remainedTime: item.remainedTime,
-        statusCode: item.statusCode,
-      });
+      const minutes = (item.remainedTime - (now.getTime() - new Date(item.updateTime).getTime()) / 60000).toFixed();
+      if(minutes > 0) {
+        arrivalUpData.value.push({
+          terminalStation: item.terminalStation,
+          currentStation: item.currentStation,
+          remainedTime: minutes,
+          statusCode: item.statusCode,
+        });
+      }
     });
 
     props.subway.realtime.down.forEach(item => {
-      arrivalDownData.value.push({
-        terminalStation: item.terminalStation,
-        currentStation: item.currentStation,
-        remainedTime: item.remainedTime,
-        statusCode: item.statusCode,
-      });
+      const minutes = (item.remainedTime - (now.getTime() - new Date(item.updateTime).getTime()) / 60000).toFixed();
+      if(minutes > 0) {
+        arrivalDownData.value.push({
+          terminalStation: item.terminalStation,
+          currentStation: item.currentStation,
+          remainedTime: minutes,
+          statusCode: item.statusCode,
+        });
+      }
     });
 
-    const now = new Date();
     props.subway.timetable.up.forEach(item => {
       const target = new Date(
         now.getFullYear(),

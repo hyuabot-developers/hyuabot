@@ -16,10 +16,13 @@ export interface SubwayTimetableList {
 }
 
 export interface SubwayRealtimeItem {
-  terminalStation: string;
-  currentStation: string;
-  remainedTime: number;
-  statusCode: string;
+  trainNumber: string,
+  updateTime: string,
+  isLastTrain: boolean,
+  terminalStation: string,
+  currentStation: string,
+  remainedTime: number,
+  statusCode: string
 }
 
 export interface SubwayTimetableItem {
