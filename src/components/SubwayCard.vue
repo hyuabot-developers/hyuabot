@@ -9,8 +9,11 @@
           <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
             {{ subwayDepartureItem.terminalStation }} 행
           </div>
-          <div class="col-4 items-center">
+          <div class="col-4 items-center" v-if="subwayDepartureItem.currentStation !== null">
             {{ subwayDepartureItem.currentStation }}
+          </div>
+          <div class="col-4 items-center" style="color: grey" v-else>
+            시간표*
           </div>
           <div class="col-4 items-center">
             {{ parseInt(subwayDepartureItem.remainedTime) }}분
