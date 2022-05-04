@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import {defineComponent} from 'vue';
 import { useRoute } from 'vue-router'
 import {useGlobalStore} from 'stores/global.store';
 import {useSubwayArrivalStore} from 'stores/subway.store';
