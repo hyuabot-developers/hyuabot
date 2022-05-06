@@ -3,20 +3,20 @@
     <q-header elevated class="bg-primary">
       <q-toolbar>
         <q-toolbar-title class="absolute-center">
-          {{ this.$t(title) }}
+          {{ $t(title) }}
         </q-toolbar-title>
       </q-toolbar>
       <q-toolbar v-if="globalStore.shuttleTabVisibility">
         <q-tabs v-model="globalStore.shuttleTabIndex" class="bg-primary text-white full-width" align="justify">
-          <q-tab name="weekdays" v-bind:label="$t('shuttle.timetable.weekdays')" />
-          <q-tab name="weekends" v-bind:label="$t('shuttle.timetable.weekends')" />
+          <q-tab name="weekdays" :label="$t('shuttle.timetable.weekdays')" />
+          <q-tab name="weekends" :label="$t('shuttle.timetable.weekends')" />
         </q-tabs>
       </q-toolbar>
       <q-toolbar v-if="globalStore.busTabVisibility">
         <q-tabs v-model="globalStore.busTabIndex" class="bg-primary text-white full-width" align="justify">
-          <q-tab name="weekdays" v-bind:label="$t('bus.timetable.weekdays')" />
-          <q-tab name="saturday" v-bind:label="$t('bus.timetable.saturday')" />
-          <q-tab name="sunday" v-bind:label="$t('bus.timetable.sunday')" />
+          <q-tab name="weekdays" :label="$t('bus.timetable.weekdays')" />
+          <q-tab name="saturday" :label="$t('bus.timetable.saturday')" />
+          <q-tab name="sunday" :label="$t('bus.timetable.sunday')" />
         </q-tabs>
       </q-toolbar>
       <q-toolbar v-if="globalStore.subwayTabVisibility">
@@ -24,14 +24,14 @@
           v-model="globalStore.subwayTabIndex"
           class="bg-primary text-white full-width"
           align="justify">
-          <q-tab name="up" v-bind:label="$t('subway.timetable.up')" />
-          <q-tab name="down" v-bind:label="$t('subway.timetable.down')" />
+          <q-tab name="up" :label="$t('subway.timetable.up')" />
+          <q-tab name="down" :label="$t('subway.timetable.down')" />
         </q-tabs>
       </q-toolbar>
     </q-header>
 
     <q-footer elevated>
-      <q-tabs>
+      <q-tabs dense>
         <q-route-tab icon="mdi-bus" to="/shuttle" :label="$t('menu.shuttle')" replace/>
         <q-route-tab icon="mdi-train" to="/subway" :label="$t('menu.subway')" replace/>
         <q-route-tab icon="mdi-bus-multiple" to="/bus" :label="$t('menu.bus')" replace/>
@@ -53,27 +53,15 @@
           <q-fab-action
             label-position="right"
             color="secondary"
-            @click="switchDarkMode"
             icon="mdi-brightness-6"
-            v-bind:label="$t('menu.dark_mode')"
+            :label="$t('menu.dark_mode')"
+            @click="switchDarkMode"
           />
         </q-fab>
       </q-page-sticky>
     </q-page-container>
   </q-layout>
 </template>
-<style scoped lang="scss">
-.bg-primary {
-  background: #f7f7f7;
-}
-
-q-spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-}
-</style>
 <script lang="ts">
   import {useGlobalStore} from 'stores/global.store';
   import { ref } from 'vue';
@@ -112,3 +100,15 @@ q-spinner {
     }
   }
 </script>
+<style scoped lang="scss">
+.bg-primary {
+  background: #f7f7f7;
+}
+
+q-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+}
+</style>
