@@ -7,18 +7,9 @@
         size="3em"
       />
     </div>
-    <ReadingRoomCard v-for="readingRoomItem in readingRoomList" :readingRoom="readingRoomItem" style="margin-bottom: 10px"/>
+    <ReadingRoomCard v-for="readingRoomItem in readingRoomList" :reading-room="readingRoomItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
-<style scoped>
-.loading-container {
-  z-index: 2;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
@@ -50,3 +41,12 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped>
+.loading-container {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

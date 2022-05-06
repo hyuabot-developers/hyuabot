@@ -1,25 +1,25 @@
 <template>
   <q-item clickable class="full-width" @click="popUpOpened = true">
     <q-item-section
-      v-bind:style="{color: item.type === 'C' ? 'var(--q-secondary)' : '#FF0000'}">
+      :style="{color: item.type === 'C' ? 'var(--q-secondary)' : '#FF0000'}">
       {{ item.type === "C" ? "순환" : "직행" }}
     </q-item-section>
     <q-item-section
-      v-bind:style="{color: isTimePassed(item.time) ? 'var(--q-text-color)' : '#7F7F7F'}">
+      :style="{color: isTimePassed(item.time) ? 'var(--q-text-color)' : '#7F7F7F'}">
       {{ item.time.replace(":", "시 ") }}분
     </q-item-section>
   </q-item>
   <q-dialog v-model="popUpOpened">
     <q-card style="width: 500px">
       <q-card-section class="bg-primary text-white">
-        <div class="text-h6">{{ this.$t('shuttle.timetable.departureTime') }}</div>
+        <div class="text-h6">{{ $t('shuttle.timetable.departureTime') }}</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
         <q-list separator>
           <q-item
             v-for="(timeDelta, index) in timeDeltaArray" :key="index"
-            v-bind:style="{color: timeDelta >= 0 ? 'var(--q-text-color)' : '#7F7F7F'}"
+            :style="{color: timeDelta >= 0 ? 'var(--q-text-color)' : '#7F7F7F'}"
           >
             <q-item-section>
               <div>{{ shuttleStopList[index] }}</div>
