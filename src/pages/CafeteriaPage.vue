@@ -7,18 +7,9 @@
         size="3em"
       />
     </div>
-    <CafeteriaCard v-for="cafeteriaItem in cafeteriaList" :cafeteriaItem="cafeteriaItem" style="margin-bottom: 10px"/>
+    <CafeteriaCard v-for="cafeteriaItem in cafeteriaList" :cafeteria-item="cafeteriaItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
-<style scoped>
-.loading-container {
-  z-index: 2;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import CafeteriaCard from 'components/CafeteriaCard.vue';
@@ -44,3 +35,12 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped>
+.loading-container {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

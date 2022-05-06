@@ -3,13 +3,13 @@
     <q-tab-panels v-model="globalStore.subwayTabIndex" animated swipeable>
       <q-tab-panel name="up">
         <q-list separator tabindex="upIndex">
-          <q-item clickable class="full-width" v-for="item in subwayArrivalData.timetable.up">
+          <q-item v-for="item in subwayArrivalData.timetable.up" clickable class="full-width">
             <q-item-section
-              v-bind:style="{color: lineColor}">
+              :style="{color: lineColor}">
               {{ item.terminalStation }}
             </q-item-section>
             <q-item-section
-              v-bind:style="{color: isTimePassed(item.departureTime) ? 'var(--q-text-color)' : '#7F7F7F'}">
+              :style="{color: isTimePassed(item.departureTime) ? 'var(--q-text-color)' : '#7F7F7F'}">
               {{ item.departureTime.slice(0,5).replace(":", "시 ") }}분
             </q-item-section>
           </q-item>
@@ -17,13 +17,13 @@
       </q-tab-panel>
       <q-tab-panel name="down">
         <q-list separator tabindex="downIndex">
-          <q-item clickable class="full-width" v-for="item in subwayArrivalData.timetable.down">
+          <q-item v-for="item in subwayArrivalData.timetable.down" clickable class="full-width">
             <q-item-section
-              v-bind:style="{color: lineColor}">
+              :style="{color: lineColor}">
               {{ item.terminalStation.replace("신인천", "인천") }}
             </q-item-section>
             <q-item-section
-              v-bind:style="{color: isTimePassed(item.departureTime) ? 'var(--q-text-color)' : '#7F7F7F'}">
+              :style="{color: isTimePassed(item.departureTime) ? 'var(--q-text-color)' : '#7F7F7F'}">
               {{ item.departureTime.slice(0,5).replace(":", "시 ") }}분
             </q-item-section>
           </q-item>

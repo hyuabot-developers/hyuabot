@@ -1,10 +1,10 @@
 <template>
-  <q-card class="full-width" v-on:click="isExpanded = !isExpanded">
+  <q-card class="full-width" @click="isExpanded = !isExpanded">
     <q-card-section class="bg-primary text-white">
       <div class="text-h6">{{ cafeteriaItem.name }}</div>
     </q-card-section>
     <q-card-section
-      v-for="(menuItems, menuKey) in cafeteriaItem.menuList" :key="menuKey" v-show="isExpanded || menuKey.includes(defaultKey)"
+      v-for="(menuItems, menuKey) in cafeteriaItem.menuList" v-show="isExpanded || menuKey.includes(defaultKey)" :key="menuKey"
       style="padding-top: 5px; padding-bottom: 0">
       <div class="text-h6" style="margin-bottom: 10px">{{ menuKey }}</div>
       <q-list dense>
@@ -15,14 +15,14 @@
               <div>₩ {{ menu.price }}</div>
             </div>
           </q-item>
-          <q-separator style="margin-top: 5px; margin-bottom: 5px" v-if="menuIndex !== menuItems.length - 1" />
+          <q-separator v-if="menuIndex !== menuItems.length - 1" style="margin-top: 5px; margin-bottom: 5px" />
         </template>
       </q-list>
       <q-separator v-if="menuKey !== Object.keys(cafeteriaItem.menuList).at(Object.keys(cafeteriaItem.menuList).length - 1) && isExpanded" />
     </q-card-section>
     <q-card-section
       v-if="Object.keys(cafeteriaItem.menuList).length === 0">
-      {{ this.$t('cafeteria.out_of_order') }}
+      {{ $t('cafeteria.out_of_order') }}
     </q-card-section>
   </q-card>
 </template>

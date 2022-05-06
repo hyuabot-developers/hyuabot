@@ -1,18 +1,18 @@
 <template>
   <q-card class="full-width">
-    <q-card-section class="text-white" style="padding: 10px" v-bind:style="{ background: lineColor }">
+    <q-card-section class="text-white" style="padding: 10px" :style="{ background: lineColor }">
       <div class="text-h6">{{ subway.lineName }}</div>
     </q-card-section>
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <q-list>
         <q-item v-for="subwayDepartureItem in arrivalUpData.slice(0, Math.min(2, arrivalUpData.length))">
-          <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
+          <div class="col-4 items-center" :style="{ color: lineColor }">
             {{ subwayDepartureItem.terminalStation }} 행
           </div>
-          <div class="col-4 items-center" v-if="subwayDepartureItem.currentStation !== null">
+          <div v-if="subwayDepartureItem.currentStation !== null" class="col-4 items-center">
             {{ subwayDepartureItem.currentStation }}
           </div>
-          <div class="col-4 items-center" style="color: grey" v-else>
+          <div v-else class="col-4 items-center" style="color: grey">
             시간표*
           </div>
           <div class="col-4 items-center">
@@ -24,16 +24,17 @@
     <q-separator />
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <q-list>
-        <q-item v-for="subwayDepartureItem in arrivalDownData
+        <q-item
+v-for="subwayDepartureItem in arrivalDownData
           .filter(item => item.terminalStation !== '오이도' || item.remainedTime > 0)
           .slice(0, Math.min(2, arrivalDownData.length))">
-          <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
+          <div class="col-4 items-center" :style="{ color: lineColor }">
             {{ subwayDepartureItem.terminalStation.replace("신인천", "인천") }} 행
           </div>
-          <div class="col-4 items-center" v-if="subwayDepartureItem.currentStation !== null">
+          <div v-if="subwayDepartureItem.currentStation !== null" class="col-4 items-center">
             {{ subwayDepartureItem.currentStation }}
           </div>
-          <div class="col-4 items-center" style="color: grey" v-else>
+          <div v-else class="col-4 items-center" style="color: grey">
             시간표*
           </div>
           <div class="col-4 items-center">
@@ -47,7 +48,7 @@
       flat
       :to="{ path: `/subway/timetable/${lineCode}` }"
       class="full-width" >
-      {{ this.$t(`subway.more`) }}
+      {{ $t(`subway.more`) }}
     </q-btn>
   </q-card>
 </template>
