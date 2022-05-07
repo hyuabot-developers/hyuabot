@@ -43,7 +43,22 @@
         event.prompt();
         button.setAttribute('disabled', "true");
       });
-    });
+    }, false);
+    // 멀티터치 방지
+    document.documentElement.addEventListener('touchstart', function (event) {
+      if(event.touches.length > 1){
+        event.preventDefault()
+      }
+    })
+    // 더블탭 방지
+    let lastTouchEnd = 0;
+    document.documentElement.addEventListener('touchend', function (event) {
+      let now = (new Date()).getTime()
+      if(now -lastTouchEnd <= 300){
+        event.preventDefault()
+      }
+      lastTouchEnd = now
+    }, false)
   </script>
   </body>
 </html>
