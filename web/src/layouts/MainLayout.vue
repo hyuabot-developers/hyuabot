@@ -31,7 +31,7 @@
     </q-header>
 
     <q-footer elevated>
-      <q-tabs dense>
+      <q-tabs>
         <q-route-tab icon="mdi-bus" to="/shuttle" :label="$t('menu.shuttle')" replace/>
         <q-route-tab icon="mdi-train" to="/subway" :label="$t('menu.subway')" replace/>
         <q-route-tab icon="mdi-bus-multiple" to="/bus" :label="$t('menu.bus')" replace/>
