@@ -10,15 +10,6 @@
     <BusCard v-for="busItem in busArrivalList" :bus="busItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
-<style>
-.loading-container {
-  z-index: 2;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
@@ -50,3 +41,12 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+.loading-container {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

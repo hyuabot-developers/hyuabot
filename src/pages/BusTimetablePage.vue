@@ -3,10 +3,11 @@
     <q-tab-panels v-model="globalStore.busTabIndex" animated swipeable>
       <q-tab-panel name="weekdays">
         <q-list separator>
-          <q-item class="full-width"
-            v-for="item in busTimetable.weekdays">
+          <q-item
+            v-for="item in busTimetable.weekdays"
+            class="full-width">
             <q-item-section
-              v-bind:style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
+              :style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
               {{ item.slice(0,5).replace(":", "시 ") }}분
             </q-item-section>
           </q-item>
@@ -14,10 +15,11 @@
       </q-tab-panel>
       <q-tab-panel name="saturday">
         <q-list separator>
-          <q-item class="full-width"
-            v-for="item in busTimetable.saturday">
+          <q-item
+            v-for="item in busTimetable.saturday"
+            class="full-width">
             <q-item-section
-              v-bind:style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
+              :style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
               {{ item.slice(0,5).replace(":", "시 ") }}분
             </q-item-section>
           </q-item>
@@ -25,10 +27,11 @@
       </q-tab-panel>
       <q-tab-panel name="sunday">
         <q-list separator>
-          <q-item class="full-width"
-            v-for="item in busTimetable.sunday">
+          <q-item
+v-for="item in busTimetable.sunday"
+            class="full-width">
             <q-item-section
-              v-bind:style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
+              :style="{color: isTimePassed(item) ? 'var(--q-text-color)' : '#7F7F7F'}">
               {{ item.slice(0,5).replace(":", "시 ") }}분
             </q-item-section>
           </q-item>

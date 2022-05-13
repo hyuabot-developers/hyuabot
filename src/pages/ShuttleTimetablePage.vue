@@ -3,12 +3,12 @@
     <q-tab-panels v-model="globalStore.shuttleTabIndex" animated swipeable>
       <q-tab-panel name="weekdays">
         <q-list separator tabindex="weekdaysIndex">
-          <ShuttleTimetableItem v-for="(item, index) in weekdaysTimetable" :key="index" :item="item" :shuttle-stop="route.params.stopCode.toString()" />
+          <ShuttleTimetableListItem v-for="(item, index) in weekdaysTimetable" :key="index" :item="item" :shuttle-stop="route.params.stopCode.toString()" />
         </q-list>
       </q-tab-panel>
       <q-tab-panel name="weekends">
         <q-list separator tabindex="weekendsIndex">
-          <ShuttleTimetableItem v-for="(item, index) in weekendsTimetable" :key="index" :item="item" :shuttle-stop="route.params.stopCode.toString()"/>
+          <ShuttleTimetableListItem v-for="(item, index) in weekendsTimetable" :key="index" :item="item" :shuttle-stop="route.params.stopCode.toString()"/>
         </q-list>
       </q-tab-panel>
     </q-tab-panels>
@@ -20,26 +20,14 @@ import {defineComponent, ref} from 'vue';
 import { useRoute } from 'vue-router'
 import {useGlobalStore} from 'stores/global.store';
 import {useShuttleTimetableStore} from 'stores/shuttle.timetable.store';
-import ShuttleTimetableItem from 'components/ShuttleTimetableItem.vue';
+import ShuttleTimetableListItem from 'components/ShuttleTimetableItem.vue';
 
 export default defineComponent({
   name: 'ShuttleTimetablePage',
   components: {
-    ShuttleTimetableItem,
+    ShuttleTimetableListItem,
   },
   setup () {
-    function isTimePassed(time: string) {
-      const now = new Date();
-      const target = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        parseInt(time.split(':')[0]),
-        parseInt(time.split(':')[1])
-      );
-      return now < target;
-    }
-
     const globalStore = useGlobalStore();
     const route = useRoute();
     globalStore.title = `shuttle.timetable.${route.params.stopCode}.${route.params.heading}`;
