@@ -141,7 +141,8 @@ export default defineComponent({
     ];
     function setDarkMode(value: string) {
       $q.dark.set(value === 'auto' ? 'auto' : value === 'true');
-      localStorage.setItem('isDarkMode', $q.dark.isActive.toString())
+      localStorage.setItem('isDarkMode', $q.dark.isActive.toString());
+      darkModeDialogOpened.value = !darkModeDialogOpened.value;
     }
 
     const localeDialogOpened = ref(false);
@@ -153,6 +154,7 @@ export default defineComponent({
     function setLocale(value: string) {
       locale.value = value;
       localStorage.setItem('locale', value);
+      localeDialogOpened.value = !localeDialogOpened.value;
     }
 
     const infoDialogOpened = ref(false);
