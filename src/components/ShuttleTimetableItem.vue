@@ -32,6 +32,9 @@
           </q-item>
         </q-list>
       </q-card-section>
+      <q-card-actions align="center">
+        <q-btn v-close-popup flat label="확인" style="width: 100%"/>
+      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
