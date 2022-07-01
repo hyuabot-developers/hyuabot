@@ -1,26 +1,26 @@
 version: '3'
 services:
-  hyuabot-redis:
-    image: redis
-    command: redis-server --port 6379
-    labels:
-      - "name=redis"
-      - "mode=standalone"
-    volumes:
-      - ./data:/data
-    expose:
-      - "6379"
+  hyuabot-postgresql:
+      image: postgres:latest
+      restart: always
+      expose:
+        - 5432
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      volumes:
+        - ./data/:/var/lib/postgresql/data/
   hyuabot-api:
       build: ./api
       environment:
-        - REDIS_HOST=hyuabot-redis
+        - POSTGRES_HOST=hyuabot-postgresql
         - BUS_API_KEY=${BUS_API_KEY}
         - METRO_API_KEY=${METRO_API_KEY}
         - TZ=Asia/Seoul
       ports:
         - 38080:8080
       depends_on:
-        - hyuabot-redis
+        - hyuabot-postgresql
       volumes:
         - /etc/localtime:/etc/localtime:ro
   hyuabot-kakao:
@@ -31,7 +31,7 @@ services:
       ports:
         - 38081:8081
       depends_on:
-        - hyuabot-redis
+        - hyuabot-postgresql
         - hyuabot-api
       volumes:
         - /etc/localtime:/etc/localtime:ro
