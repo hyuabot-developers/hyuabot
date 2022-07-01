@@ -1,24 +1,26 @@
 <template>
   <q-card class="full-width">
-    <q-card-section class="text-white" style="padding: 10px" v-bind:style="{ background: lineColor }">
+    <q-card-section class="text-white" style="padding: 10px" :style="{ background: lineColor }">
       <div class="text-h6">{{ bus.name }}</div>
     </q-card-section>
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <div class="row">
-        <div class="text-subtitle1 col-3 items-center">
-          {{ this.$t(`bus.${bus.name}.terminalStop`) }}
+        <div class="text-subtitle1 col-4 items-center">
+          {{ $t(`bus.${bus.name}.terminalStop`) }}
         </div>
-        <div class="col-9">
+        <div class="col-8">
           <q-list dense>
-            <q-item v-for="busDepartureItem in arrivalData.slice(0, Math.min(3, arrivalData.length))">
-              <div class="col-6 items-center" style="color: #0E4A84" v-if="parseInt(busDepartureItem.location) >= 0">
+            <q-item
+v-for="busDepartureItem in arrivalData.slice(0, Math.min(3, arrivalData.length))"
+              class="no-padding">
+              <div v-if="parseInt(busDepartureItem.location) >= 0" class="col-6 items-center" style="color: var(--q-secondary)">
                 {{ busDepartureItem.location }} 전
               </div>
-              <div class="col-6 items-center" style="color: #FF0000" v-else>
-                {{ this.$t('bus.waitingStartStop') }}
+              <div v-else class="col-6 items-center" style="color: #FF0000">
+                {{ $t('bus.waitingStartStop') }}
               </div>
               <div class="col-6 items-center">
-                {{ busDepartureItem.remainedTime }}분
+                {{ busDepartureItem.remainedTime }}분 {{ getSeatCount(busDepartureItem)}}
               </div>
             </q-item>
           </q-list>
@@ -28,8 +30,9 @@
     <q-separator />
     <q-btn
       flat
+      :to="{ path: `/bus/timetable/${bus.name}` }"
       class="full-width" >
-      {{ this.$t(`shuttle.more`) }}
+      {{ $t(`shuttle.more`) }}
     </q-btn>
   </q-card>
 </template>
@@ -57,6 +60,13 @@ export default {
       });
     });
 
+    function getSeatCount(item) {
+      if (item.remainedSeat >= 0) {
+        return `(${item.remainedSeat}석)`;
+      } else {
+        return '';
+      }
+    }
     const now = new Date();
     if(now.getDay() === 0) {
       props.bus.timetable.sunday.forEach(item => {
@@ -110,8 +120,7 @@ export default {
         }
       });
     }
-    console.log(arrivalData.value);
-    return {lineColor, arrivalData};
+    return {getSeatCount, lineColor, arrivalData};
   }
 }
 </script>

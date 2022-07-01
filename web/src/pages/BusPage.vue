@@ -1,6 +1,6 @@
 <template>
   <q-page class="column items-center justify-evenly" style="margin-left: 10px; margin-right: 10px; margin-top: 10px">
-    <div v-if="globalStore.isLoading" class="loading-container">
+    <div v-show="globalStore.isLoading" class="loading-container">
       <q-spinner
         class="loading"
         color="secondary"
@@ -10,7 +10,6 @@
     <BusCard v-for="busItem in busArrivalList" :bus="busItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
-
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
@@ -29,13 +28,25 @@ export default defineComponent({
 
     const busStore = useBusArrivalStore();
     busStore.fetchArrivalList();
-    setInterval(() => {
+    const timer = setInterval(() => {
       busStore.fetchArrivalList();
     }, 60000);
     busStore.$subscribe((mutation, state) => {
       busArrivalList.value = state.arrivalList;
     })
-    return {globalStore, busArrivalList};
+    return {globalStore, busArrivalList, timer};
+  },
+  unmounted() {
+    clearInterval(this.timer);
   }
 });
 </script>
+<style>
+.loading-container {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

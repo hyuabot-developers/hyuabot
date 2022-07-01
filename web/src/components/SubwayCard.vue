@@ -1,16 +1,19 @@
 <template>
   <q-card class="full-width">
-    <q-card-section class="text-white" style="padding: 10px" v-bind:style="{ background: lineColor }">
+    <q-card-section class="text-white" style="padding: 10px" :style="{ background: lineColor }">
       <div class="text-h6">{{ subway.lineName }}</div>
     </q-card-section>
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <q-list>
         <q-item v-for="subwayDepartureItem in arrivalUpData.slice(0, Math.min(2, arrivalUpData.length))">
-          <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
+          <div class="col-4 items-center" :style="{ color: lineColor }">
             {{ subwayDepartureItem.terminalStation }} 행
           </div>
-          <div class="col-4 items-center">
+          <div v-if="subwayDepartureItem.currentStation !== null" class="col-4 items-center">
             {{ subwayDepartureItem.currentStation }}
+          </div>
+          <div v-else class="col-4 items-center" style="color: grey">
+            시간표*
           </div>
           <div class="col-4 items-center">
             {{ parseInt(subwayDepartureItem.remainedTime) }}분
@@ -21,12 +24,18 @@
     <q-separator />
     <q-card-section style="padding-top: 0; padding-bottom: 0">
       <q-list>
-        <q-item v-for="subwayDepartureItem in arrivalDownData.slice(0, Math.min(2, arrivalDownData.length))">
-          <div class="col-4 items-center" v-bind:style="{ color: lineColor }">
-            {{ subwayDepartureItem.terminalStation }} 행
+        <q-item
+v-for="subwayDepartureItem in arrivalDownData
+          .filter(item => item.terminalStation !== '오이도' || item.remainedTime > 0)
+          .slice(0, Math.min(2, arrivalDownData.length))">
+          <div class="col-4 items-center" :style="{ color: lineColor }">
+            {{ subwayDepartureItem.terminalStation.replace("신인천", "인천") }} 행
           </div>
-          <div class="col-4 items-center">
+          <div v-if="subwayDepartureItem.currentStation !== null" class="col-4 items-center">
             {{ subwayDepartureItem.currentStation }}
+          </div>
+          <div v-else class="col-4 items-center" style="color: grey">
+            시간표*
           </div>
           <div class="col-4 items-center">
             {{ parseInt(subwayDepartureItem.remainedTime) }}분
@@ -37,8 +46,9 @@
     <q-separator />
     <q-btn
       flat
+      :to="{ path: `/subway/timetable/${lineCode}` }"
       class="full-width" >
-      {{ this.$t(`shuttle.more`) }}
+      {{ $t(`subway.more`) }}
     </q-btn>
   </q-card>
 </template>
@@ -59,26 +69,41 @@ export default {
     const lineColor = props.subway.lineName === '4호선' ? '#00A4E3' : '#FABE00';
     const arrivalUpData = ref([]);
     const arrivalDownData = ref([]);
+    let lineCode = -1;
+    switch (props.subway.lineName){
+      case '4호선':
+        lineCode = 1004;
+        break;
+      case '수인분당선':
+        lineCode = 1075;
+        break;
+    }
 
+    const now = new Date();
     props.subway.realtime.up.forEach(item => {
-      arrivalUpData.value.push({
-        terminalStation: item.terminalStation,
-        currentStation: item.currentStation,
-        remainedTime: item.remainedTime,
-        statusCode: item.statusCode,
-      });
+      const minutes = (item.remainedTime - (now.getTime() - new Date(item.updateTime).getTime()) / 60000).toFixed();
+      if(minutes > 0) {
+        arrivalUpData.value.push({
+          terminalStation: item.terminalStation,
+          currentStation: item.currentStation,
+          remainedTime: minutes,
+          statusCode: item.statusCode,
+        });
+      }
     });
 
     props.subway.realtime.down.forEach(item => {
-      arrivalDownData.value.push({
-        terminalStation: item.terminalStation,
-        currentStation: item.currentStation,
-        remainedTime: item.remainedTime,
-        statusCode: item.statusCode,
-      });
+      const minutes = (item.remainedTime - (now.getTime() - new Date(item.updateTime).getTime()) / 60000).toFixed();
+      if(minutes > 0) {
+        arrivalDownData.value.push({
+          terminalStation: item.terminalStation,
+          currentStation: item.currentStation,
+          remainedTime: minutes,
+          statusCode: item.statusCode,
+        });
+      }
     });
 
-    const now = new Date();
     props.subway.timetable.up.forEach(item => {
       const target = new Date(
         now.getFullYear(),
@@ -117,7 +142,7 @@ export default {
       }
     });
 
-    return {lineColor, arrivalUpData, arrivalDownData};
+    return {lineCode, lineColor, arrivalUpData, arrivalDownData};
   }
 }
 </script>

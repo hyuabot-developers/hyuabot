@@ -7,42 +7,34 @@
         size="3em"
       />
     </div>
-    <SubwayCard v-for="subwayItem in subWayArrivalList" :subway="subwayItem" style="margin-bottom: 10px"/>
+    <ReadingRoomCard v-for="readingRoomItem in readingRoomList" :reading-room="readingRoomItem" style="margin-bottom: 10px"/>
   </q-page>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import {useGlobalStore} from 'stores/global.store';
-import {useSubwayArrivalStore} from 'stores/subway.store';
-import SubwayCard from 'components/SubwayCard.vue';
-
-import {SubwayItem} from 'src/models/subway.item';
+import ReadingRoomCard from 'components/ReadingRoomCard.vue'
+import {ReadingRoomItem} from 'src/models/readingRoom.item';
+import {useReadingRoomStore} from 'stores/readingRoom.store';
 
 export default defineComponent({
-  name: 'SubwayPage',
-  components: {
-    SubwayCard,
-  },
+  name: 'ReadingRoomPage',
+  components: {ReadingRoomCard},
   setup () {
-    const subWayArrivalList = ref([] as SubwayItem[]);
+    const readingRoomList = ref([] as ReadingRoomItem[])
 
     const globalStore = useGlobalStore();
-    globalStore.title = 'menu.subway';
+    globalStore.title = 'menu.library';
 
-    const subwayStore = useSubwayArrivalStore();
-    subwayStore.fetchSubwayArrivalList('erica');
+    const readingRoomStore = useReadingRoomStore();
+    readingRoomStore.fetchReadingRoomList('erica');
     const timer = setInterval(() => {
-      subwayStore.fetchSubwayArrivalList('erica');
+      readingRoomStore.fetchReadingRoomList('erica');
     }, 60000);
-    subwayStore.$subscribe((mutation, state) => {
-      subWayArrivalList.value = state.arrivalList;
-    });
-
-    return {
-      globalStore,
-      subWayArrivalList,
-      timer
-    };
+    readingRoomStore.$subscribe((mutation, state) => {
+      readingRoomList.value = state.readingRoomList;
+    })
+    return {globalStore, readingRoomList, timer};
   },
   unmounted() {
     clearInterval(this.timer);
