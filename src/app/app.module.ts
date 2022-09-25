@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,7 +14,7 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TranslateModule.forRoot({
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot({ mode: 'ios' }), AppRoutingModule, TranslateModule.forRoot({
     loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }
   })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

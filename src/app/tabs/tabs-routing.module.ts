@@ -4,31 +4,39 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'shuttle',
+        loadChildren: () => import('../pages/shuttle/shuttle.module').then(m => m.ShuttleModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'bus',
+        loadChildren: () => import('../pages/bus/bus.module').then(m => m.BusModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'subway',
+        loadChildren: () => import('../pages/subway/subway.module').then(m => m.SubwayPageModule)
+      },
+      {
+        path: 'cafeteria',
+        loadChildren: () => import('../pages/cafeteria/cafeteria.module').then(m => m.CafeteriaPageModule)
+      },
+      {
+        path: 'menu',
+        loadChildren: () => import('../pages/menu/menu.module').then(m => m.MenuPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/shuttle',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/shuttle',
     pathMatch: 'full'
   }
 ];

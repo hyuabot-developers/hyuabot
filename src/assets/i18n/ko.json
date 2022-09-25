@@ -27,5 +27,17 @@
       "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다."
     },
     "out_of_service": "운행 종료"
+  },
+  "bus": {
+    "title": "노선버스"
+  },
+  "subway": {
+    "title": "전철"
+  },
+  "cafeteria": {
+    "title": "학식"
+  },
+  "menu": {
+    "title": "메뉴"
   }
 }
