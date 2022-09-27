@@ -7,16 +7,18 @@ import { ShuttlePage } from './shuttle.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { ShuttleRoutingModule } from './shuttle-routing.module';
+import {ShuttleDualHeadingCardModule} from "../../cards/shuttle.dual.heading/shuttle.dual.heading.card.module";
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TranslateModule,
-    ExploreContainerComponentModule,
-    ShuttleRoutingModule
-  ],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        TranslateModule,
+        ExploreContainerComponentModule,
+        ShuttleRoutingModule,
+        ShuttleDualHeadingCardModule
+    ],
   declarations: [ShuttlePage]
 })
 export class ShuttleModule {}

@@ -1,0 +1,26 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ 'shuttle.stop.' + stopName + '.name' | translate }}</ion-card-title>
+    <ion-card-subtitle>{{ 'shuttle.stop.' + stopName + '.bound' | translate }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-list-header>
+              <ion-text>{{ 'shuttle.heading.station' | translate }}</ion-text>
+            </ion-list-header>
+          </ion-list>
+        </ion-col>
+        <ion-col>
+          <ion-list>
+            <ion-list-header>
+              <ion-text>{{ 'shuttle.heading.terminal' | translate }}</ion-text>
+            </ion-list-header>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
