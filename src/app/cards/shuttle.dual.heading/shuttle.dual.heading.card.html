@@ -11,6 +11,9 @@
             <ion-list-header>
               <ion-text>{{ 'shuttle.heading.station' | translate }}</ion-text>
             </ion-list-header>
+            <ion-item *ngFor="let item of shuttleTimetableStation">
+              {{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1]} }}
+            </ion-item>
           </ion-list>
         </ion-col>
         <ion-col>

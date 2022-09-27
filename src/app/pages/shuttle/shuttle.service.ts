@@ -12,13 +12,9 @@ export interface ShuttleTimetableItem {
 export class ShuttleService {
   period: BehaviorSubject<string> = new BehaviorSubject<string>('semester');
   weekday: BehaviorSubject<string> = new BehaviorSubject<string>('weekday');
-  shuttleTimetableDH: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
-  shuttleTimetableDY: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
-  shuttleTimetableC: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
+  shuttleTimetable: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
   public setShuttleTimetable(timetable: ShuttleTimetableItem[]) {
-    this.shuttleTimetableDH.next(timetable.filter((item) => item.shuttleType === 'DH'));
-    this.shuttleTimetableDY.next(timetable.filter((item) => item.shuttleType === 'DY'));
-    this.shuttleTimetableC.next(timetable.filter((item) => item.shuttleType === 'C'));
+    this.shuttleTimetable.next(timetable);
   }
 }
 
