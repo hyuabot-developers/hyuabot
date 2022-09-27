@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
+import { shuttleServiceInjectables } from './pages/shuttle/shuttle.service';
 
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -18,7 +19,10 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot({ mode: 'ios' }), AppRoutingModule, TranslateModule.forRoot({
     loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }
   }), GraphQLModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    shuttleServiceInjectables
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,7 +6,13 @@ import { HttpLink } from 'apollo-angular/http';
 const uri = 'https://api.hyuabot.app/api/v2';
 export const createApollo = (httpLink: HttpLink): ApolloClientOptions<any> => ({
   link: httpLink.create({ uri }),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Shuttle: {
+        merge: true,
+      }
+    }
+  }),
 });
 
 @NgModule({
