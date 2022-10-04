@@ -1,3 +1,6 @@
+ion-list-header {
+  padding: 0;
+}
 ion-list-header ion-text {
   width: 100%;
   text-align: center;
