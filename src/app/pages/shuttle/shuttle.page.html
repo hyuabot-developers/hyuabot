@@ -13,9 +13,21 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item>
+  <ion-slides>
+    <ion-slide>
       <app-shuttle-dual-card stopName="dormitory"></app-shuttle-dual-card>
-    </ion-item>
-  </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <app-shuttle-dual-card stopName="shuttlecock_o"></app-shuttle-dual-card>
+    </ion-slide>
+    <ion-slide>
+      <app-shuttle-dual-card stopName="station" firstDestination="campus" secondDestination="terminal"></app-shuttle-dual-card>
+    </ion-slide>
+    <ion-slide>
+      <app-shuttle-single-card stopName="terminal" firstDestination="campus"></app-shuttle-single-card>
+    </ion-slide>
+    <ion-slide>
+      <app-shuttle-single-card stopName="shuttlecock_i" firstDestination="dormitory"></app-shuttle-single-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

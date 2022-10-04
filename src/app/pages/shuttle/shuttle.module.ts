@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../../explore-container/explore
 
 import { ShuttleRoutingModule } from './shuttle-routing.module';
 import {ShuttleDualHeadingCardModule} from "../../cards/shuttle.dual.heading/shuttle.dual.heading.card.module";
+import { ShuttleSingleHeadingCardModule } from '../../cards/shuttle.single.heading/shuttle.single.heading.card.module';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {ShuttleDualHeadingCardModule} from "../../cards/shuttle.dual.heading/shu
         TranslateModule,
         ExploreContainerComponentModule,
         ShuttleRoutingModule,
-        ShuttleDualHeadingCardModule
+        ShuttleDualHeadingCardModule,
+        ShuttleSingleHeadingCardModule
     ],
   declarations: [ShuttlePage]
 })

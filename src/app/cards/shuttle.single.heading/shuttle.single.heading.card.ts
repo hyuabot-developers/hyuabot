@@ -2,19 +2,18 @@ import { Component, Input } from '@angular/core';
 import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttle.service';
 
 @Component({
-  selector: 'app-shuttle-dual-card',
-  templateUrl: 'shuttle.dual.heading.card.html',
-  styleUrls: ['shuttle.dual.heading.card.scss']
+  selector: 'app-shuttle-single-card',
+  templateUrl: 'shuttle.single.heading.card.html',
+  styleUrls: ['shuttle.single.heading.card.scss']
 })
-export class ShuttleDualHeadingCardComponent {
+export class ShuttleSingleHeadingCardComponent {
   @Input() stopName: string;
   @Input() timeDeltaDH: number;
   @Input() timeDeltaDY: number;
   @Input() timeDeltaC: number;
   shuttleTimetableStation: ShuttleTimetableItem[] = [];
   shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
-  @Input() firstDestination = 'station';
-  @Input() secondDestination = 'terminal';
+  @Input() firstDestination = 'campus';
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();

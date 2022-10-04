@@ -9,7 +9,7 @@
         <ion-col>
           <ion-list>
             <ion-list-header>
-              <ion-text>{{ 'shuttle.heading.station' | translate }}</ion-text>
+              <ion-text>{{ 'shuttle.heading.' + firstDestination | translate }}</ion-text>
             </ion-list-header>
             <ion-item *ngFor="let item of shuttleTimetableStation">
               {{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1]} }}
@@ -19,7 +19,7 @@
         <ion-col>
           <ion-list>
             <ion-list-header>
-              <ion-text>{{ 'shuttle.heading.terminal' | translate }}</ion-text>
+              <ion-text>{{ 'shuttle.heading.' + secondDestination | translate }}</ion-text>
             </ion-list-header>
           </ion-list>
         </ion-col>
