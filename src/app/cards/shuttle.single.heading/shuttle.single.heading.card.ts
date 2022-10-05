@@ -18,17 +18,34 @@ export class ShuttleSingleHeadingCardComponent {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
       this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
-      for (const item of timetable.filter((item) => (item.startStop === 'dormitory' || this.stopName !== 'dormitory' ))) {
+      for (const item of timetable.filter((item) => (item.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
         if (item.shuttleType === 'DH'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaDH);
-          this.shuttleTimetableStation.push(item);
+          this.shuttleTimetableStation.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
         } else if (item.shuttleType === 'DY'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaDY);
-          this.shuttleTimetableTerminal.push(item);
+          this.shuttleTimetableTerminal.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
         } else if (item.shuttleType === 'C'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaC);
-          this.shuttleTimetableStation.push(item);
-          this.shuttleTimetableTerminal.push(item);
+          this.shuttleTimetableStation.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
+          this.shuttleTimetableTerminal.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
         }
       }
     });

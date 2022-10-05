@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttle.service';
 
 @Component({
@@ -8,36 +8,54 @@ import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttl
 })
 export class ShuttleDualHeadingCardComponent {
   @Input() stopName: string;
-  @Input() timeDeltaDH: number;
-  @Input() timeDeltaDY: number;
-  @Input() timeDeltaC: number;
-  shuttleTimetableStation: ShuttleTimetableItem[] = [];
-  shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
   @Input() firstDestination = 'station';
   @Input() secondDestination = 'terminal';
+  @Input() timeDeltaDH = -5;
+  @Input() timeDeltaDY = -5;
+  @Input() timeDeltaC = -5;
+  shuttleTimetableStation: ShuttleTimetableItem[] = [];
+  shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
       this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
-      for (const item of timetable.filter((item) => (item.startStop === 'dormitory' || this.stopName !== 'dormitory' ))) {
+      for (const item of timetable.filter(
+        (shuttleItem) => (shuttleItem.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
         if (item.shuttleType === 'DH'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaDH);
-          this.shuttleTimetableStation.push(item);
+          this.shuttleTimetableStation.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
         } else if (item.shuttleType === 'DY'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaDY);
-          this.shuttleTimetableTerminal.push(item);
+          this.shuttleTimetableTerminal.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
+          });
         } else if (item.shuttleType === 'C'){
-          item.shuttleTime = this.addTimeDelta(item.shuttleTime, this.timeDeltaC);
-          this.shuttleTimetableStation.push(item);
-          this.shuttleTimetableTerminal.push(item);
+          this.shuttleTimetableStation.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+          });
+          this.shuttleTimetableTerminal.push({
+            period: item.period,
+            shuttleType: item.shuttleType,
+            startStop: item.startStop,
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
+          });
         }
       }
     });
   }
 
   addTimeDelta(time: string, delta: number): string {
-    const [hour, minute] = time.split(':');
-    const newTime = new Date(0, 0, 0, parseInt(hour), parseInt(minute) + delta);
-    return String(newTime.getHours()).padStart(2, "0") + ":" + String(newTime.getMinutes()).padStart(2, "0");
+    const [hour, minute, second] = time.split(':');
+    const newTime = new Date(2022, 10, 29, parseInt(hour, 10), parseInt(minute, 10) + delta);
+    return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
   }
 }
