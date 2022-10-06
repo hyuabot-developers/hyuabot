@@ -50,6 +50,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
   private loading = true;
   private weekday = 'weekdays';
   private period = 'semester';
+  private swiper: any;
   private stopLocationList: BusStop[] = [
     {stopName: 'shuttle.stop.dormitory.name', latitude: 37.29339607529377, longitude: 126.83630604103446},
     {stopName: 'shuttle.stop.shuttlecock_o.name', latitude: 37.29875417910844, longitude: 126.83784054072336},
@@ -112,5 +113,17 @@ export class ShuttlePage implements OnInit, OnDestroy {
         this.closestStopIndex = index;
       }
     });
+  }
+
+  setSwiperInstance(swiper) {
+    this.swiper = swiper;
+  }
+
+  clickPrevButton() {
+    this.swiper.slidePrev();
+  }
+
+  clickNextButton() {
+    this.swiper.slideNext();
   }
 }
