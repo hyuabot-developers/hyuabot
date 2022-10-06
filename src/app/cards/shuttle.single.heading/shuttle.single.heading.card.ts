@@ -11,43 +11,47 @@ export class ShuttleSingleHeadingCardComponent {
   @Input() timeDeltaDH: number;
   @Input() timeDeltaDY: number;
   @Input() timeDeltaC: number;
-  shuttleTimetableStation: ShuttleTimetableItem[] = [];
-  shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
+  shuttleTimetable: ShuttleTimetableItem[] = [];
   @Input() firstDestination = 'campus';
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
-      this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
-      this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
+      this.shuttleTimetable = new Array<ShuttleTimetableItem>();
       for (const item of timetable.filter((item) => (item.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
-        if (item.shuttleType === 'DH'){
-          this.shuttleTimetableStation.push({
+        if (item.shuttleType === 'DH') {
+          this.shuttleTimetable.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
             shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
           });
-        } else if (item.shuttleType === 'DY'){
-          this.shuttleTimetableTerminal.push({
+        } else if (item.shuttleType === 'DY') {
+          this.shuttleTimetable.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
           });
-        } else if (item.shuttleType === 'C'){
-          this.shuttleTimetableStation.push({
+        } else if (item.shuttleType === 'C') {
+          this.shuttleTimetable.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
-          });
-          this.shuttleTimetableTerminal.push({
-            period: item.period,
-            shuttleType: item.shuttleType,
-            startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC)
           });
         }
       }
+      if (this.stopName === 'terminal'){
+        this.shuttleTimetable = this.shuttleTimetable.filter((item) => item.shuttleType === 'DY' || item.shuttleType === 'C');
+      }
+      this.shuttleTimetable.sort((a, b) => {
+        if (a.shuttleTime < b.shuttleTime) {
+          return -1;
+        } else if (a.shuttleTime > b.shuttleTime) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     });
   }
 

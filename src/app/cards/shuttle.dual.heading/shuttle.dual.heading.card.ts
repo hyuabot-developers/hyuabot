@@ -50,6 +50,8 @@ export class ShuttleDualHeadingCardComponent {
           });
         }
       }
+      this.shuttleTimetableStation.sort(this.compareTime);
+      this.shuttleTimetableTerminal.sort(this.compareTime);
     });
   }
 
@@ -57,5 +59,15 @@ export class ShuttleDualHeadingCardComponent {
     const [hour, minute, second] = time.split(':');
     const newTime = new Date(2022, 10, 29, parseInt(hour, 10), parseInt(minute, 10) + delta);
     return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
+  }
+
+  compareTime(item1: ShuttleTimetableItem, item2: ShuttleTimetableItem): number {
+    if (item1.shuttleTime < item2.shuttleTime) {
+      return -1;
+    } else if (item1.shuttleTime > item2.shuttleTime) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }
