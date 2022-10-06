@@ -8,13 +8,14 @@ import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttl
 })
 export class ShuttleSingleHeadingCardComponent {
   @Input() stopName: string;
-  @Input() timeDeltaDH: number;
-  @Input() timeDeltaDY: number;
-  @Input() timeDeltaC: number;
+  @Input() timeDeltaDH: string;
+  @Input() timeDeltaDY: string;
+  @Input() timeDeltaC: string;
   shuttleTimetable: ShuttleTimetableItem[] = [];
   @Input() firstDestination = 'campus';
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
+      let now = new Date();
       this.shuttleTimetable = new Array<ShuttleTimetableItem>();
       for (const item of timetable.filter((item) => (item.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
         if (item.shuttleType === 'DH') {
@@ -22,21 +23,21 @@ export class ShuttleSingleHeadingCardComponent {
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH, now)
           });
         } else if (item.shuttleType === 'DY') {
           this.shuttleTimetable.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY, now)
           });
         } else if (item.shuttleType === 'C') {
           this.shuttleTimetable.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC, now)
           });
         }
       }
@@ -55,9 +56,11 @@ export class ShuttleSingleHeadingCardComponent {
     });
   }
 
-  addTimeDelta(time: string, delta: number): string {
-    const [hour, minute] = time.split(':');
-    const newTime = new Date(0, 0, 0, parseInt(hour), parseInt(minute) + delta);
-    return String(newTime.getHours()).padStart(2, "0") + ":" + String(newTime.getMinutes()).padStart(2, "0");
+  addTimeDelta(time: string, delta: string, now: Date): string {
+    const [hour, minute, second] = time.split(':');
+    const newTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
+    newTime.setMinutes(newTime.getMinutes() + parseInt(delta, 10));
+    console.log(hour, minute, delta, String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0'))
+    return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
   }
 }

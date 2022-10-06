@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttle.service';
+import { min } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shuttle-dual-card',
@@ -10,13 +11,14 @@ export class ShuttleDualHeadingCardComponent {
   @Input() stopName: string;
   @Input() firstDestination = 'station';
   @Input() secondDestination = 'terminal';
-  @Input() timeDeltaDH = -5;
-  @Input() timeDeltaDY = -5;
-  @Input() timeDeltaC = -5;
+  @Input() timeDeltaDH = '-5';
+  @Input() timeDeltaDY = '-5';
+  @Input() timeDeltaC = '-5';
   shuttleTimetableStation: ShuttleTimetableItem[] = [];
   shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
+      let now = new Date();
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
       this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
       for (const item of timetable.filter(
@@ -26,38 +28,40 @@ export class ShuttleDualHeadingCardComponent {
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH, now)
           });
         } else if (item.shuttleType === 'DY'){
           this.shuttleTimetableTerminal.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY, now)
           });
         } else if (item.shuttleType === 'C'){
           this.shuttleTimetableStation.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC, now)
           });
           this.shuttleTimetableTerminal.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC, now)
           });
         }
       }
-      this.shuttleTimetableStation.sort(this.compareTime);
-      this.shuttleTimetableTerminal.sort(this.compareTime);
+      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.compareShuttleTime(item, now)).sort(this.compareTime);
+      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.compareShuttleTime(item, now)).sort(this.compareTime);
     });
   }
 
-  addTimeDelta(time: string, delta: number): string {
+  addTimeDelta(time: string, delta: string, now: Date): string {
     const [hour, minute, second] = time.split(':');
-    const newTime = new Date(2022, 10, 29, parseInt(hour, 10), parseInt(minute, 10) + delta);
+    const newTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
+    newTime.setMinutes(newTime.getMinutes() + parseInt(delta, 10));
+    console.log(hour, minute, delta, String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0'))
     return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
   }
 
@@ -69,5 +73,11 @@ export class ShuttleDualHeadingCardComponent {
     } else {
       return 0;
     }
+  }
+
+  compareShuttleTime(item: ShuttleTimetableItem, now: Date): boolean {
+    let hour, minute;
+    [hour, minute] = item.shuttleTime.split(':');
+    return parseInt(hour, 10) > now.getHours() || (parseInt(hour, 10) === now.getHours() && parseInt(minute, 10) >= now.getMinutes());
   }
 }
