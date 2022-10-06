@@ -1,0 +1,19 @@
+ion-list-header {
+  padding: 0;
+}
+ion-list-header ion-text {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+ion-item {
+  padding: 0;
+}
+ion-item ion-text {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=shuttle.single.heading.card.css.map */
