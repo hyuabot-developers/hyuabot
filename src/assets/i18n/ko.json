@@ -9,7 +9,7 @@
       "shuttlecock_i": {"name": "셔틀콕 건너편", "bound": "기숙사 방면"}
     },
     "type": {
-      "DH": "한대앞 직행", "DY": "예술인 직행", "C": "순환 버스"
+      "DH": "직행", "DY": "직행", "C": "순환"
     },
     "heading": {
       "station": "한대앞 방면", "terminal": "예술인 방면", "dormitory": "기숙사 방면", "campus": "캠퍼스 방면"

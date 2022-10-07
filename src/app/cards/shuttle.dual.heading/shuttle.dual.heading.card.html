@@ -10,6 +10,7 @@
         <ion-button>{{ 'shuttle.timetable.all' | translate }}</ion-button>
       </ion-list-header>
       <ion-item *ngFor="let item of shuttleTimetableStation.slice(0, 3); let i = index" [lines]="(i === 2 || i === shuttleTimetableStation.length - 1) ? 'none' : 'full'">
+        <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
         <ion-label>{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1]} }}</ion-label>
       </ion-item>
     </ion-list>
@@ -19,7 +20,8 @@
         <ion-button>{{ 'shuttle.timetable.all' | translate }}</ion-button>
       </ion-list-header>
       <ion-item *ngFor="let item of shuttleTimetableTerminal.slice(0, 3); let i = index" [lines]="(i === 2 || i === shuttleTimetableTerminal.length - 1) ? 'none' : 'inset'">
-        <ion-text>{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1]} }}</ion-text>
+        <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
+        <ion-label>{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1]} }}</ion-label>
       </ion-item>
     </ion-list>
   </ion-card-content>

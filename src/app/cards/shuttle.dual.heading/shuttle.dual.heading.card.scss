@@ -13,9 +13,24 @@ ion-list-header {
 
 ion-item {
   padding: 0;
-  ion-text {
+  ion-label {
     width: 100%;
     text-align: center;
     justify-content: center;
   }
+}
+
+.DH {
+  color: red;
+  font-weight: bold;
+}
+
+.DY {
+  color: green;
+  font-weight: bold;
+}
+
+.C {
+  color: blue;
+  font-weight: bold;
 }
