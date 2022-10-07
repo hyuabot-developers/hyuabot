@@ -1,17 +1,31 @@
 ion-list-header {
-  padding: 0;
-  ion-text {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+  padding-left: 0;
+  ion-label {
+    text-align: start;
+  }
+  ion-button {
+    margin-right: 0;
+    span {
+      text-align: end;
+    }
   }
 }
 
 ion-item {
   padding: 0;
-  ion-text {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
+}
+
+.DH {
+  color: red;
+  font-weight: bold;
+}
+
+.DY {
+  color: green;
+  font-weight: bold;
+}
+
+.C {
+  color: blue;
+  font-weight: bold;
 }

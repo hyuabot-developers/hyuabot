@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShuttleService, ShuttleTimetableItem } from './shuttle.service';
 import { Apollo, gql } from 'apollo-angular';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -47,6 +49,7 @@ interface BusStop {
   styleUrls: ['shuttle.page.scss']
 })
 export class ShuttlePage implements OnInit, OnDestroy {
+  closestStopIndex = 0;
   private loading = true;
   private weekday = 'weekdays';
   private period = 'semester';
@@ -58,14 +61,9 @@ export class ShuttlePage implements OnInit, OnDestroy {
     {stopName: 'shuttle.stop.terminal.name', latitude: 37.31945164682341, longitude: 126.8455453372041},
     {stopName: 'shuttle.stop.shuttlecock_i.name', latitude: 37.29869328231496, longitude: 126.8377767466817},
   ];
-  private closestStopIndex = 0;
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  constructor(private apollo: Apollo, private shuttleService: ShuttleService) {
-    this.getLocation().subscribe(position => {
-      this.setClosestStop(position.coords.latitude, position.coords.longitude);
-    });
-  }
+  constructor(private apollo: Apollo, private shuttleService: ShuttleService, private toastController: ToastController, private translateService: TranslateService) {}
   ngOnInit() {
     const now = new Date();
     const previous30Minutes = new Date(now.getTime() - 30 * 60 * 1000);
@@ -87,6 +85,10 @@ export class ShuttlePage implements OnInit, OnDestroy {
         this.shuttleService.setShuttleTimetable(data.shuttle.timetable);
       });
     });
+
+    this.getLocation().subscribe(position => {
+      this.setClosestStop(position.coords.latitude, position.coords.longitude);
+    });
   }
 
   ngOnDestroy() {
@@ -97,7 +99,6 @@ export class ShuttlePage implements OnInit, OnDestroy {
   getLocation(): Observable<any> {
     return new Observable(observer => {
       window.navigator.geolocation.getCurrentPosition(position => {
-        console.log(typeof position);
         observer.next(position);
         observer.complete();
       }, error => {
@@ -105,25 +106,32 @@ export class ShuttlePage implements OnInit, OnDestroy {
     });
   }
   setClosestStop(latitude: number, longitude: number) {
-    let minDistance = 999999999;
-    this.stopLocationList.forEach((stop, index) => {
-      const distance = Math.sqrt(Math.pow(stop.latitude - latitude, 2) + Math.pow(stop.longitude - longitude, 2));
+    let minDistance = Number.MAX_VALUE;
+    for (let i = 0; i < this.stopLocationList.length; i++) {
+      const distance = this.getDistance(latitude, longitude, this.stopLocationList[i].latitude, this.stopLocationList[i].longitude);
       if (distance < minDistance) {
         minDistance = distance;
-        this.closestStopIndex = index;
+        this.closestStopIndex = i;
       }
-    });
+    }
+    this.showClosestShuttleStop().then();
+  }
+  getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+    return Math.sqrt(Math.pow(lat1 - lat2, 2) + Math.pow(lon1 - lon2, 2));
   }
 
   setSwiperInstance(swiper) {
     this.swiper = swiper;
+    this.swiper.slideTo(this.closestStopIndex, 1000, false);
   }
-
-  clickPrevButton() {
-    this.swiper.slidePrev();
-  }
-
-  clickNextButton() {
-    this.swiper.slideNext();
+  async showClosestShuttleStop() {
+    const toast = await this.toastController.create({
+      message: this.translateService.instant(
+        'shuttle.stop.closest', {name: this.translateService.instant(this.stopLocationList[this.closestStopIndex].stopName)}),
+      buttons: [
+        { text: this.translateService.instant('OK'), role: 'cancel' }
+      ]
+    });
+    await toast.present();
   }
 }

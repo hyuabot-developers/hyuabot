@@ -1,19 +1,33 @@
 ion-list-header {
-  padding: 0;
+  padding-left: 0;
 }
-ion-list-header ion-text {
-  width: 100%;
-  text-align: center;
-  justify-content: center;
+ion-list-header ion-label {
+  text-align: start;
+}
+ion-list-header ion-button {
+  margin-right: 0;
+}
+ion-list-header ion-button span {
+  text-align: end;
 }
 
 ion-item {
   padding: 0;
 }
-ion-item ion-text {
-  width: 100%;
-  text-align: center;
-  justify-content: center;
+
+.DH {
+  color: red;
+  font-weight: bold;
+}
+
+.DY {
+  color: green;
+  font-weight: bold;
+}
+
+.C {
+  color: blue;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=shuttle.dual.heading.card.css.map */
