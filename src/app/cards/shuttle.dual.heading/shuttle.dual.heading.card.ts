@@ -16,9 +16,10 @@ export class ShuttleDualHeadingCardComponent {
   @Input() timeDeltaC = '-5';
   shuttleTimetableStation: ShuttleTimetableItem[] = [];
   shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
+  now: Date = new Date();
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
-      let now = new Date();
+      this.now = new Date();
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
       this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
       for (const item of timetable.filter(
@@ -28,38 +29,38 @@ export class ShuttleDualHeadingCardComponent {
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH, now)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDH)
           });
         } else if (item.shuttleType === 'DY'){
           this.shuttleTimetableTerminal.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY, now)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaDY)
           });
         } else if (item.shuttleType === 'C'){
           this.shuttleTimetableStation.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC, now)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC)
           });
           this.shuttleTimetableTerminal.push({
             period: item.period,
             shuttleType: item.shuttleType,
             startStop: item.startStop,
-            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC, now)
+            shuttleTime: this.addTimeDelta(item.shuttleTime, this.timeDeltaC)
           });
         }
       }
-      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.compareShuttleTime(item, now)).sort(this.compareTime);
-      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.compareShuttleTime(item, now)).sort(this.compareTime);
+      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.compareShuttleTime(item)).sort(this.compareTime);
+      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.compareShuttleTime(item)).sort(this.compareTime);
     });
   }
 
-  addTimeDelta(time: string, delta: string, now: Date): string {
+  addTimeDelta(time: string, delta: string): string {
     const [hour, minute, second] = time.split(':');
-    const newTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
+    const newTime = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
     newTime.setMinutes(newTime.getMinutes() + parseInt(delta, 10));
     return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
   }
@@ -74,9 +75,13 @@ export class ShuttleDualHeadingCardComponent {
     }
   }
 
-  compareShuttleTime(item: ShuttleTimetableItem, now: Date): boolean {
-    let hour, minute;
-    [hour, minute] = item.shuttleTime.split(':');
-    return parseInt(hour, 10) > now.getHours() || (parseInt(hour, 10) === now.getHours() && parseInt(minute, 10) >= now.getMinutes());
+  compareShuttleTime(item: ShuttleTimetableItem): boolean {
+    const [hour, minute] = item.shuttleTime.split(':');
+    return parseInt(hour, 10) > this.now.getHours() ||
+      (parseInt(hour, 10) === this.now.getHours() && parseInt(minute, 10) >= this.now.getMinutes());
+  }
+  getRemainedTime(time: string): number {
+    const [hour, minute] = time.split(':');
+    return (parseInt(hour, 10) - this.now.getHours()) * 60 + (parseInt(minute, 10) - this.now.getMinutes());
   }
 }
