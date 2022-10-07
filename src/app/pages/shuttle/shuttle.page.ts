@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShuttleService, ShuttleTimetableItem } from './shuttle.service';
 import { Apollo, gql } from 'apollo-angular';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -61,7 +63,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
   ];
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  constructor(private apollo: Apollo, private shuttleService: ShuttleService) {}
+  constructor(private apollo: Apollo, private shuttleService: ShuttleService, private toastController: ToastController, private translateService: TranslateService) {}
   ngOnInit() {
     const now = new Date();
     const previous30Minutes = new Date(now.getTime() - 30 * 60 * 1000);
@@ -112,6 +114,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
         this.closestStopIndex = i;
       }
     }
+    this.showClosestShuttleStop().then();
   }
   getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
     return Math.sqrt(Math.pow(lat1 - lat2, 2) + Math.pow(lon1 - lon2, 2));
@@ -121,12 +124,14 @@ export class ShuttlePage implements OnInit, OnDestroy {
     this.swiper = swiper;
     this.swiper.slideTo(this.closestStopIndex, 1000, false);
   }
-
-  clickPrevButton() {
-    this.swiper.slidePrev();
-  }
-
-  clickNextButton() {
-    this.swiper.slideNext();
+  async showClosestShuttleStop() {
+    const toast = await this.toastController.create({
+      message: this.translateService.instant(
+        'shuttle.stop.closest', {name: this.translateService.instant(this.stopLocationList[this.closestStopIndex].stopName)}),
+      buttons: [
+        { text: this.translateService.instant('OK'), role: 'cancel' }
+      ]
+    });
+    await toast.present();
   }
 }
