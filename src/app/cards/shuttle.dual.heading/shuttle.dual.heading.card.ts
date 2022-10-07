@@ -61,7 +61,6 @@ export class ShuttleDualHeadingCardComponent {
     const [hour, minute, second] = time.split(':');
     const newTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
     newTime.setMinutes(newTime.getMinutes() + parseInt(delta, 10));
-    console.log(hour, minute, delta, String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0'))
     return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
   }
 
