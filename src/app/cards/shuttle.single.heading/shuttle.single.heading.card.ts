@@ -45,18 +45,18 @@ export class ShuttleSingleHeadingCardComponent {
       if (this.stopName === 'terminal'){
         this.shuttleTimetable = this.shuttleTimetable.filter((item) => item.shuttleType === 'DY' || item.shuttleType === 'C');
       }
-      this.shuttleTimetable.sort((a, b) => {
-        if (a.shuttleTime < b.shuttleTime) {
-          return -1;
-        } else if (a.shuttleTime > b.shuttleTime) {
-          return 1;
-        } else {
-          return 0;
-        }
+      this.shuttleTimetable = this.shuttleTimetable.filter((item) => this.getRemainedTime(item.shuttleTime) > 0)
+        .sort((a, b) => {
+          if (a.shuttleTime < b.shuttleTime) {
+            return -1;
+          } else if (a.shuttleTime > b.shuttleTime) {
+            return 1;
+          } else {
+            return 0;
+          }
       });
     });
   }
-
   addTimeDelta(time: string, delta: string): string {
     const [hour, minute, second] = time.split(':');
     const newTime = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate(), parseInt(hour, 10), parseInt(minute, 10));

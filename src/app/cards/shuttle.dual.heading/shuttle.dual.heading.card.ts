@@ -53,8 +53,8 @@ export class ShuttleDualHeadingCardComponent {
           });
         }
       }
-      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.compareShuttleTime(item)).sort(this.compareTime);
-      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.compareShuttleTime(item)).sort(this.compareTime);
+      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
+      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
     });
   }
 
@@ -73,12 +73,6 @@ export class ShuttleDualHeadingCardComponent {
     } else {
       return 0;
     }
-  }
-
-  compareShuttleTime(item: ShuttleTimetableItem): boolean {
-    const [hour, minute] = item.shuttleTime.split(':');
-    return parseInt(hour, 10) > this.now.getHours() ||
-      (parseInt(hour, 10) === this.now.getHours() && parseInt(minute, 10) >= this.now.getMinutes());
   }
   getRemainedTime(time: string): number {
     const [hour, minute] = time.split(':');
