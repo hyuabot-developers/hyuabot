@@ -1,9 +1,13 @@
 ion-list-header {
-  padding: 0;
-  ion-text {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+  padding-left: 0;
+  ion-label {
+    text-align: start;
+  }
+  ion-button {
+    margin-right: 0;
+    span {
+      text-align: end;
+    }
   }
 }
 

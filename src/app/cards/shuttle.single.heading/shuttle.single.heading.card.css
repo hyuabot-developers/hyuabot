@@ -1,10 +1,14 @@
 ion-list-header {
-  padding: 0;
+  padding-left: 0;
 }
-ion-list-header ion-text {
-  width: 100%;
-  text-align: center;
-  justify-content: center;
+ion-list-header ion-label {
+  text-align: start;
+}
+ion-list-header ion-button {
+  margin-right: 0;
+}
+ion-list-header ion-button span {
+  text-align: end;
 }
 
 ion-item {
