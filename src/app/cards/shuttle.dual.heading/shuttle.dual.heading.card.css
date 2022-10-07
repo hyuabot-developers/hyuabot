@@ -14,11 +14,6 @@ ion-list-header ion-button span {
 ion-item {
   padding: 0;
 }
-ion-item ion-label {
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-}
 
 .DH {
   color: red;
