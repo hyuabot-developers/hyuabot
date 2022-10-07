@@ -1,9 +1,9 @@
 /* Error: Can't find stylesheet to import.
  *    ,
- * 29 | @import '~swiper/scss';
- *    |         ^^^^^^^^^^^^^^
+ * 30 | @import '@ionic/angular/css/ionic-swiper';
+ *    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *    '
- *   global.scss 29:9  root stylesheet */
+ *   global.scss 30:9  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a    \2577 \a 29 \2502  @import '~swiper/scss';\a    \2502          ^^^^^^^^^^^^^^\a    \2575 \a   global.scss 29:9  root stylesheet";
+  content: "Error: Can't find stylesheet to import.\a    \2577 \a 30 \2502  @import '@ionic/angular/css/ionic-swiper';\d\a    \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   global.scss 30:9  root stylesheet";
 }

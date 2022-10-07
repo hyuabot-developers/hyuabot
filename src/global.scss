@@ -26,5 +26,5 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 // global.scss
-@import '~swiper/scss';
-@import '~@ionic/angular/css/ionic-swiper';
+@import 'swiper/swiper.min.css';
+@import '@ionic/angular/css/ionic-swiper';
