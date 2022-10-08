@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShuttlePage } from './shuttle.page';
+import { ShuttleTimetablePage } from './shuttle-timetable.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ShuttlePage,
+    component: ShuttleTimetablePage,
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ShuttleRoutingModule {}
+export class ShuttleTimetableRoutingModule {}

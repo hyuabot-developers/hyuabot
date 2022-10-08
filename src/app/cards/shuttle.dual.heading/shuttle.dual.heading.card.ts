@@ -18,11 +18,15 @@ export class ShuttleDualHeadingCardComponent {
   shuttleTimetableStation: ShuttleTimetableItem[] = [];
   shuttleTimetableTerminal: ShuttleTimetableItem[] = [];
   now: Date = new Date();
+  firstTimetableURL: string;
+  secondTimetableURL: string;
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
       this.now = new Date();
       this.shuttleTimetableStation = new Array<ShuttleTimetableItem>();
       this.shuttleTimetableTerminal = new Array<ShuttleTimetableItem>();
+      this.firstTimetableURL = '/shuttle/timetable?destination=' + this.firstDestination + '&stop=' + this.stopName;
+      this.secondTimetableURL = '/shuttle/timetable?destination=' + this.secondDestination + '&stop=' + this.stopName;
       for (const item of timetable.filter(
         (shuttleItem) => (shuttleItem.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
         if (item.shuttleType === 'DH'){

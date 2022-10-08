@@ -7,7 +7,7 @@
     <ion-list>
       <ion-list-header>
         <ion-label>{{ 'shuttle.heading.' + firstDestination | translate }}</ion-label>
-        <ion-button>{{ 'shuttle.timetable.all' | translate }}</ion-button>
+        <ion-button [href]="firstTimetableURL">{{ 'shuttle.timetable.all' | translate }}</ion-button>
       </ion-list-header>
       <ion-item *ngFor="let item of shuttleTimetableStation.slice(0, 3); let i = index" [lines]="(i === 2 || i === shuttleTimetableStation.length - 1) ? 'none' : 'full'">
         <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
@@ -17,7 +17,7 @@
     <ion-list>
       <ion-list-header>
         <ion-label>{{ 'shuttle.heading.' + secondDestination | translate }}</ion-label>
-        <ion-button>{{ 'shuttle.timetable.all' | translate }}</ion-button>
+        <ion-button [href]="secondTimetableURL">{{ 'shuttle.timetable.all' | translate }}</ion-button>
       </ion-list-header>
       <ion-item *ngFor="let item of shuttleTimetableTerminal.slice(0, 3); let i = index" [lines]="(i === 2 || i === shuttleTimetableTerminal.length - 1) ? 'none' : 'inset'">
         <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
