@@ -130,7 +130,8 @@ export class ShuttlePage implements OnInit, OnDestroy {
         'shuttle.stop.closest', {name: this.translateService.instant(this.stopLocationList[this.closestStopIndex].stopName)}),
       buttons: [
         { text: this.translateService.instant('OK'), role: 'cancel' }
-      ]
+      ],
+      duration: 1500
     });
     await toast.present();
   }
