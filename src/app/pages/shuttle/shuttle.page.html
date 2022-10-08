@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <swiper (swiper)="setSwiperInstance($event)" loop="true" loopAdditionalSlides="1">
+  <swiper (swiper)="setSwiperInstance($event)" loop="true" loopAdditionalSlides="1" slidesPerView="1.2" centeredSlides="centeredSlides">
     <ng-template swiperSlide>
       <div class="slide-content">
         <app-shuttle-dual-card stopName="dormitory"></app-shuttle-dual-card>

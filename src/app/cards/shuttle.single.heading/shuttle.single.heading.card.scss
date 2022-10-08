@@ -1,7 +1,12 @@
+ion-card {
+  height: 500px;
+}
+
 ion-list-header {
   padding-left: 0;
   ion-label {
     text-align: start;
+    font-size: large;
   }
   ion-button {
     margin-right: 0;
