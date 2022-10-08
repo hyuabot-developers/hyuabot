@@ -13,8 +13,12 @@ export class ShuttleService {
   period: BehaviorSubject<string> = new BehaviorSubject<string>('semester');
   weekday: BehaviorSubject<string> = new BehaviorSubject<string>('weekday');
   shuttleTimetable: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public setShuttleTimetable(timetable: ShuttleTimetableItem[]) {
     this.shuttleTimetable.next(timetable);
+  }
+  public setLoading(loading: boolean) {
+    this.loading.next(loading);
   }
 }
 

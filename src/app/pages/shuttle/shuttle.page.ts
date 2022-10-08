@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShuttleService, ShuttleTimetableItem } from './shuttle.service';
 import { Apollo, gql } from 'apollo-angular';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 const GET_SHUTTLE_PERIOD = gql`
@@ -50,7 +50,6 @@ interface BusStop {
 })
 export class ShuttlePage implements OnInit, OnDestroy {
   closestStopIndex = 0;
-  private loading = true;
   private weekday = 'weekdays';
   private period = 'semester';
   private swiper: any;
@@ -63,7 +62,13 @@ export class ShuttlePage implements OnInit, OnDestroy {
   ];
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  constructor(private apollo: Apollo, private shuttleService: ShuttleService, private toastController: ToastController, private translateService: TranslateService) {}
+  private loadingToast;
+  constructor(
+    private apollo: Apollo,
+    private shuttleService: ShuttleService,
+    private toastController: ToastController,
+    private loadingController: LoadingController,
+    private translateService: TranslateService) {}
   ngOnInit() {
     const now = new Date();
     const previous30Minutes = new Date(now.getTime() - 30 * 60 * 1000);
@@ -81,13 +86,27 @@ export class ShuttlePage implements OnInit, OnDestroy {
           weekday: this.weekday,
           startTime: `${previous30Minutes.getHours()}:${previous30Minutes.getMinutes()}`, count: 5}
       }).valueChanges.subscribe(({data, loading}) => {
-        this.loading = loading;
+        this.shuttleService.setLoading(loading);
         this.shuttleService.setShuttleTimetable(data.shuttle.timetable);
       });
     });
 
     this.getLocation().subscribe(position => {
       this.setClosestStop(position.coords.latitude, position.coords.longitude);
+    });
+
+    this.shuttleService.loading.subscribe(loading => {
+      if (loading) {
+        this.loadingController.create({
+          message: this.translateService.instant('shuttle.loading'),
+          spinner: 'crescent'
+        }).then(
+          loadingToast => this.loadingToast = loadingToast
+        );
+        this.loadingToast.present();
+      } else {
+        this.loadingToast.dismiss();
+      }
     });
   }
 
