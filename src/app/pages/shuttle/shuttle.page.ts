@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShuttleService, ShuttleTimetableItem } from './shuttle.service';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from '../../services/loading.service';
@@ -61,9 +61,9 @@ export class ShuttlePage implements OnInit, OnDestroy {
     {stopName: 'shuttle.stop.terminal.name', latitude: 37.31945164682341, longitude: 126.8455453372041},
     {stopName: 'shuttle.stop.shuttlecock_i.name', latitude: 37.29869328231496, longitude: 126.8377767466817},
   ];
+  private shuttleQuery: QueryRef<ShuttleTimetableQuery>;
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  private loadingToast: HTMLIonLoadingElement | undefined;
   constructor(
     private apollo: Apollo,
     private shuttleService: ShuttleService,
@@ -79,14 +79,15 @@ export class ShuttlePage implements OnInit, OnDestroy {
       this.weekday = data.shuttle.weekday;
       this.period = data.shuttle.period;
       this.shuttleDateSubscription?.unsubscribe();
-      this.shuttleTimetableSubscription = this.apollo.watchQuery<ShuttleTimetableQuery>({
+      this.shuttleQuery = this.apollo.watchQuery<ShuttleTimetableQuery>({
         query: GET_SHUTTLE_TIMETABLE,
         pollInterval: 60000,
         variables: {
           period: this.period,
           weekday: this.weekday,
           startTime: `${previous30Minutes.getHours()}:${previous30Minutes.getMinutes()}`, count: 5}
-      }).valueChanges.subscribe(({data, loading}) => {
+      });
+      this.shuttleTimetableSubscription = this.shuttleQuery.valueChanges.subscribe(({data, loading}) => {
         this.shuttleService.setLoading(loading);
         this.shuttleService.setShuttleTimetable(data.shuttle.timetable);
       });
@@ -109,12 +110,15 @@ export class ShuttlePage implements OnInit, OnDestroy {
       }
     });
   }
-
   ngOnDestroy() {
     this.shuttleDateSubscription?.unsubscribe();
     this.shuttleTimetableSubscription?.unsubscribe();
   }
-
+  refreshShuttleTimetable(event) {
+    this.shuttleQuery.refetch().then(() => {
+      event.target.complete();
+    });
+  }
   getLocation(): Observable<any> {
     return new Observable(observer => {
       window.navigator.geolocation.getCurrentPosition(position => {
