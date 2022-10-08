@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ShuttleService, ShuttleTimetableItem } from './shuttle.service';
 import { Apollo, gql } from 'apollo-angular';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from '../../services/loading.service';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -62,12 +63,12 @@ export class ShuttlePage implements OnInit, OnDestroy {
   ];
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  private loadingToast: HTMLIonToastElement | undefined;
+  private loadingToast: HTMLIonLoadingElement | undefined;
   constructor(
     private apollo: Apollo,
     private shuttleService: ShuttleService,
     private toastController: ToastController,
-    private loadingController: LoadingController,
+    private loadingService: LoadingService,
     private translateService: TranslateService) {}
   ngOnInit() {
     const now = new Date();
@@ -94,11 +95,17 @@ export class ShuttlePage implements OnInit, OnDestroy {
     this.getLocation().subscribe(position => {
       this.setClosestStop(position.coords.latitude, position.coords.longitude);
     });
-    this.shuttleService.loading.subscribe(loading => {
-      if (loading) {
-        this.showLoading().then();
-      } else {
-        this.hideLoading().then();
+    this.shuttleService.loading.subscribe(value => {
+      if (value) {
+        this.loadingService.present('shuttle.loading', 'shuttle.loading').then(
+          () => {
+            this.shuttleService.loading.subscribe(loading => {
+              if (!loading) {
+                this.loadingService.dismiss('shuttle.loading').then();
+              }
+            });
+          }
+        );
       }
     });
   }
@@ -146,15 +153,5 @@ export class ShuttlePage implements OnInit, OnDestroy {
       duration: 1500
     });
     await toast.present();
-  }
-  async showLoading() {
-    this.loadingToast = await this.toastController.create({
-      message: this.translateService.instant('shuttle.loading'),
-      duration: 0
-    });
-    await this.loadingToast.present();
-  }
-  async hideLoading() {
-    await this.loadingToast?.dismiss();
   }
 }

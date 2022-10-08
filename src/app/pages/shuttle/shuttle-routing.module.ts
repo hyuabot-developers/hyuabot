@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: ShuttlePage,
+  },
+  {
+    path: 'timetable/:shuttleStop/:destination',
+    loadComponent: () => import('./timetable/shuttle-timetable.module').then( m => m.ShuttleTimetableModule )
   }
 ];
 
