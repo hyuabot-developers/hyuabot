@@ -62,7 +62,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
   ];
   private shuttleDateSubscription: Subscription | undefined;
   private shuttleTimetableSubscription: Subscription | undefined;
-  private loadingToast;
+  private loadingToast: HTMLIonToastElement | undefined;
   constructor(
     private apollo: Apollo,
     private shuttleService: ShuttleService,
@@ -94,18 +94,11 @@ export class ShuttlePage implements OnInit, OnDestroy {
     this.getLocation().subscribe(position => {
       this.setClosestStop(position.coords.latitude, position.coords.longitude);
     });
-
     this.shuttleService.loading.subscribe(loading => {
       if (loading) {
-        this.loadingController.create({
-          message: this.translateService.instant('shuttle.loading'),
-          spinner: 'crescent'
-        }).then(
-          loadingToast => this.loadingToast = loadingToast
-        );
-        this.loadingToast.present();
+        this.showLoading().then();
       } else {
-        this.loadingToast.dismiss();
+        this.hideLoading().then();
       }
     });
   }
@@ -153,5 +146,15 @@ export class ShuttlePage implements OnInit, OnDestroy {
       duration: 1500
     });
     await toast.present();
+  }
+  async showLoading() {
+    this.loadingToast = await this.toastController.create({
+      message: this.translateService.instant('shuttle.loading'),
+      duration: 0
+    });
+    await this.loadingToast.present();
+  }
+  async hideLoading() {
+    await this.loadingToast?.dismiss();
   }
 }
