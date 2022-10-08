@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { shuttleServiceInjectables } from './pages/shuttle/shuttle.service';
+import { shuttleTimetableServiceInjectables } from './pages/shuttle/timetable/shuttle-timetable.service';
 
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -21,7 +22,7 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
   }), GraphQLModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    shuttleServiceInjectables
+    shuttleServiceInjectables, shuttleTimetableServiceInjectables
   ],
   bootstrap: [AppComponent],
 })

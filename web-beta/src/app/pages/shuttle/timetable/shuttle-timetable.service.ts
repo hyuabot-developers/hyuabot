@@ -9,7 +9,7 @@ export interface ShuttleTimetableItem {
 }
 
 @Injectable()
-export class ShuttleService {
+export class ShuttleTimetableService {
   period: BehaviorSubject<string> = new BehaviorSubject<string>('semester');
   weekday: BehaviorSubject<string> = new BehaviorSubject<string>('weekday');
   shuttleTimetable: BehaviorSubject<ShuttleTimetableItem[]> = new BehaviorSubject<ShuttleTimetableItem[]>([]);
@@ -22,6 +22,6 @@ export class ShuttleService {
   }
 }
 
-export const shuttleServiceInjectables: Array<any> = [
-  ShuttleService
+export const shuttleTimetableServiceInjectables: Array<any> = [
+  ShuttleTimetableService
 ];

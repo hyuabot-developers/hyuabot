@@ -13,7 +13,10 @@
     </ion-toolbar>
   </ion-header>
 
-  <swiper (swiper)="setSwiperInstance($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshShuttleTimetable($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <swiper (swiper)="setSwiperInstance($event)" slidesPerView="1.2" centeredSlides="centeredSlides">
     <ng-template swiperSlide>
       <div class="slide-content">
         <app-shuttle-dual-card stopName="dormitory"></app-shuttle-dual-card>
