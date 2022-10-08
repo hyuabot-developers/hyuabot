@@ -1,5 +1,7 @@
 ion-card {
   height: 500px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 ion-list-header {
