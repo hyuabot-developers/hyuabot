@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface ShuttleTimetableItem {
   period: string;
+  weekday: string;
   startStop: string;
   shuttleTime: string;
   shuttleType: string;

@@ -18,14 +18,15 @@
     "timetable": {
       "all": "전체 시간표",
       "item": "{{hour}}시 {{minute}}분 ({{remained}}분 후)",
+      "item.all": "{{hour}}시 {{minute}}분",
       "last": "막차",
       "remained": "{{minute}}분 후",
       "title": {
-        "dormitory": "셔틀버스 시간표 (기숙사)",
-        "shuttlecock_o": "셔틀버스 시간표 (셔틀콕)",
-        "station": "셔틀버스 시간표 (한대앞)",
-        "terminal": "셔틀버스 시간표 (예술인)",
-        "shuttlecock_i": "셔틀버스 시간표 (셔틀콕 건너편)"
+        "dormitory": "기숙사 시간표",
+        "shuttlecock_o": "셔틀콕 시간표",
+        "station": "한대앞 시간표",
+        "terminal": "예술인 시간표",
+        "shuttlecock_i": "셔틀콕 건너편 시간표"
       },
       "subtitle": "{{year}}년 {{month}}월 {{day}}일 기준",
       "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다."
