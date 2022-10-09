@@ -1,5 +1,5 @@
 ion-card {
-  height: 500px;
+  height: 385px;
   margin-left: 4px;
   margin-right: 4px;
 }
@@ -9,17 +9,35 @@ ion-list-header {
   ion-label {
     text-align: start;
     font-size: large;
+    margin-top: 5px;
   }
   ion-button {
-    margin-right: 0;
+    margin-top: 5px;
+    --padding-start: 0;
+    --padding-end: 0;
     span {
-      text-align: end;
+      font-size: medium;
     }
   }
 }
 
 ion-item {
-  padding: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --min-height: 16px;
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  ion-text {
+    font-size: medium;
+    text-align: end;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 .DH {
