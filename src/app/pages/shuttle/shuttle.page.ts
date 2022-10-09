@@ -154,6 +154,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
       buttons: [
         { text: this.translateService.instant('OK'), role: 'cancel' }
       ],
+      cssClass: 'toast-closest-stop',
       duration: 1500
     });
     await toast.present();
