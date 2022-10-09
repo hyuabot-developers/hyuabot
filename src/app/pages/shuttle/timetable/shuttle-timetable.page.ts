@@ -114,8 +114,8 @@ export class ShuttleTimetablePage implements OnInit, OnDestroy {
     return this.shuttleService.shuttleTimetable.value
       .filter(item => (
         this.checkDestination(item) &&
-        item.startStop.toLowerCase() === 'dormitory' || this.stop !== 'dormitory') &&
-        item.weekday === this.shuttleService.weekday.value)
+        (item.startStop.toLowerCase() === 'dormitory' || this.stop !== 'dormitory') &&
+        item.weekday === this.shuttleService.weekday.value))
       .map(item => ({
           period: item.period,
           shuttleTime: this.addTimeDelta(item),
