@@ -58,8 +58,10 @@ export class ShuttleDualHeadingCardComponent {
           });
         }
       }
-      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) => this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
-      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) => this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
+      this.shuttleTimetableStation = this.shuttleTimetableStation.filter((item) =>
+        this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
+      this.shuttleTimetableTerminal = this.shuttleTimetableTerminal.filter((item) =>
+        this.getRemainedTime(item.shuttleTime) > 0).sort(this.compareTime);
     });
   }
 

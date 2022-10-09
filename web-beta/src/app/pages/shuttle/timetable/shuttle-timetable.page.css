@@ -1,19 +1,21 @@
-app-shuttle-dual-card {
-  width: 100%;
+ion-list {
+  padding: 20px;
+  margin-bottom: 60px;
 }
 
-app-shuttle-single-card {
-  width: 100%;
+.DH {
+  color: red;
+  font-weight: bold;
 }
 
-swiper {
-  width: 100%;
-  height: 100%;
+.DY {
+  color: green;
+  font-weight: bold;
 }
 
-.slide-content {
-  width: 100%;
-  height: 100%;
+.C {
+  color: blue;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=shuttle-timetable.page.css.map */

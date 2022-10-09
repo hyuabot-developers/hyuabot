@@ -14,10 +14,12 @@ export class ShuttleSingleHeadingCardComponent {
   @Input() firstDestination = 'campus';
   shuttleTimetable: ShuttleTimetableItem[] = [];
   now: Date = new Date();
+  firstTimetableURL: string;
   constructor(private shuttleService: ShuttleService) {
     this.shuttleService.shuttleTimetable.subscribe((timetable) => {
       this.now = new Date();
       this.shuttleTimetable = new Array<ShuttleTimetableItem>();
+      this.firstTimetableURL = '/shuttle/timetable?destination=' + this.firstDestination + '&stop=' + this.stopName;
       for (const item of timetable.filter((item) => (item.startStop.toLowerCase() === 'dormitory' || this.stopName !== 'dormitory' ))) {
         if (item.shuttleType === 'DH') {
           this.shuttleTimetable.push({

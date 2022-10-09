@@ -17,21 +17,26 @@
     },
     "timetable": {
       "all": "전체 시간표",
-      "item": "{{hour}}시 {{minute}}분 ({{remained}}분 후)",
+      "item": "{{hour}}시 {{minute}}분 ({{remained}}분)",
+      "last.item": "{{hour}}시 {{minute}}분 ({{remained}}분, 막차)",
+      "item.all": "{{hour}}시 {{minute}}분",
       "last": "막차",
       "remained": "{{minute}}분 후",
       "title": {
-        "dormitory": "셔틀버스 시간표 (기숙사)",
-        "shuttlecock_o": "셔틀버스 시간표 (셔틀콕)",
-        "station": "셔틀버스 시간표 (한대앞)",
-        "terminal": "셔틀버스 시간표 (예술인)",
-        "shuttlecock_i": "셔틀버스 시간표 (셔틀콕 건너편)"
+        "dormitory": "기숙사",
+        "shuttlecock_o": "셔틀콕",
+        "station": "한대앞",
+        "terminal": "예술인",
+        "shuttlecock_i": "셔틀콕 건너편"
       },
       "subtitle": "{{year}}년 {{month}}월 {{day}}일 기준",
-      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다."
+      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다.",
+      "weekends": "주말 시간표입니다.",
+      "weekdays": "평일 시간표입니다."
     },
     "out_of_service": "운행 종료",
-    "slide_instruction": "다른 정류장을 보려면 카드를 옆으로 넘겨주세요."
+    "slide_instruction": "다른 정류장을 보려면 카드를 옆으로 넘겨주세요.",
+    "loading": "불러오는 중..."
   },
   "bus": {
     "title": "노선버스"
