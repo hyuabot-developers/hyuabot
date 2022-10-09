@@ -4,6 +4,8 @@ import { ShuttleTimetableService, ShuttleTimetableItem } from './shuttle-timetab
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { LoadingService } from '../../../services/loading.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -54,6 +56,8 @@ export class ShuttleTimetablePage implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private apollo: Apollo,
+    private toastController: ToastController,
+    private translateService: TranslateService,
     private shuttleService: ShuttleTimetableService,
     private loadingService: LoadingService) {}
   ngOnInit() {
@@ -87,6 +91,9 @@ export class ShuttleTimetablePage implements OnInit, OnDestroy {
           }
         );
       }
+    });
+    this.shuttleService.weekday.subscribe(value => {
+      this.showCurrentWeekdays(value);
     });
     this.route.queryParams.subscribe(params => {
       this.destination = params.destination;
@@ -149,5 +156,16 @@ export class ShuttleTimetablePage implements OnInit, OnDestroy {
     const newTime = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate(), parseInt(hour, 10), parseInt(minute, 10));
     newTime.setMinutes(newTime.getMinutes() + this.calculateTimeDelta(item.shuttleType));
     return String(newTime.getHours()).padStart(2, '0') + ':' + String(newTime.getMinutes()).padStart(2, '0');
+  }
+  async showCurrentWeekdays(value: string) {
+    const toast = await this.toastController.create({
+      message: this.translateService.instant('shuttle.timetable.' + value),
+      buttons: [
+        { text: this.translateService.instant('OK'), role: 'cancel' }
+      ],
+      cssClass: 'toast-closest-stop',
+      duration: 1500
+    });
+    await toast.present();
   }
 }

@@ -29,7 +29,9 @@
         "shuttlecock_i": "셔틀콕 건너편 시간표"
       },
       "subtitle": "{{year}}년 {{month}}월 {{day}}일 기준",
-      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다."
+      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다.",
+      "weekends": "주말 시간표입니다.",
+      "weekdays": "평일 시간표입니다."
     },
     "out_of_service": "운행 종료",
     "slide_instruction": "다른 정류장을 보려면 카드를 옆으로 넘겨주세요.",
