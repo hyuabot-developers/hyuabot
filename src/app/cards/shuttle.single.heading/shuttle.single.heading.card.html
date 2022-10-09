@@ -7,7 +7,7 @@
     <ion-list>
       <ion-list-header>
         <ion-label>{{ 'shuttle.heading.' + firstDestination | translate }}</ion-label>
-        <ion-button>{{ 'shuttle.timetable.all' | translate }}</ion-button>
+        <ion-button [href]="firstTimetableURL">{{ 'shuttle.timetable.all' | translate }}</ion-button>
       </ion-list-header>
       <ion-item *ngFor="let item of shuttleTimetable.slice(0, 6); let i = index" [lines]="(i === 5 || i === shuttleTimetable.length - 1) ? 'none' : 'full'">
         <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
