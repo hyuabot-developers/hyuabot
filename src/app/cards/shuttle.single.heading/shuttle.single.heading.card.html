@@ -12,7 +12,8 @@
       <ng-template [ngIf]="shuttleTimetable.length > 0">
         <ion-item *ngFor="let item of shuttleTimetable.slice(0, 6); let i = index" [lines]="(i === 5 || i === shuttleTimetable.length - 1) ? 'none' : 'full'">
           <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
-          <ion-text>{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+          <ion-text *ngIf="i !== shuttleTimetable.length - 1">{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+          <ion-text class="last-bus" *ngIf="i === shuttleTimetable.length - 1">{{ "shuttle.timetable.last.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
         </ion-item>
       </ng-template>
       <ng-template [ngIf]="shuttleTimetable.length === 0">
