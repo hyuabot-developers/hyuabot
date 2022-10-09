@@ -8,12 +8,12 @@ app-shuttle-single-card {
 
 swiper {
   width: 100%;
-  height: 100%;
+  height: 420px;
 }
 
 .slide-content {
   width: 100%;
-  height: 100%;
+  height: 400px;
 }
 
 /*# sourceMappingURL=shuttle.page.css.map */

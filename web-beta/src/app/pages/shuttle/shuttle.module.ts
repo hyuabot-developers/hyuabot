@@ -10,19 +10,21 @@ import { ShuttleRoutingModule } from './shuttle-routing.module';
 import {ShuttleDualHeadingCardModule} from "../../cards/shuttle.dual.heading/shuttle.dual.heading.card.module";
 import { ShuttleSingleHeadingCardModule } from '../../cards/shuttle.single.heading/shuttle.single.heading.card.module';
 import { SwiperModule } from 'swiper/angular';
+import { ShuttleSubwayCardModule } from '../../cards/shuttle.subway/shuttle.subway.card.module';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TranslateModule,
-    ExploreContainerComponentModule,
-    ShuttleRoutingModule,
-    ShuttleDualHeadingCardModule,
-    ShuttleSingleHeadingCardModule,
-    SwiperModule
-  ],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        TranslateModule,
+        ExploreContainerComponentModule,
+        ShuttleRoutingModule,
+        ShuttleDualHeadingCardModule,
+        ShuttleSingleHeadingCardModule,
+        SwiperModule,
+        ShuttleSubwayCardModule
+    ],
   declarations: [ShuttlePage]
 })
 export class ShuttleModule {}

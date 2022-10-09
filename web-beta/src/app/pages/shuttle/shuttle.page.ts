@@ -5,6 +5,7 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from '../../services/loading.service';
+import { SubwayRealtimeItem, SubwayRealtimeQuery } from '../subway/subway.service';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -21,6 +22,9 @@ const GET_SHUTTLE_TIMETABLE = gql`
         timetable (period: $period, weekday: $weekday, startTime: $startTime, count: $count) {
           period, startStop, shuttleTime, shuttleType
         }
+      },
+      subway(routePair: [{stationName: "한대앞", routeName: "수인분당선"}]) {
+        realtime {heading, terminalStation, remainedTime}
       }
     }
   `;
@@ -36,6 +40,7 @@ interface ShuttleTimetableQuery {
   shuttle: {
     timetable: ShuttleTimetableItem[];
   };
+  subway: SubwayRealtimeQuery[];
 }
 
 interface BusStop {
@@ -90,6 +95,7 @@ export class ShuttlePage implements OnInit, OnDestroy {
       this.shuttleTimetableSubscription = this.shuttleQuery.valueChanges.subscribe(({data, loading}) => {
         this.shuttleService.setLoading(loading);
         this.shuttleService.setShuttleTimetable(data.shuttle.timetable);
+        this.shuttleService.setSubwayRealtime(data.subway[0].realtime);
       });
     });
 

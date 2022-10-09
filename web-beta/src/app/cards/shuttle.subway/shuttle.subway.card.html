@@ -1,0 +1,26 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ 'subway.can_i_take' | translate }}</ion-card-title>
+    <ion-card-subtitle>{{ 'subway.can_i_take.subtitle' | translate }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>{{ 'subway.line.suinbundang' | translate }}</ion-label>
+      </ion-list-header>
+      <ng-template [ngIf]="subwayRealtimeItems.up.length > 0 || subwayRealtimeItems.down.length > 0">
+        <ion-item *ngFor="let item of getLongerRealtimeList(); let i = index" [lines]="i === getLongerRealtimeList().length - 1 ? 'none' : 'inset'">
+          <div class="container">
+            <ion-text *ngIf="subwayRealtimeItems.down[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.down[i].remainedTime, destination: subwayRealtimeItems.down[i].terminalStation} }}</ion-text>
+            <ion-text *ngIf="subwayRealtimeItems.up[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.up[i].remainedTime, destination: subwayRealtimeItems.up[i].terminalStation} }}</ion-text>
+          </div>
+        </ion-item>
+      </ng-template>
+      <ng-template [ngIf]="subwayRealtimeItems.up.length === 0 && subwayRealtimeItems.down.length === 0">
+        <ion-item lines="none">
+          <ion-label style="text-align: center">{{ 'shuttle.out_of_service' | translate }}</ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

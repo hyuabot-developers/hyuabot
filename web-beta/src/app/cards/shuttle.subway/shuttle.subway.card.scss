@@ -1,11 +1,17 @@
 ion-card {
-  height: 385px;
-  margin-left: 4px;
-  margin-right: 4px;
+  margin-left: 20px;
+  margin-right: 20px;
+  ion-card-header {
+    padding-bottom: 0;
+  }
+  ion-card-title {
+    font-size: large;
+  }
 }
 
 ion-list-header {
   padding-left: 0;
+  color: #FABE00;
   ion-label {
     text-align: start;
     font-size: large;
@@ -38,24 +44,4 @@ ion-item {
     margin-top: 5px;
     margin-bottom: 5px;
   }
-}
-
-.DH {
-  color: red;
-  font-weight: bold;
-}
-
-.DY {
-  color: green;
-  font-weight: bold;
-}
-
-.C {
-  color: blue;
-  font-weight: bold;
-}
-
-.last-bus {
-  color: red;
-  font-weight: bold;
 }
