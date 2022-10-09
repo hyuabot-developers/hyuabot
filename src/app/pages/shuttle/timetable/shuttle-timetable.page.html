@@ -13,9 +13,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-refresher slot="fixed" (ionRefresh)="refreshShuttleTimetable($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-list lines="inset">
     <ion-item *ngFor="let item of getShuttleTimetable(); let i = index" [lines]="i === getShuttleTimetable().length - 1 ? 'none' : 'inset'" >
       <ion-label [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-label>
