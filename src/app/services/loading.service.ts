@@ -14,6 +14,8 @@ export class LoadingService {
     await loading.present();
   }
   async dismiss(loadingID: string) {
-    await this.loadingController.dismiss(null, null, loadingID);
+    if (await this.loadingController.getTop() !== undefined){
+      await this.loadingController.dismiss(null, null, loadingID);
+    }
   }
 }

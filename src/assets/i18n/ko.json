@@ -42,7 +42,11 @@
     "title": "노선버스"
   },
   "subway": {
-    "title": "전철"
+    "title": "전철",
+    "can_i_take": "전철이 올까요..?",
+    "can_i_take.subtitle": "안올 것 같으면 버스를 타세요...",
+    "line": {"suinbundang": "수인분당선"},
+    "realtime": {"item": "{{minute}}분 ({{destination}} 행)", "last": "막차"}
   },
   "cafeteria": {
     "title": "학식"

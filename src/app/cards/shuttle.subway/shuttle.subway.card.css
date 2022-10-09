@@ -1,11 +1,17 @@
 ion-card {
-  height: 385px;
-  margin-left: 4px;
-  margin-right: 4px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+ion-card ion-card-header {
+  padding-bottom: 0;
+}
+ion-card ion-card-title {
+  font-size: large;
 }
 
 ion-list-header {
   padding-left: 0;
+  color: #FABE00;
 }
 ion-list-header ion-label {
   text-align: start;
@@ -38,26 +44,6 @@ ion-item ion-text {
   text-align: end;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.DH {
-  color: red;
-  font-weight: bold;
-}
-
-.DY {
-  color: green;
-  font-weight: bold;
-}
-
-.C {
-  color: blue;
-  font-weight: bold;
-}
-
-.last-bus {
-  color: red;
-  font-weight: bold;
 }
 
 /*# sourceMappingURL=shuttle.subway.card.css.map */
