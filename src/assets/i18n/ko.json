@@ -44,12 +44,12 @@
     "stop": {"guestHouse":  "한양대ERICA컨벤션센터", "mainGate": "한양대정문"},
     "heading": {"sangnoksu": "상록수역 방면", "suwon": "수원역 방면", "gangnam": "강남역 방면"},
     "realtime": {
-      "item": {"withSeat": "{{minute}}분 후 도착({{seat}}석)", "withoutSeat": "{{minute}}분 후 도착"}
+      "item": {"withSeat": "{{minute}}분 후 도착({{stop}}번째 전, {{seat}}석)", "withoutSeat": "{{minute}}분 후 도착({{stop}}번째 전)"}
     },
     "timetable": {
       "all": "전체 시간표",
       "item": "{{hour}}시 {{minute}}분 (회차점 대기)",
-      "last.item": "{{hour}}시 {{minute}}분 (회차점 대기)",
+      "last.item": "{{hour}}시 {{minute}}분 (회차점 대기, 막차)",
       "item.all": "{{hour}}시 {{minute}}분",
       "last": "막차",
       "remained": "{{minute}}분 후"

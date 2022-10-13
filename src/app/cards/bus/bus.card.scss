@@ -31,6 +31,9 @@ ion-item {
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
+    .realtime {
+      font-weight: bold;
+    }
   }
   ion-text {
     font-size: medium;

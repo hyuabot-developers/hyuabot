@@ -33,6 +33,9 @@ ion-item .container {
   justify-content: flex-end;
   flex-direction: row;
 }
+ion-item .container .realtime {
+  font-weight: bold;
+}
 ion-item ion-text {
   font-size: medium;
   text-align: end;
