@@ -30,7 +30,7 @@ ion-item {
 ion-item .container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   flex-direction: row;
 }
 ion-item ion-text {
