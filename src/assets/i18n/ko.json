@@ -6,38 +6,53 @@
       "shuttlecock_o": {"name": "셔틀콕", "bound": "한대앞/예술인 방면"},
       "station": {"name": "한대앞", "bound": "셔틀콕/기숙사/예술인 방면"},
       "terminal": {"name": "예술인", "bound": "셔틀콕/기숙사 방면"},
-      "shuttlecock_i": {"name": "셔틀콕 건너편", "bound": "기숙사 방면"}
+      "shuttlecock_i": {"name": "셔틀콕 건너편", "bound": "기숙사 방면"},
+      "closest": "가장 가까운 정류장은 {{name}}입니다."
     },
     "type": {
-      "DH": "한대앞 직행", "DY": "예술인 직행", "C": "순환 버스"
+      "DH": "직행", "DY": "직행", "C": "순환"
+    },
+    "heading": {
+      "station": "한대앞 방면", "terminal": "예술인 방면", "dormitory": "기숙사 방면", "campus": "캠퍼스 방면"
     },
     "timetable": {
-      "all": "전체 시간표 보기",
-      "item": "{{hour}}시 {{minute}}분",
+      "all": "전체 시간표",
+      "item": "{{hour}}시 {{minute}}분 ({{remained}}분 후)",
+      "last.item": "{{hour}}시 {{minute}}분 ({{remained}}분 후, 막차)",
+      "item.all": "{{hour}}시 {{minute}}분",
       "last": "막차",
       "remained": "{{minute}}분 후",
       "title": {
-        "dormitory": "셔틀버스 시간표 (기숙사)",
-        "shuttlecock_o": "셔틀버스 시간표 (셔틀콕)",
-        "station": "셔틀버스 시간표 (한대앞)",
-        "terminal": "셔틀버스 시간표 (예술인)",
-        "shuttlecock_i": "셔틀버스 시간표 (셔틀콕 건너편)"
+        "dormitory": "기숙사",
+        "shuttlecock_o": "셔틀콕",
+        "station": "한대앞",
+        "terminal": "예술인",
+        "shuttlecock_i": "셔틀콕 건너편"
       },
       "subtitle": "{{year}}년 {{month}}월 {{day}}일 기준",
-      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다."
+      "no_bus": "오늘은 해당 노선으로 운행하는 버스가 없습니다.",
+      "weekends": "주말 시간표입니다.",
+      "weekdays": "평일 시간표입니다."
     },
-    "out_of_service": "운행 종료"
+    "out_of_service": "운행 종료",
+    "slide_instruction": "다른 정류장을 보려면 카드를 옆으로 넘겨주세요.",
+    "loading": "불러오는 중..."
   },
   "bus": {
     "title": "노선버스"
   },
   "subway": {
-    "title": "전철"
+    "title": "전철",
+    "can_i_take": "전철이 올까요..?",
+    "can_i_take.subtitle": "안올 것 같으면 버스를 타세요...",
+    "line": {"suinbundang": "수인분당선"},
+    "realtime": {"item": "{{minute}}분 ({{destination}} 행)", "last": "막차"}
   },
   "cafeteria": {
     "title": "학식"
   },
   "menu": {
     "title": "메뉴"
-  }
+  },
+  "OK": "확인"
 }

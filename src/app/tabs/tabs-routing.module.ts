@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/shuttle/shuttle.module').then(m => m.ShuttleModule)
       },
       {
+        path: 'shuttle/timetable',
+        loadChildren: () => import('../pages/shuttle/timetable/shuttle-timetable.module').then(m => m.ShuttleTimetableModule)
+      },
+      {
         path: 'bus',
         loadChildren: () => import('../pages/bus/bus.module').then(m => m.BusModule)
       },

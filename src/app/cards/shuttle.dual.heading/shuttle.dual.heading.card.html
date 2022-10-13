@@ -1,0 +1,48 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ 'shuttle.stop.' + stopName + '.name' | translate }}</ion-card-title>
+    <ion-card-subtitle>{{ 'shuttle.stop.' + stopName + '.bound' | translate }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>{{ 'shuttle.heading.' + firstDestination | translate }}</ion-label>
+        <ion-button [href]="firstTimetableURL">{{ 'shuttle.timetable.all' | translate }}</ion-button>
+      </ion-list-header>
+      <ng-template [ngIf]="shuttleTimetableStation.length > 0">
+        <ion-item *ngFor="let item of shuttleTimetableStation.slice(0, 3); let i = index" lines="none">
+          <div class="container">
+            <ion-text [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-text>
+            <ion-text *ngIf="i !== shuttleTimetableStation.length - 1" >{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+            <ion-text class="last-bus" *ngIf="i === shuttleTimetableStation.length - 1" >{{ "shuttle.timetable.last.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+          </div>
+        </ion-item>
+      </ng-template>
+      <ng-template [ngIf]="shuttleTimetableStation.length === 0">
+        <ion-item lines="none">
+          <ion-label style="text-align: center">{{ 'shuttle.out_of_service' | translate }}</ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>{{ 'shuttle.heading.' + secondDestination | translate }}</ion-label>
+        <ion-button [href]="secondTimetableURL">{{ 'shuttle.timetable.all' | translate }}</ion-button>
+      </ion-list-header>
+      <ng-template [ngIf]="shuttleTimetableTerminal.length > 0">
+        <ion-item *ngFor="let item of shuttleTimetableTerminal.slice(0, 3); let i = index" lines="none">
+          <div class="container">
+            <ion-text [class]="item.shuttleType">{{ "shuttle.type." + item.shuttleType | translate }}</ion-text>
+            <ion-text *ngIf="i !== shuttleTimetableStation.length - 1" >{{ "shuttle.timetable.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+            <ion-text class="last-bus" *ngIf="i === shuttleTimetableStation.length - 1" >{{ "shuttle.timetable.last.item" | translate: {hour: item.shuttleTime.split(":")[0], minute: item.shuttleTime.split(":")[1], remained: getRemainedTime(item.shuttleTime)} }}</ion-text>
+          </div>
+        </ion-item>
+      </ng-template>
+      <ng-template [ngIf]="shuttleTimetableTerminal.length === 0">
+        <ion-item lines="none">
+          <ion-label style="text-align: center">{{ 'shuttle.out_of_service' | translate }}</ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
