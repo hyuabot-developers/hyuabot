@@ -29,8 +29,11 @@ ion-item {
   .container {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     flex-direction: row;
+    .realtime {
+      font-weight: bold;
+    }
   }
   ion-text {
     font-size: medium;

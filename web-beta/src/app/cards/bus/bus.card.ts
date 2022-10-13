@@ -8,6 +8,7 @@ import { BusRouteItem, BusService } from '../../pages/bus/bus.service';
 })
 export class BusCardComponent implements OnInit {
   @Input() routeName: string;
+  @Input() routeColor: string;
   @Input() stopName: string;
   @Input() destination: string;
   now: Date = new Date();
@@ -23,6 +24,7 @@ export class BusCardComponent implements OnInit {
       } else {
         this.routeItem = busArrivalList.find((item) => item.routeName === this.routeName && item.stopName === this.getStopName());
       }
+      console.log(this.routeItem);
     });
   }
   getStopName() {
