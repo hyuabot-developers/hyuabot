@@ -48,8 +48,8 @@
     },
     "timetable": {
       "all": "전체 시간표",
-      "item": "{{hour}}시 {{minute}}분 (화차점 대기)",
-      "last.item": "{{hour}}시 {{minute}}분 (화차점 대기)",
+      "item": "{{hour}}시 {{minute}}분 (회차점 대기)",
+      "last.item": "{{hour}}시 {{minute}}분 (회차점 대기)",
       "item.all": "{{hour}}시 {{minute}}분",
       "last": "막차",
       "remained": "{{minute}}분 후"
