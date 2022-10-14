@@ -1,14 +1,15 @@
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-
 import { SubwayPage } from './subway.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
-import { SubwayPageRoutingModule } from './subway-routing.module';
+import { SubwayRoutingModule } from './subway-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { SwiperModule } from 'swiper/angular';
+import { BusCardModule } from '../../cards/bus/bus.card.module';
+import { SubwayCardModule } from '../../cards/subway/subway.card.module';
 
 @NgModule({
   imports: [
@@ -16,10 +17,12 @@ import { SubwayPageRoutingModule } from './subway-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
+    SubwayRoutingModule,
     TranslateModule,
-    RouterModule.forChild([{ path: '', component: SubwayPage }]),
-    SubwayPageRoutingModule,
+    SwiperModule,
+    BusCardModule,
+    SubwayCardModule
   ],
   declarations: [SubwayPage]
 })
-export class SubwayPageModule {}
+export class SubwayModule {}

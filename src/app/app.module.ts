@@ -14,6 +14,8 @@ import { shuttleServiceInjectables } from './pages/shuttle/shuttle.service';
 import { shuttleTimetableServiceInjectables } from './pages/shuttle/timetable/shuttle-timetable.service';
 import { busServiceInjectables } from './pages/bus/bus.service';
 import { busTimetableServiceInjectables } from './pages/bus/timetable/bus-timetable.service';
+import { subwayServiceInjectables } from './pages/subway/subway.service';
+import { subwayTimetableServiceInjectables } from './pages/subway/timetable/subway-timetable.service';
 
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -24,7 +26,8 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
   }), GraphQLModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    shuttleServiceInjectables, shuttleTimetableServiceInjectables, busServiceInjectables, busTimetableServiceInjectables
+    shuttleServiceInjectables, shuttleTimetableServiceInjectables, busServiceInjectables, busTimetableServiceInjectables,
+    subwayServiceInjectables, subwayTimetableServiceInjectables
   ],
   bootstrap: [AppComponent],
 })

@@ -25,7 +25,11 @@ const routes: Routes = [
       },
       {
         path: 'subway',
-        loadChildren: () => import('../pages/subway/subway.module').then(m => m.SubwayPageModule)
+        loadChildren: () => import('../pages/subway/subway.module').then(m => m.SubwayModule)
+      },
+      {
+        path: 'subway/timetable',
+        loadChildren: () => import('../pages/subway/timetable/subway-timetable.module').then(m => m.SubwayTimetableModule)
       },
       {
         path: 'cafeteria',

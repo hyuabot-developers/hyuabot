@@ -63,8 +63,43 @@
     "title": "전철",
     "can_i_take": "전철이 올까요..?",
     "can_i_take.subtitle": "안올 것 같으면 버스를 타세요...",
-    "line": {"suinbundang": "수인분당선"},
-    "realtime": {"item": "{{minute}}분 ({{destination}} 행)", "last": "막차"}
+    "line": {
+      "suinbundang": {"name": "수인분당선", "color": "#f5a623"},
+      "line4": {"name": "4호선", "color": "#009b3a"}
+    },
+    "heading": {"up": "상행", "down": "하행"},
+    "realtime": {
+      "heading": "{{destination}} 행",
+      "item.sub": "{{minute}}분 후 도착({{currentStation}} {{status}})",
+      "item": "{{minute}}분 ({{destination}} 행)",
+      "last": "막차"
+    },
+    "timetable": {
+      "title": "{{lineName}}",
+      "all": "전체 시간표",
+      "item": "{{hour}}시 {{minute}}분 (출발역 대기)",
+      "last.item": "{{hour}}시 {{minute}}분 (출발역 대기, 막차)",
+      "item.all": "{{hour}}시 {{minute}}분",
+      "last": "막차",
+      "remained": "{{minute}}분 후",
+      "weekdays": "평일",
+      "saturday": "토요일",
+      "sunday": "일요일"
+    },
+    "destination": {
+      "incheon": "인천",
+      "oido": "오이도",
+      "ansan": "안산",
+      "gosaek": "고색",
+      "jukjeon": "죽전",
+      "wangsimni": "왕십리",
+      "danggogae": "당고개",
+      "nowon": "노원",
+      "hansung": "한성대입구",
+      "seoul": "서울역",
+      "sadang": "사당",
+      "geumjeong": "금정"
+    }
   },
   "cafeteria": {
     "title": "학식"

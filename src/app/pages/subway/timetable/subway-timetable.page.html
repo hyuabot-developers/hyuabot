@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ 'subway.line.' + routeName + '.name' | translate }} ({{ 'subway.timetable.' + weekday | translate }})
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        {{ 'subway.line.' + routeName + '.name' | translate }} ({{ 'subway.timetable.' + weekday | translate }})
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list lines="inset">
+    <ion-item *ngFor="let item of this.subwayTimetableItems; let i = index" [lines]="i === this.subwayTimetableItems.length - 1 ? 'none' : 'inset'" >
+      <div class="container">
+        <ion-text>{{ 'subway.realtime.heading' | translate: {destination: 'subway.destination.' + getSubwayDestination(item.terminalStation) | translate} }}</ion-text>
+        <ion-text>{{ "subway.timetable.item.all" | translate: { hour: item.departureTime.split(":")[0], minute: item.departureTime.split(":")[1] } }}</ion-text>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 10px; margin-right: 10px">
+    <ion-fab-button (click)="changeWeekday()">
+      <ion-icon name="swap-horizontal-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
