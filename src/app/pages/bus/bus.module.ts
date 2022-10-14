@@ -8,6 +8,8 @@ import { ExploreContainerComponentModule } from '../../explore-container/explore
 
 import { BusRoutingModule } from './bus-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SwiperModule } from 'swiper/angular';
+import { BusCardModule } from '../../cards/bus/bus.card.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     ExploreContainerComponentModule,
     BusRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SwiperModule,
+    BusCardModule
   ],
   declarations: [BusPage]
 })

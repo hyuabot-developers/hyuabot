@@ -1,0 +1,37 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title [className]="routeColor">{{ 'bus.routeName' | translate: { routeName: routeName } }}</ion-card-title>
+    <ion-card-subtitle>{{ 'bus.stop.' + stopName | translate }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>{{ 'bus.heading.' + destination | translate }}</ion-label>
+        <ion-button [href]="timetableURL">{{ 'bus.timetable.all' | translate }}</ion-button>
+      </ion-list-header>
+      <ng-template [ngIf]="routeItem.realtime.length > 0">
+        <ion-item *ngFor="let item of routeItem.realtime.slice(0, 6); let i = index" lines="none">
+          <div class="container">
+            <ion-text class="realtime" *ngIf="item.remainedSeat >= 0 && i !== routeItem.realtime.length + routeItem.timetable.length - 1">{{ "bus.realtime.item.withSeat" | translate: {minute: item.remainedTime, stop: item.remainedStop, seat: item.remainedSeat} }}</ion-text>
+            <ion-text class="realtime" *ngIf="item.remainedSeat < 0 && i !== routeItem.realtime.length + routeItem.timetable.length - 1">{{ "bus.realtime.item.withoutSeat" | translate: {minute: item.remainedTime, stop: item.remainedStop} }}</ion-text>
+            <ion-text class="realtime last-bus" *ngIf="item.remainedSeat >= 0 && i === routeItem.realtime.length + routeItem.timetable.length - 1">{{ "bus.realtime.item.withSeat" | translate: {minute: item.remainedTime, stop: item.remainedStop, seat: item.remainedSeat} }}</ion-text>
+            <ion-text class="realtime last-bus" *ngIf="item.remainedSeat < 0 && i === routeItem.realtime.length + routeItem.timetable.length - 1">{{ "bus.realtime.item.withoutSeat" | translate: {minute: item.remainedTime, stop: item.remainedStop} }}</ion-text>
+          </div>
+        </ion-item>
+      </ng-template>
+      <ng-template [ngIf]="routeItem.timetable.length > 0">
+        <ion-item *ngFor="let item of routeItem.timetable.slice(0, 7 - routeItem.realtime.length); let i = index" lines="none">
+          <div class="container">
+            <ion-text *ngIf="i !== routeItem.timetable.length - 1">{{ "bus.timetable.item" | translate: {hour: item.departureTime.split(":")[0], minute: item.departureTime.split(":")[1]} }}</ion-text>
+            <ion-text class="last-bus" *ngIf="i === routeItem.timetable.length - 1">{{ "bus.timetable.last.item" | translate: {hour: item.departureTime.split(":")[0], minute: item.departureTime.split(":")[1]} }}</ion-text>
+          </div>
+        </ion-item>
+      </ng-template>
+      <ng-template [ngIf]="routeItem.realtime.length + routeItem.timetable.length === 0">
+        <ion-item lines="none">
+          <ion-label style="text-align: center">{{ 'shuttle.out_of_service' | translate }}</ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/bus/bus.module').then(m => m.BusModule)
       },
       {
+        path: 'bus/timetable',
+        loadChildren: () => import('../pages/bus/timetable/bus-timetable.module').then(m => m.BusTimetableModule)
+      },
+      {
         path: 'subway',
         loadChildren: () => import('../pages/subway/subway.module').then(m => m.SubwayPageModule)
       },
