@@ -1,0 +1,59 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TabsPage } from './tabs.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TabsPage,
+    children: [
+      {
+        path: 'shuttle',
+        loadChildren: () => import('../pages/shuttle/shuttle.module').then(m => m.ShuttleModule)
+      },
+      {
+        path: 'shuttle/timetable',
+        loadChildren: () => import('../pages/shuttle/timetable/shuttle-timetable.module').then(m => m.ShuttleTimetableModule)
+      },
+      {
+        path: 'bus',
+        loadChildren: () => import('../pages/bus/bus.module').then(m => m.BusModule)
+      },
+      {
+        path: 'bus/timetable',
+        loadChildren: () => import('../pages/bus/timetable/bus-timetable.module').then(m => m.BusTimetableModule)
+      },
+      {
+        path: 'subway',
+        loadChildren: () => import('../pages/subway/subway.module').then(m => m.SubwayModule)
+      },
+      {
+        path: 'subway/timetable',
+        loadChildren: () => import('../pages/subway/timetable/subway-timetable.module').then(m => m.SubwayTimetableModule)
+      },
+      {
+        path: 'cafeteria',
+        loadChildren: () => import('../pages/cafeteria/cafeteria.module').then(m => m.CafeteriaPageModule)
+      },
+      {
+        path: 'menu',
+        loadChildren: () => import('../pages/menu/menu.module').then(m => m.MenuPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/shuttle',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/shuttle',
+    pathMatch: 'full'
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+})
+export class TabsPageRoutingModule {}

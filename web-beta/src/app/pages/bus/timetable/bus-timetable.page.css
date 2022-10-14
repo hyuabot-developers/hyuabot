@@ -1,0 +1,27 @@
+ion-list {
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+}
+ion-item .container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+ion-item .container .realtime {
+  font-weight: bold;
+}
+ion-item ion-text {
+  font-size: medium;
+  text-align: end;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/*# sourceMappingURL=bus-timetable.page.css.map */

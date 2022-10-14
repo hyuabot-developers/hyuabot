@@ -1,0 +1,22 @@
+<script src="subway.page.ts"></script>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ "subway.title" | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ "subway.title" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshSubwayTimetable($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <app-subway-card subwayRouteItemIndex="0"></app-subway-card>
+  <app-subway-card subwayRouteItemIndex="1"></app-subway-card>
+</ion-content>
