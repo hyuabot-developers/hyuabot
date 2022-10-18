@@ -102,7 +102,10 @@
     }
   },
   "cafeteria": {
-    "title": "학식"
+    "title": "학식",
+    "name": {"student":  "학생식당", "faculty": "교직원식당", "food-court": "푸드코트", "foundation": "창업보육센터", "dormitory": "창의인재원식당"},
+    "type": {"breakfast": "조식", "lunch": "중식", "dinner": "석식", "lunchAndDinner": "중식/석식"},
+    "favorite": "즐겨찾기 저장한 식당은 {{name}}입니다."
   },
   "menu": {
     "title": "메뉴"

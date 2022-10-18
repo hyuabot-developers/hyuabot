@@ -8,6 +8,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CafeteriaPage } from './cafeteria.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 import { CafeteriaPageRoutingModule } from './cafeteria-routing.module';
+import { CafeteriaCardModule } from '../../cards/cafeteria/cafeteria.card.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -16,8 +18,10 @@ import { CafeteriaPageRoutingModule } from './cafeteria-routing.module';
     FormsModule,
     TranslateModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: CafeteriaPage }]),
+    RouterModule.forChild([{path: '', component: CafeteriaPage}]),
     CafeteriaPageRoutingModule,
+    CafeteriaCardModule,
+    SwiperModule,
   ],
   declarations: [CafeteriaPage]
 })
