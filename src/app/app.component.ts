@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,8 +7,12 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private renderer: Renderer2) {
     translate.setDefaultLang(localStorage.getItem('language') || 'ko');
     translate.use('ko');
+
+    if (localStorage.getItem('app-theme') === 'dark') {
+      this.renderer.setAttribute(document.body, 'app-theme', 'dark');
+    }
   }
 }

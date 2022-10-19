@@ -108,7 +108,15 @@
     "favorite": "즐겨찾기 저장한 식당은 {{name}}입니다."
   },
   "menu": {
-    "title": "메뉴"
+    "title": "메뉴",
+    "language": {"header": "언어", "korean": "한국어", "english": "English", "chinese": "中文"},
+    "theme": {"header": "테마", "light": "주간 모드", "dark": "야간 모드", "system": "자동(시스템)"},
+    "donate": "후원하기",
+    "contact_email": "문의하기 (이메일)",
+    "contact_kakao": "문의하기 (카카오톡)",
+    "contact_github": "Github",
+    "about": {"header": "앱 정보", "developer":  "개발자: 이정인(컴퓨터전공 17)", "updated_at": "최근 업데이트: 2022.11.01"},
+    "cancel": "취소"
   },
   "OK": "확인"
 }

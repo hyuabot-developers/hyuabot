@@ -1,0 +1,24 @@
+ion-card {
+  margin-left: 10px;
+  margin-right: 10px;
+  ion-card-header {
+    padding-bottom: 0;
+  }
+  ion-card-title {
+    font-size: large;
+  }
+}
+
+ion-list {
+  width: 100%;
+  ion-item {
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-end: 0;
+  }
+}
+
+.information-data {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
