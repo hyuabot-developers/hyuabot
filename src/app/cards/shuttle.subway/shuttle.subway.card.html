@@ -6,13 +6,13 @@
   <ion-card-content>
     <ion-list>
       <ion-list-header>
-        <ion-label>{{ 'subway.line.suinbundang' | translate }}</ion-label>
+        <ion-label>{{ 'subway.line.suinbundang.name' | translate }}</ion-label>
       </ion-list-header>
       <ng-template [ngIf]="subwayRealtimeItems.up.length > 0 || subwayRealtimeItems.down.length > 0">
         <ion-item *ngFor="let item of getLongerRealtimeList().slice(0, 4); let i = index" lines="none">
           <div class="container">
-            <ion-text *ngIf="subwayRealtimeItems.down[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.down[i].remainedTime, destination: subwayRealtimeItems.down[i].terminalStation} }}</ion-text>
-            <ion-text *ngIf="subwayRealtimeItems.up[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.up[i].remainedTime, destination: subwayRealtimeItems.up[i].terminalStation} }}</ion-text>
+            <ion-text *ngIf="subwayRealtimeItems.down[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.down[i].remainedTime, destination: getTerminalName(subwayRealtimeItems.down[i].terminalStation)} }}</ion-text>
+            <ion-text *ngIf="subwayRealtimeItems.up[i] !== undefined ">{{ 'subway.realtime.item' | translate: {minute: subwayRealtimeItems.up[i].remainedTime, destination: getTerminalName(subwayRealtimeItems.up[i].terminalStation)} }}</ion-text>
           </div>
         </ion-item>
       </ng-template>
