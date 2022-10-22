@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ShuttleTimetableItem } from '../shuttle/shuttle.service';
 
 export interface CafeteriaQuery {
   cafeteria: CafeteriaItem[];

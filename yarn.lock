@@ -288,6 +288,13 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/service-worker@^14.0.0":
+  version "14.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-14.2.7.tgz#5012b8d36b0eb63dce5ba671b2c16f61aef9dcc5"
+  integrity sha512-QS6iK14QVUi/5enXoPpfXn9Rm4wbub+7QWTUeVk+ADSdq9+sOCMtfw3WUFaJkNVgTbPm1fTExrZlVo1ehwtCQw==
+  dependencies:
+    tslib "^2.3.0"
+
 "@apollo/client@3.6.9":
   version "3.6.9"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.6.9.tgz#ad0ee2e3a3c92dbed4acd6917b6158a492739d94"
@@ -4386,6 +4393,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+
+fontfaceobserver@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.3.0.tgz#5fb392116e75d5024b7ec8e4f2ce92106d1488c8"
+  integrity sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==
 
 forever-agent@~0.6.1:
   version "0.6.1"

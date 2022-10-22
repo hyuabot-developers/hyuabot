@@ -1,5 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import FontFaceObserver from 'fontfaceobserver';
+
 
 @Component({
   selector: 'app-root',
@@ -14,5 +16,9 @@ export class AppComponent {
     if (localStorage.getItem('app-theme') === 'dark') {
       this.renderer.setAttribute(document.body, 'app-theme', 'dark');
     }
+    const fontFaceObserver = new FontFaceObserver('Godo');
+    fontFaceObserver.load().then(() => {
+      document.documentElement.classList.add('font-loaded');
+    });
   }
 }

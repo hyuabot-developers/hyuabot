@@ -43,7 +43,7 @@
     "loading": "Loading...",
     "routeName": "{{routeName}}",
     "stop": {"guestHouse":  "Guest House", "mainGate": "Main Gate"},
-    "heading": {"sangnoksu": "To Sangnoksu stn.", "suwon": "To Suwon stn.", "gangnam": "To Gangnam stn."},
+    "heading": {"sangnoksu": "→ Sangnoksu", "suwon": "→ Suwon stn.", "gangnam": "→ Gangnam"},
     "realtime": {
       "item": {"withSeat": "{{minute}}min(s) left({{seat}} seat(s) left)", "withoutSeat": "{{minute}}min(s) left"}
     },
@@ -73,7 +73,7 @@
     "realtime": {
       "heading": "To {{destination}}",
       "item.sub": "{{minute}}min(s) left",
-      "item": "{{minute}}min(s) left (To {{destination}})",
+      "item": "{{minute}}m ({{destination}})",
       "last": "Last train"
     },
     "timetable": {
@@ -85,8 +85,7 @@
       "last": "Last train",
       "remained": "{{minute}}min(s) left",
       "weekdays": "weekdays",
-      "saturday": "saturday",
-      "sunday": "sunday"
+      "weekends": "weekends"
     },
     "destination": {
       "incheon": "Incheon",
@@ -94,6 +93,7 @@
       "ansan": "Ansan",
       "gosaek": "Gosaek",
       "jukjeon": "Jukjeon",
+      "cheongnyangni": "Cheongnyangni",
       "wangsimni": "Wangsimni",
       "danggogae": "Danggogae",
       "nowon": "Nowon",
@@ -120,5 +120,8 @@
     "about": {"header": "App Info", "developer":  "Developer: Jeongin Lee(CSE 17)", "updated_at": "Updated at 2022.11.01"},
     "cancel": "Cancel"
   },
-  "OK": "OK"
+  "OK": "OK",
+  "developer": {
+    "birthday": {"title": "Today is developer's birthday!", "content": "Say congratulations to developer!\nI am happy to receive your kind words.", "give_me_a_coffee": "Give me a coffee"}
+  }
 }

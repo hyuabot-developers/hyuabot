@@ -1,7 +1,6 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CafeteriaCardComponent } from './menu.card';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -10,9 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TranslateModule,
   ],
-  exports: [
-    CafeteriaCardComponent
-  ],
-  declarations: [CafeteriaCardComponent]
+  exports: [],
+  declarations: []
 })
 export class MenuCardModule {}

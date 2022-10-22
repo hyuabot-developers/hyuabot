@@ -5,7 +5,7 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from '../../services/loading.service';
-import { SubwayRealtimeItem, SubwayRealtimeQuery } from '../subway/subway.service';
+import { SubwayRealtimeQuery } from '../subway/subway.service';
 
 const GET_SHUTTLE_PERIOD = gql`
     query GetShuttlePeriod($currentDate: String!) {
@@ -56,6 +56,7 @@ interface BusStop {
 })
 export class ShuttlePage implements OnInit, OnDestroy {
   closestStopIndex = 0;
+  now = new Date();
   private weekday = 'weekdays';
   private period = 'semester';
   private swiper: any;
@@ -76,10 +77,10 @@ export class ShuttlePage implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private translateService: TranslateService) {}
   ngOnInit() {
-    const now = new Date();
-    const previous30Minutes = new Date(now.getTime() - 30 * 60 * 1000);
+    const previous30Minutes = new Date(this.now.getTime() - 30 * 60 * 1000);
+    this.now = new Date();
     this.shuttleDateSubscription = this.apollo.watchQuery<ShuttlePeriodQuery>({
-      query: GET_SHUTTLE_PERIOD, variables: {currentDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`}
+      query: GET_SHUTTLE_PERIOD, variables: {currentDate: `${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`}
     }).valueChanges.subscribe(({data, loading}) => {
       this.weekday = data.shuttle.weekday;
       this.period = data.shuttle.period;

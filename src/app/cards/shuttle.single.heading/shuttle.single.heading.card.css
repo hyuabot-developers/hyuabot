@@ -51,7 +51,7 @@ ion-item ion-text {
 }
 
 .C {
-  color: blue;
+  color: var(--ion-color-primary);
   font-weight: bold;
 }
 
@@ -60,4 +60,4 @@ ion-item ion-text {
   font-weight: bold;
 }
 
-/*# sourceMappingURL=bus.card.css.map */
+/*# sourceMappingURL=shuttle.single.heading.card.css.map */

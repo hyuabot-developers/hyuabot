@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttle.service';
-import { min } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-shuttle-dual-card',

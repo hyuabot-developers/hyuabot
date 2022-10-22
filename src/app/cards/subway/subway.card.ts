@@ -25,6 +25,7 @@ export class SubwayCardComponent {
   @Input() subwayRouteItemIndex: number;
   subwayRealtimeItems: SubwayRealtimeList = {up: [], down: []};
   subwayTimetableItems: SubwayTimetableList = {up: [], down: []};
+  realtimeDelta : {up: number, down: number} = {up: -1, down: -1};
   routeName: string;
   stationName: string;
   upTimetableURL: string;
@@ -37,10 +38,17 @@ export class SubwayCardComponent {
         this.stationName = this.getSubwayDestination(subwayArrivalList[this.subwayRouteItemIndex].stationName);
         this.subwayRealtimeItems.up = subwayArrivalList[this.subwayRouteItemIndex].realtime.filter((item) => item.heading === 'up');
         this.subwayRealtimeItems.down = subwayArrivalList[this.subwayRouteItemIndex].realtime.filter((item) => item.heading === 'down');
+        if (this.subwayRealtimeItems.up.length > 0) {
+          this.realtimeDelta.up = this.subwayRealtimeItems.up[this.subwayRealtimeItems.up.length -1].remainedTime;
+        }
+        if (this.subwayRealtimeItems.down.length > 0) {
+          this.realtimeDelta.down = this.subwayRealtimeItems.down[this.subwayRealtimeItems.down.length -1].remainedTime;
+        }
+
         this.subwayTimetableItems.up = subwayArrivalList[this.subwayRouteItemIndex].timetable.map(this.mapSubwayTimetableItem).filter(
-          (item) => item.heading === 'up' && item.departureTime > this.getLocalTime(this.now));
+          (item) => item.heading === 'up' && this.getRemainedMinutes(item.departureTime) > this.realtimeDelta.up);
         this.subwayTimetableItems.down = subwayArrivalList[this.subwayRouteItemIndex].timetable.map(this.mapSubwayTimetableItem).filter(
-          (item) => item.heading === 'down' && item.departureTime > this.getLocalTime(this.now));
+          (item) => item.heading === 'down' && this.getRemainedMinutes(item.departureTime) > this.realtimeDelta.down);
         this.upTimetableURL = '/subway/timetable?route=' + this.routeName + '&station=' + this.stationName + '&heading=up';
         this.downTimetableURL = '/subway/timetable?route=' + this.routeName + '&station=' + this.stationName + '&heading=down';
       }
@@ -87,8 +95,10 @@ export class SubwayCardComponent {
         return destination;
     }
   }
-  getLocalTime(time: Date): string {
-    return time.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
+  getRemainedMinutes(departureTime: string): number {
+    let [hour, minute] = departureTime.split(':');
+    const remainedTime = new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDate(), parseInt(hour), parseInt(minute)).getTime() - this.now.getTime();
+    return Math.floor(remainedTime / 1000 / 60) - 5;
   }
   mapSubwayTimetableItem(subwayTimetableItem: SubwayTimetableItem): SubwayTimetableItem {
     let departureTime = subwayTimetableItem.departureTime;

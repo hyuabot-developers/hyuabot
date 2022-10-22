@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ShuttleService, ShuttleTimetableItem } from '../../pages/shuttle/shuttle.service';
-import { min } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ShuttleService } from '../../pages/shuttle/shuttle.service';
 import { SubwayRealtimeItem } from '../../pages/subway/subway.service';
 import { TranslateService } from '@ngx-translate/core';
 

@@ -1,6 +1,7 @@
 ion-list {
   padding: 20px;
   margin-bottom: 60px;
+  --ion-item-background: var(--ion-background-color);
 }
 
 ion-item {
