@@ -17,6 +17,8 @@ import { busTimetableServiceInjectables } from './pages/bus/timetable/bus-timeta
 import { subwayServiceInjectables } from './pages/subway/subway.service';
 import { subwayTimetableServiceInjectables } from './pages/subway/timetable/subway-timetable.service';
 import { cafeteriaServiceInjectables } from './pages/cafeteria/cafeteria.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -24,7 +26,12 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot({ mode: 'ios' }), AppRoutingModule, TranslateModule.forRoot({
     loader: { provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient] }
-  }), GraphQLModule],
+  }), GraphQLModule, ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: environment.production,
+  // Register the ServiceWorker as soon as the application is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     shuttleServiceInjectables, shuttleTimetableServiceInjectables, busServiceInjectables, busTimetableServiceInjectables,

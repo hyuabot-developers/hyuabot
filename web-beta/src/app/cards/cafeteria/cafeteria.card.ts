@@ -16,7 +16,7 @@ export class CafeteriaCardComponent {
   lunchAndDinnerMenuList: MenuItem[] = [];
   constructor(private cafeteriaService: CafeteriaService, private translateService: TranslateService) {
     this.cafeteriaService.menuList.subscribe(menuList => {
-      let cafeteriaItem = menuList.find(item => item.cafeteriaName === this.translateService.instant('cafeteria.name.' + this.cafeteriaName));
+      let cafeteriaItem = menuList.find(item => item.cafeteriaName === this.getCafeteriaName());
       if (cafeteriaItem) {
         this.breakfastMenuList = cafeteriaItem.menu.filter(item => item.timeType === '조식');
         this.lunchMenuList = cafeteriaItem.menu.filter(item => item.timeType === '중식');
@@ -34,5 +34,19 @@ export class CafeteriaCardComponent {
   }
   removeBookmark() {
     localStorage.removeItem('bookmark.cafeteria.index');
+  }
+  getCafeteriaName(): string {
+    switch (this.cafeteriaName) {
+      case 'student':
+        return '학생식당'
+      case 'faculty':
+        return '교직원식당'
+      case 'dormitory':
+        return '창의인재원식당'
+      case 'food-court':
+        return '푸드코트'
+      case 'foundation':
+        return '창업보육센터'
+    }
   }
 }

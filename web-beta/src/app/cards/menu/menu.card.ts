@@ -35,13 +35,6 @@ export class MenuCardComponent {
           }
         },
         {
-          text: this.translateService.instant('menu.language.chinese'),
-          handler: () => {
-            this.translateService.use('zh');
-            localStorage.setItem('language', 'zh');
-          }
-        },
-        {
           text: this.translateService.instant('menu.cancel'),
           role: 'cancel',
         }

@@ -40,6 +40,7 @@
   },
   "bus": {
     "title": "노선버스",
+    "loading": "불러오는 중...",
     "routeName": "{{routeName}}번",
     "stop": {"guestHouse":  "한양대ERICA컨벤션센터", "mainGate": "한양대정문"},
     "heading": {"sangnoksu": "상록수역 방면", "suwon": "수원역 방면", "gangnam": "강남역 방면"},
@@ -63,6 +64,7 @@
     "title": "전철",
     "can_i_take": "전철이 올까요..?",
     "can_i_take.subtitle": "안올 것 같으면 버스를 타세요...",
+    "loading": "불러오는 중...",
     "line": {
       "suinbundang": {"name": "수인분당선", "color": "#f5a623"},
       "line4": {"name": "4호선", "color": "#009b3a"}
@@ -83,8 +85,7 @@
       "last": "막차",
       "remained": "{{minute}}분 후",
       "weekdays": "평일",
-      "saturday": "토요일",
-      "sunday": "일요일"
+      "weekends": "주말"
     },
     "destination": {
       "incheon": "인천",
@@ -92,6 +93,7 @@
       "ansan": "안산",
       "gosaek": "고색",
       "jukjeon": "죽전",
+      "cheongnyangni": "청량리",
       "wangsimni": "왕십리",
       "danggogae": "당고개",
       "nowon": "노원",
@@ -118,5 +120,8 @@
     "about": {"header": "앱 정보", "developer":  "개발자: 이정인(컴퓨터전공 17)", "updated_at": "최근 업데이트: 2022.11.01"},
     "cancel": "취소"
   },
-  "OK": "확인"
+  "OK": "확인",
+  "developer": {
+    "birthday": {"title": "오늘은 개발자의 생일입니다.", "content": "개발자에게 축하한다고 전해주세요. 개발자는 항상 많은 학우분들이 사용해주셔서 행복하딥니다.", "give_me_a_coffee": "스타벅스 커피 사주기"}
+  }
 }

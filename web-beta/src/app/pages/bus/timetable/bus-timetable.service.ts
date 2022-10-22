@@ -1,15 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BusTimetableItemWithWeekday } from '../bus.service';
-
-export interface ShuttleTimetableItem {
-  period: string;
-  weekday: string;
-  startStop: string;
-  shuttleTime: string;
-  shuttleType: string;
-}
-
 @Injectable()
 export class BusTimetableService {
   period: BehaviorSubject<string> = new BehaviorSubject<string>('semester');

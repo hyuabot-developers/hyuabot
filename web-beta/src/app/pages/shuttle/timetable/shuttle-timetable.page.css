@@ -1,6 +1,7 @@
 ion-list {
   padding: 20px;
   margin-bottom: 60px;
+  --ion-item-background: var(--ion-background-color);
 }
 
 .DH {
@@ -14,8 +15,8 @@ ion-list {
 }
 
 .C {
-  color: blue;
+  color: var(--ion-color-primary);
   font-weight: bold;
 }
 
-/*# sourceMappingURL=bus-timetable.page.css.map */
+/*# sourceMappingURL=shuttle-timetable.page.css.map */

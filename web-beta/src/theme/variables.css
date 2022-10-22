@@ -1,5 +1,16 @@
+@font-face {
+  font-family: "Godo";
+  src: url("../assets/fonts/GodoM.woff2") format("woff2");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Godo";
+  src: url("../assets/fonts/GodoB.woff2") format("woff2");
+  font-weight: bold;
+}
 /** Ionic CSS Variables **/
 :root {
+  --ion-font-family: "Godo";
   --ion-color-primary: #0e4a84;
   --ion-color-primary-rgb: 14,74,132;
   --ion-color-primary-contrast: #ffffff;

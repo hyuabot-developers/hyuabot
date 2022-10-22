@@ -11,6 +11,7 @@ import {ShuttleDualHeadingCardModule} from "../../cards/shuttle.dual.heading/shu
 import { ShuttleSingleHeadingCardModule } from '../../cards/shuttle.single.heading/shuttle.single.heading.card.module';
 import { SwiperModule } from 'swiper/angular';
 import { ShuttleSubwayCardModule } from '../../cards/shuttle.subway/shuttle.subway.card.module';
+import { BirthdayCardComponent } from '../../cards/birthday/birthday.card';
 
 @NgModule({
     imports: [
@@ -25,6 +26,6 @@ import { ShuttleSubwayCardModule } from '../../cards/shuttle.subway/shuttle.subw
         SwiperModule,
         ShuttleSubwayCardModule
     ],
-  declarations: [ShuttlePage]
+    declarations: [ShuttlePage, BirthdayCardComponent]
 })
 export class ShuttleModule {}
