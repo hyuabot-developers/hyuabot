@@ -131,6 +131,8 @@ export class ShuttleTimetablePage implements OnInit, OnDestroy {
       return item.shuttleType === 'DH' || item.shuttleType === 'C';
     } else if (this.destination === 'terminal') {
       return item.shuttleType === 'DY' || item.shuttleType === 'C';
+    } else if (this.stop === 'terminal') {
+      return item.shuttleType === 'DY' || item.shuttleType === 'C';
     } else {
       return this.destination === 'campus' || this.destination === 'dormitory';
     }
