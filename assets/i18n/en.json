@@ -1,0 +1,127 @@
+{
+  "shuttle": {
+    "title": "Shuttle",
+    "stop": {
+      "dormitory" : {"name": "Dormitory", "bound": "To shuttlecock, station, terminal"},
+      "shuttlecock_o": {"name": "Shuttlecoke", "bound": "To station, terminal"},
+      "station": {"name": "Station", "bound": "To campus, terminal"},
+      "terminal": {"name": "Terminal", "bound": "To campus"},
+      "shuttlecock_i": {"name": "Across from shuttlecoke", "bound": "To dormitory"},
+      "closest": "The closest stop is {{name}}."
+    },
+    "type": {
+      "DH": "Direct", "DY": "Direct", "C": "Cycle"
+    },
+    "heading": {
+      "station": "To station", "terminal": "To terminal", "dormitory": "To Dormitory", "campus": "To campus"
+    },
+    "timetable": {
+      "all": "Entire timetable",
+      "item": "{{hour}}:{{minute}} ({{remained}}min(s) left)",
+      "last.item": "{{hour}}:{{minute}} ({{remained}}min(s) left, last shuttle)",
+      "item.all": "{{hour}}:{{minute}}",
+      "last": "Last shuttle",
+      "remained": "{{minute}}min(s) left",
+      "title": {
+        "dormitory": "Dormitory",
+        "shuttlecock_o": "Shuttlecoke",
+        "station": "Station",
+        "terminal": "Terminal",
+        "shuttlecock_i": "Across from shuttlecoke"
+      },
+      "subtitle": "As of {{year}}/{{month}}/{{day}}",
+      "no_bus": "There is no shuttle bus today.",
+      "weekends": "Weekends timetable",
+      "weekdays": "Weekdays timetable"
+    },
+    "out_of_service": "Out of service",
+    "slide_instruction": "To see the other shuttle stop, swipe left or right.",
+    "loading": "Loading..."
+  },
+  "bus": {
+    "title": "Bus",
+    "loading": "Loading...",
+    "routeName": "{{routeName}}",
+    "stop": {"guestHouse":  "Guest House", "mainGate": "Main Gate"},
+    "heading": {"sangnoksu": "→ Sangnoksu", "suwon": "→ Suwon stn.", "gangnam": "→ Gangnam"},
+    "realtime": {
+      "item": {"withSeat": "{{minute}}min(s) left({{seat}} seat(s) left)", "withoutSeat": "{{minute}}min(s) left"}
+    },
+    "timetable": {
+      "title": "{{routeName}}",
+      "all": "Entire timetable",
+      "item": "Departure at {{hour}}:{{minute}}",
+      "last.item": "Departure at {{hour}}:{{minute}} (Last bus)",
+      "item.all": "{{hour}}:{{minute}}",
+      "last": "Last bus",
+      "remained": "{{minute}}min(s) left",
+      "weekdays": "weekdays",
+      "saturday": "saturday",
+      "sunday": "sunday"
+    }
+  },
+  "subway": {
+    "title": "Subway",
+    "can_i_take": "Can I take this subway?",
+    "can_i_take.subtitle": "If you can't, take a bus instead...",
+    "loading": "Loading...",
+    "line": {
+      "suinbundang": {"name": "Suin-bundang line", "color": "#f5a623"},
+      "line4": {"name": "Line no.4", "color": "#009b3a"}
+    },
+    "heading": {"up": "Up", "down": "Down"},
+    "realtime": {
+      "heading": "To {{destination}}",
+      "item.sub": "{{minute}}min(s) left",
+      "item": "{{minute}}m ({{destination}})",
+      "last": "Last train"
+    },
+    "timetable": {
+      "title": "{{lineName}}",
+      "all": "Entire timetable",
+      "item": "Departure at {{hour}}:{{minute}}",
+      "last.item": "Departure at {{hour}}:{{minute}} (Last train)",
+      "item.all": "{{hour}}:{{minute}}",
+      "last": "Last train",
+      "remained": "{{minute}}min(s) left",
+      "weekdays": "weekdays",
+      "weekends": "weekends"
+    },
+    "destination": {
+      "incheon": "Incheon",
+      "oido": "Oido",
+      "ansan": "Ansan",
+      "gosaek": "Gosaek",
+      "jukjeon": "Jukjeon",
+      "cheongnyangni": "Cheongnyangni",
+      "wangsimni": "Wangsimni",
+      "danggogae": "Danggogae",
+      "nowon": "Nowon",
+      "hansung": "Hansung Univ.",
+      "seoul": "Seoul Stn.",
+      "sadang": "Sadang",
+      "geumjeong": "Geumjeong"
+    }
+  },
+  "cafeteria": {
+    "title": "Cafeteria",
+    "name": {"student":  "Student", "faculty": "Faculty", "food-court": "FoodCourt", "foundation": "Business Incubation Center", "dormitory": "Dormitory"},
+    "type": {"breakfast": "Breakfast", "lunch": "Lunch", "dinner": "Dinner", "lunchAndDinner": "Lunch/Dinner"},
+    "favorite": "Your bookmarked cafeteria is {{name}}."
+  },
+  "menu": {
+    "title": "Menu",
+    "language": {"header": "Language", "korean": "한국어", "english": "English", "chinese": "中文"},
+    "theme": {"header": "Theme", "light": "Light mode", "dark": "Dark mode", "system": "Auto(System)"},
+    "donate": "Donate",
+    "contact_email": "Contact (Email)",
+    "contact_kakao": "Contact (Kakaotalk)",
+    "contact_github": "Github",
+    "about": {"header": "App Info", "developer":  "Developer: Jeongin Lee(CSE 17)", "updated_at": "Updated at 2022.11.01"},
+    "cancel": "Cancel"
+  },
+  "OK": "OK",
+  "developer": {
+    "birthday": {"title": "Today is developer's birthday!", "content": "Say congratulations to developer!\nI am happy to receive your kind words.", "give_me_a_coffee": "Give me a coffee"}
+  }
+}
