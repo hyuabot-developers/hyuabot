@@ -1,7 +1,0 @@
-{
-  "name": "hyuabot-client-pwa",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
