@@ -15,7 +15,7 @@
     },
     "heading": {
       "station": "To station", "terminal": "To terminal", "dormitory": "To Dormitory", "campus": "To campus",
-      "jungang": "To Jungang Stn."
+      "jungang": "To Jungang Stn.(11.21~)"
     },
     "timetable": {
       "all": "Entire timetable",
@@ -27,7 +27,7 @@
       "title": {
         "dormitory": "Dormitory",
         "shuttlecock_o": "Shuttlecoke",
-        "jungang": "Jungang Stn.",
+        "jungang": "Jungang Stn.(11.21~)",
         "station": "Station",
         "terminal": "Terminal",
         "shuttlecock_i": "Across from shuttlecoke"

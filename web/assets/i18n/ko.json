@@ -15,7 +15,7 @@
     },
     "heading": {
       "station": "한대앞 방면", "terminal": "예술인 방면", "dormitory": "기숙사 방면", "campus": "캠퍼스 방면",
-      "jungang": "중앙역 방면"
+      "jungang": "중앙역 방면(11.21~)"
     },
     "timetable": {
       "all": "전체 시간표",
@@ -27,7 +27,7 @@
       "title": {
         "dormitory": "기숙사",
         "shuttlecock_o": "셔틀콕",
-        "jungang": "중앙역(2번출구)",
+        "jungang": "중앙역(2번출구)/11.21~",
         "station": "한대앞",
         "terminal": "예술인",
         "shuttlecock_i": "셔틀콕 건너편"
