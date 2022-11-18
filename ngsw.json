@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1668743239671,
+  "timestamp": 1668750972024,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -279,8 +279,8 @@
     "/9824.83c2ff07be398614.js": "710a78711d3ffde17d7b0c286fb250c08acaa72c",
     "/9922.0d06e61124159c67.js": "e53b0f70ac3a44baddae58ee5a34a4ed6bde054a",
     "/9958.2e75cfaf86f5ab8c.js": "fe09c9be181b2bdaabec4b179d6fd01528711e1e",
-    "/assets/i18n/en.json": "66fc6101c7ee06d7a4ee3f1c4d242d947ed602a1",
-    "/assets/i18n/ko.json": "c445b1d1a981add07996595c09655ca8814551aa",
+    "/assets/i18n/en.json": "6054de0f4d2e3641c4e4b9be5de053951291ae77",
+    "/assets/i18n/ko.json": "a5feaaadef3e735efd499f4fa813691326f6bd8b",
     "/assets/icon/favicon.png": "7798b8e0eb61d7375c245af78bbf5c916932bf13",
     "/assets/icons/android/android-launchericon-144-144.png": "dfc267062b5eb2253a42fa9d0c01afdcd4a46387",
     "/assets/icons/android/android-launchericon-192-192.png": "115ad3b8f79fa0bbd2ac3a2f30ef584c64f58539",
