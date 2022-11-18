@@ -5,15 +5,17 @@
       "dormitory" : {"name": "Dormitory", "bound": "To shuttlecock, station, terminal"},
       "shuttlecock_o": {"name": "Shuttlecoke", "bound": "To station, terminal"},
       "station": {"name": "Station", "bound": "To campus, terminal"},
+      "jungang": {"name": "Jungang", "bound": "To campus, terminal"},
       "terminal": {"name": "Terminal", "bound": "To campus"},
       "shuttlecock_i": {"name": "Across from shuttlecoke", "bound": "To dormitory"},
       "closest": "The closest stop is {{name}}."
     },
     "type": {
-      "DH": "Direct", "DY": "Direct", "C": "Cycle"
+      "DH": "Direct", "DY": "Direct", "C": "Cycle", "DJ": "For Jungang Stn."
     },
     "heading": {
-      "station": "To station", "terminal": "To terminal", "dormitory": "To Dormitory", "campus": "To campus"
+      "station": "To station", "terminal": "To terminal", "dormitory": "To Dormitory", "campus": "To campus",
+      "jungang": "To Jungang Stn."
     },
     "timetable": {
       "all": "Entire timetable",
@@ -25,6 +27,7 @@
       "title": {
         "dormitory": "Dormitory",
         "shuttlecock_o": "Shuttlecoke",
+        "jungang": "Jungang Stn.",
         "station": "Station",
         "terminal": "Terminal",
         "shuttlecock_i": "Across from shuttlecoke"

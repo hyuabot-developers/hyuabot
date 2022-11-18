@@ -5,15 +5,17 @@
       "dormitory" : {"name": "기숙사", "bound": "셔틀콕/한대앞/예술인 방면"},
       "shuttlecock_o": {"name": "셔틀콕", "bound": "한대앞/예술인 방면"},
       "station": {"name": "한대앞", "bound": "셔틀콕/기숙사/예술인 방면"},
+      "jungang": {"name": "중앙역(2번출구)", "bound": "셔틀콕/기숙사 방면"},
       "terminal": {"name": "예술인", "bound": "셔틀콕/기숙사 방면"},
       "shuttlecock_i": {"name": "셔틀콕 건너편", "bound": "기숙사 방면"},
       "closest": "가장 가까운 정류장은 {{name}}입니다."
     },
     "type": {
-      "DH": "직행", "DY": "직행", "C": "순환"
+      "DH": "직행", "DY": "직행", "C": "순환", "DJ": "중앙역(경유)"
     },
     "heading": {
-      "station": "한대앞 방면", "terminal": "예술인 방면", "dormitory": "기숙사 방면", "campus": "캠퍼스 방면"
+      "station": "한대앞 방면", "terminal": "예술인 방면", "dormitory": "기숙사 방면", "campus": "캠퍼스 방면",
+      "jungang": "중앙역 방면"
     },
     "timetable": {
       "all": "전체 시간표",
@@ -25,6 +27,7 @@
       "title": {
         "dormitory": "기숙사",
         "shuttlecock_o": "셔틀콕",
+        "jungang": "중앙역(2번출구)",
         "station": "한대앞",
         "terminal": "예술인",
         "shuttlecock_i": "셔틀콕 건너편"
